@@ -1,5 +1,3 @@
-"use client";
-
 import { Users, Dumbbell, ClipboardList, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
