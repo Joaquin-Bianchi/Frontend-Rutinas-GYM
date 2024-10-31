@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// Crear una instancia de axios con la configuración base
+//? Crear una instancia de axios
 const api = axios.create({
   baseURL: process.env.API_URL || "http://localhost:3002",
   headers: {
@@ -9,10 +9,10 @@ const api = axios.create({
   },
 });
 
-// Interceptor para requests - añade el token
+//? Interceptor para requests - añade el token a las peticiones
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // o donde guardes tu token
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -23,7 +23,7 @@ api.interceptors.request.use(
   }
 );
 
-// Interceptor para responses - maneja errores de autenticación
+//? Interceptor para responses - maneja errores de autenticación
 api.interceptors.response.use(
   (response) => response,
   (error) => {
