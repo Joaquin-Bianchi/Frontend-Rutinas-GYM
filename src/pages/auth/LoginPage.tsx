@@ -33,7 +33,7 @@ export default function LoginPage() {
       if (res?.data?.error) {
         setError(res.data.error);
       } else {
-        navigate("/home");
+        navigate("/dashboard");
       }
     } catch (err) {
       setError(err as string);
