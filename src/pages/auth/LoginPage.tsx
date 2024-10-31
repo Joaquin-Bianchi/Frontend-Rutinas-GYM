@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Dumbbell } from "lucide-react";
-
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signIn } from "@/services/authService";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,26 +23,23 @@ export default function LoginPage() {
     setIsLoading(true);
     setError(null);
 
-    // Simulating login process
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsLoading(false);
-    // Uncomment and implement actual login logic
-    // try {
-    //   const res = await signIn("credentials", {
-    //     username: data.username,
-    //     password: data.password,
-    //     redirect: false,
-    //   })
-    //   if (res?.error) {
-    //     setError(res.error)
-    //   } else {
-    //     navigate("/home")
-    //   }
-    // } catch (err) {
-    //   setError("An unexpected error occurred. Please try again.")
-    // } finally {
-    //   setIsLoading(false)
-    // }
+
+    try {
+      const res = await signIn({
+        email: data.email,
+        password: data.password,
+      });
+      if (res?.data?.error) {
+        setError(res.data.error);
+      } else {
+        navigate("/home");
+      }
+    } catch (err) {
+      setError(err as string);
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -62,20 +59,20 @@ export default function LoginPage() {
             </p>
           )}
           <div>
-            <Label htmlFor="username">Nombre de usuario</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
-              id="username"
+              id="email"
               type="text"
-              placeholder="Usuario"
+              placeholder="Email"
               className="mt-2"
               disabled={isLoading}
-              {...register("username", {
-                required: "El nombre de usuario es requerido",
+              {...register("email", {
+                required: "El email es requerido",
               })}
             />
-            {errors.username && (
+            {errors.email && (
               <p className="text-destructive text-sm mt-1">
-                {errors.username.message as string}
+                {errors.email.message as string}
               </p>
             )}
           </div>

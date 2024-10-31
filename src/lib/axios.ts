@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 //? Crear una instancia de axios
 const api = axios.create({
-  baseURL: process.env.API_URL || "http://localhost:3002",
+  baseURL: import.meta.env.API_URL || "http://localhost:3002",
   headers: {
     "Content-Type": "application/json",
   },
