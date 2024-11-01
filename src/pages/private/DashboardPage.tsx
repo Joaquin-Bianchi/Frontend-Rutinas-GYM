@@ -2,6 +2,7 @@ import { Users, Dumbbell, ClipboardList, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { signOut } from "@/services/authService";
 
 export default function DashboardPage() {
   return (
@@ -13,11 +14,13 @@ export default function DashboardPage() {
               Sección Administrativa
             </h1>
             <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <User className=" h-4 w-4" />
-                Modo Cliente
-              </Button>
-              <Button variant="destructive" size="sm">
+              <Link to="/home">
+                <Button variant="outline" size="sm">
+                  <User className=" h-4 w-4" />
+                  Modo Cliente
+                </Button>
+              </Link>
+              <Button onClick={signOut} variant="destructive" size="sm">
                 <LogOut className=" h-4 w-4" />
                 Cerrar sesión
               </Button>

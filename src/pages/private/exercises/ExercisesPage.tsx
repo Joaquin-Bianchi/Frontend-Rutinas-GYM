@@ -1,8 +1,9 @@
-import { Plus, ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { CreateExerciseModal } from "./components/CreateExerciseModal";
 
 export default function ExercisesPage() {
   return (
@@ -21,14 +22,11 @@ export default function ExercisesPage() {
                 Gestión de Ejercicios
               </h1>
             </div>
-            <Button variant={"secondary"} size="sm">
-              <Plus className="h-4 w-4" />
-              Nuevo Ejercicio
-            </Button>
+            <CreateExerciseModal />
           </div>
         </div>
       </header>
-
+      {/* TODO: buton de busqueda */}
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Card>
@@ -49,8 +47,8 @@ export default function ExercisesPage() {
           </Card>
         </div>
 
+        {/*TODO: Agregar ejercicios dinámicamente */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Ejemplo de tarjeta de ejercicio - Esto se repetiría por cada ejercicio */}
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-lg">Press de Banca</CardTitle>
@@ -72,8 +70,6 @@ export default function ExercisesPage() {
               </div>
             </CardContent>
           </Card>
-
-          {/* Más tarjetas de ejercicios irían aquí */}
         </div>
       </main>
     </div>
