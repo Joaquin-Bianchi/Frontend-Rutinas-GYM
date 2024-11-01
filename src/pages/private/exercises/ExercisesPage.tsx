@@ -1,26 +1,22 @@
-import { ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { CreateExerciseModal } from "./components/CreateExerciseModal";
 import ExerciseCard from "./components/card/ExerciseCard";
 import { getExercises } from "@/services/exerciseService";
 import { useQuery } from "@tanstack/react-query";
 import { Exercise } from "@/interfaces/exercise.interface";
+import SearchInput from "@/components/search/SearchInput";
 
 export default function ExercisesPage() {
-  const {
-    data: exercises,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: exercises } = useQuery({
     queryKey: ["exercises"],
     queryFn: () => getExercises(),
   });
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
+      {/* TODO: Crear navbar */}
       <header className="border-b bg-primary shadow-md">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
@@ -39,28 +35,9 @@ export default function ExercisesPage() {
           </div>
         </div>
       </header>
-      {/* TODO: buton de busqueda */}
-      <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl text-primary">Buscar</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Nombre del ejercicio..."
-                    className="pl-10"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/*TODO: Agregar ejercicios dinámicamente */}
+      <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <SearchInput />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {exercises?.data.map((exercise: Exercise) => (
             <ExerciseCard key={exercise.id} exercise={exercise} />
