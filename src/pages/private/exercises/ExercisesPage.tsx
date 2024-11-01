@@ -4,8 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { CreateExerciseModal } from "./components/CreateExerciseModal";
+import ExerciseCard from "./components/card/ExerciseCard";
+import { getExercises } from "@/services/exerciseService";
+import { useQuery } from "@tanstack/react-query";
+import { Exercise } from "@/interfaces/exercise.interface";
 
 export default function ExercisesPage() {
+  const {
+    data: exercises,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["exercises"],
+    queryFn: () => getExercises(),
+  });
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <header className="border-b bg-primary shadow-md">
@@ -49,27 +62,9 @@ export default function ExercisesPage() {
 
         {/*TODO: Agregar ejercicios dinámicamente */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="text-lg">Press de Banca</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  Ejercicio para pecho que involucra empujar peso mientras estás
-                  acostado en un banco.
-                </p>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    Editar
-                  </Button>
-                  <Button variant="destructive" size="sm">
-                    Eliminar
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {exercises?.data.map((exercise: Exercise) => (
+            <ExerciseCard key={exercise.id} exercise={exercise} />
+          ))}
         </div>
       </main>
     </div>
