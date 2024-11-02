@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { DumbbellIcon, Plus } from "lucide-react";
 import ExerciseForm from "../ExerciseForm";
 import { useState } from "react";
 
@@ -18,9 +18,10 @@ export function CreateExerciseModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="" variant="default" size="default">
-          <Plus className="h-4 w-4 mr-2 " />
-          Nuevo Ejercicio
+        <Button variant="default" size="default">
+          <Plus />
+          <p className="font-bold">Nuevo Ejercicio</p>
+          <DumbbellIcon className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
