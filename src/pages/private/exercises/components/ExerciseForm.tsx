@@ -22,8 +22,7 @@ interface Props {
 
 function ExerciseForm({ onSuccess }: Props) {
   const queryClient = useQueryClient();
-  const {
-    
+  const { 
     handleSubmit,
     control,
     formState: { errors },

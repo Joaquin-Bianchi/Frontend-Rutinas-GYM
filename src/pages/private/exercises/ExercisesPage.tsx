@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CreateExerciseModal } from "./components/modal/CreateExerciseModal";
-import ExerciseCard from "./components/card/ExerciseCard";
+import ExerciseCard from "./components/cards/ExerciseCard";
 import { getExercises } from "@/services/exerciseService";
 import { useQuery } from "@tanstack/react-query";
 import { Exercise } from "@/interfaces/exercise.interface";
