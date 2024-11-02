@@ -5,6 +5,7 @@ import HomePage from "./pages/public/HomePage";
 import ProtectedRoutes from "./components/guards/ProtectedRoute";
 import ExercisesPage from "./pages/private/exercises/ExercisesPage";
 import { Toaster } from "sonner";
+import { PrivateLayout } from "./layouts/PrivateLayout";
 
 const App = () => {
   return (
@@ -17,8 +18,10 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           {/* Rutas privadas */}
           <Route path="/" element={<ProtectedRoutes />}>
-            <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="/dashboard/exercises" element={<ExercisesPage />} />
+            <Route element={<PrivateLayout />}>
+              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="/dashboard/exercises" element={<ExercisesPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

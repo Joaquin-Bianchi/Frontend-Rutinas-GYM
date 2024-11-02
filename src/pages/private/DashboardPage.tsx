@@ -7,32 +7,8 @@ import { signOut } from "@/services/authService";
 export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <header className="border-b bg-primary shadow-md">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <h1 className="text-2xl text-primary-foreground font-bold">
-              Sección Administrativa
-            </h1>
-            <div className="flex items-center gap-4">
-              <Link to="/home">
-                <Button variant="outline" size="sm">
-                  <User className=" h-4 w-4" />
-                  Modo Cliente
-                </Button>
-              </Link>
-              <Button onClick={signOut} variant="destructive" size="sm">
-                <LogOut className=" h-4 w-4" />
-                Cerrar sesión
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-semibold mb-8 text-primary">
-          Opciones Principales
-        </h2>
+        <h2 className="text-3xl font-semibold mb-8 text-primary">Inicio</h2>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
