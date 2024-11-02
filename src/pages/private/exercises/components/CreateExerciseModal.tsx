@@ -13,8 +13,8 @@ export function CreateExerciseModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">
-          <Plus className="h-4 w-4 mr-2" />
+        <Button className="" variant="default" size="default">
+          <Plus className="h-4 w-4 mr-2 " />
           Nuevo Ejercicio
         </Button>
       </DialogTrigger>
