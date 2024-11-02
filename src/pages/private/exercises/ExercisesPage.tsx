@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CreateExerciseModal } from "./components/CreateExerciseModal";
+import { CreateExerciseModal } from "./components/modal/CreateExerciseModal";
 import ExerciseCard from "./components/card/ExerciseCard";
 import { getExercises } from "@/services/exerciseService";
 import { useQuery } from "@tanstack/react-query";
@@ -37,7 +37,7 @@ export default function ExercisesPage() {
       </header>
 
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        {/* TODO: Crear section component */}
+        {/* TODO: Crear title component */}
         <div className="mb-8">
           <Card>
             <CardHeader>
