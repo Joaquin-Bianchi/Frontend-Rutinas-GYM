@@ -31,7 +31,6 @@ function ExerciseForm({ onSuccess }: Props) {
   });
 
   const onSubmit = handleSubmit((data: Exercise) => {
-    console.log(data);
     createExerciseMutation.mutate(data);
   });
 

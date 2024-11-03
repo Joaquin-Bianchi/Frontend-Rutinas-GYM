@@ -1,4 +1,3 @@
-import { CreateExerciseModal } from "./components/modal/CreateExerciseModal";
 import ExerciseCard from "./components/cards/ExerciseCard";
 import { getExercises } from "@/services/exerciseService";
 import { useQuery } from "@tanstack/react-query";
