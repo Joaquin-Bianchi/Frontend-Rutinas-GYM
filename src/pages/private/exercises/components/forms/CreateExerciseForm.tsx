@@ -13,7 +13,7 @@ interface Props {
 }
 //? FUNCION PARA CERRAR EL MODAL
 
-function ExerciseForm({ onSuccess }: Props) {
+function CreateExerciseForm({ onSuccess }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
 
@@ -41,14 +41,14 @@ function ExerciseForm({ onSuccess }: Props) {
         label="Nombre"
         control={control}
         rules={{ required: "El nombre es requerido" }}
-        placeholder="Press de banca..."
+        placeholder="Nombre"
       />
 
       <FormField
         name="image"
         label="URL de la imagen"
         control={control}
-        placeholder="https://..."
+        placeholder="Imagen"
       />
 
       <MultiSelectField
@@ -57,7 +57,7 @@ function ExerciseForm({ onSuccess }: Props) {
         control={control}
         options={Object.values(MuscleGroup)}
         rules={{ required: "Debes seleccionar al menos un grupo muscular" }}
-        placeholder="Selecciona grupos musculares"
+        placeholder="Grupos musculares"
       />
 
       <Button type="submit" disabled={createExerciseMutation.isPending}>
@@ -67,4 +67,4 @@ function ExerciseForm({ onSuccess }: Props) {
   );
 }
 
-export default ExerciseForm;
+export default CreateExerciseForm;

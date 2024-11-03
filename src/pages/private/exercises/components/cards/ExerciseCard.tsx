@@ -4,6 +4,8 @@ import { Exercise } from "@/interfaces/exercise.interface";
 import { deleteExerciseById } from "@/services/exerciseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { ActionModal } from "@/components/modal/ActionModal";
+import EditExerciseForm from "../forms/EditExerciseForm";
 
 function ExerciseCard({ exercise }: { exercise: Exercise }) {
   const queryClient = useQueryClient();
@@ -50,9 +52,12 @@ function ExerciseCard({ exercise }: { exercise: Exercise }) {
             className="rounded-md"
           />
           <div className="flex gap-2 mb-10">
-            <Button variant="outline" size="sm">
+            {/* <Button variant="outline" size="sm">
               Editar
-            </Button>
+            </Button> */}
+            <ActionModal title="Editar" dialogTitle="Editar Ejercicio">
+              <EditExerciseForm exercise={exercise}/>
+            </ActionModal>
             <Button
               variant="destructive"
               size="sm"

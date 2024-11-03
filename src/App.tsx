@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
-import DashboardPage from "./pages/private/DashboardPage";
+import HomeAdminPage from "./pages/private/HomeAdminPage";
 import HomePage from "./pages/public/HomePage";
 import ProtectedRoutes from "./components/guards/ProtectedRoute";
 import ExercisesPage from "./pages/private/exercises/ExercisesPage";
@@ -20,7 +20,7 @@ const App = () => {
           {/* Rutas privadas */}
           <Route path="/" element={<ProtectedRoutes />}>
             <Route element={<PrivateLayout />}>
-              <Route path="dashboard" element={<DashboardPage />} />{" "}
+              <Route path="dashboard" element={<HomeAdminPage />} />{" "}
               <Route path="dashboard/clients" element={<ClientsPage />} />
               <Route path="/dashboard/exercises" element={<ExercisesPage />} />
             </Route>

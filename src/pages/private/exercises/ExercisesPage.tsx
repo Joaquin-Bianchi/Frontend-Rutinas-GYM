@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Exercise } from "@/interfaces/exercise.interface";
 import SectionHeader from "@/components/header/SectionHeader";
 import { ActionModal } from "@/components/modal/ActionModal";
-import ExerciseForm from "./components/ExerciseForm";
+import CreateExerciseForm from "./components/forms/CreateExerciseForm";
 
 export default function ExercisesPage() {
   const { data: exercises } = useQuery({
@@ -22,7 +22,7 @@ export default function ExercisesPage() {
               title="Nuevo Ejercicio"
               dialogTitle="Crear Nuevo Ejercicio"
             >
-              <ExerciseForm />
+              <CreateExerciseForm />
             </ActionModal>
           }
         />

@@ -18,8 +18,6 @@ interface Props {
 export function ActionModal({ children, title, dialogTitle }: Props) {
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => setOpen(false);
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

@@ -19,8 +19,20 @@ export const createExercise = async (exercise: Exercise) => {
   return response;
 };
 
+export const editExercise = async ({
+  exerciseId,
+  data,
+}: {
+  exerciseId: string;
+  data: Exercise;
+}) => {
+
+  const response = await api.put(`/exercise/${exerciseId}`, data);
+  return response;
+};
+
 export const deleteExerciseById = async (exerciseId: string) => {
-  const response = await api.delete(`/exercise/${exerciseId}`)
+  const response = await api.delete(`/exercise/${exerciseId}`);
   console.log(response);
   return response;
 };
