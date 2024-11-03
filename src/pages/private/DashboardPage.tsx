@@ -1,8 +1,6 @@
-import { Users, Dumbbell, ClipboardList, LogOut, User } from "lucide-react";
+import { Users, Dumbbell, ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { signOut } from "@/services/authService";
 
 export default function DashboardPage() {
   return (

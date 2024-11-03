@@ -1,8 +1,29 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Exercise } from "@/interfaces/exercise.interface";
+import { deleteExerciseById } from "@/services/exerciseService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 function ExerciseCard({ exercise }: { exercise: Exercise }) {
+  const queryClient = useQueryClient();
+
+  const deleteExerciseMutation = useMutation({
+    mutationFn: deleteExerciseById,
+    mutationKey: ["deleteExercise"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["exercises"] });
+      toast.success("Ejercicio eliminado correctamente");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Error al eliminar el ejercicio");
+    },
+  });
+
+  const handleDelete = () => {
+    deleteExerciseMutation.mutate(exercise.id);
+  };
+
   return (
     <Card className="hover:shadow-lg transition-shadow flex flex-col ">
       <CardHeader>
@@ -32,8 +53,13 @@ function ExerciseCard({ exercise }: { exercise: Exercise }) {
             <Button variant="outline" size="sm">
               Editar
             </Button>
-            <Button variant="destructive" size="sm">
-              Eliminar
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleDelete}
+              disabled={deleteExerciseMutation.isPending}
+            >
+              {deleteExerciseMutation.isPending ? "Eliminando..." : "Eliminar"}
             </Button>
           </div>
         </div>
