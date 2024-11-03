@@ -15,12 +15,14 @@ export default function HomeAdminPage() {
               title: "Clientes",
               description:
                 "Gestiona tus clientes, revisa sus perfiles y seguimiento.",
+              imageUrl: "img/gym-clientes.jpg",
             },
             {
               to: "/dashboard/exercises",
               icon: Dumbbell,
               title: "Ejercicios",
               description: "Explora y administra tu catálogo de ejercicios.",
+              imageUrl: "img/gym-ejercicios.jpg",
             },
             {
               to: "/dashboard/routines",
@@ -28,12 +30,13 @@ export default function HomeAdminPage() {
               title: "Rutinas",
               description:
                 "Crea y modifica rutinas de entrenamiento para tus clientes.",
+              imageUrl: "img/gym-rutinas.jpg",
             },
           ].map((item) => (
             <Link key={item.to} to={item.to} className="block group">
               <Card className="transition-all duration-300 h-full border border-black/40 hover:border-primary hover:shadow-lg">
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-3 text-2xl  ">
+                  <CardTitle className="flex items-center space-x-3 text-2xl">
                     <item.icon className="h-8 w-8 text-primary" />
                     <span>{item.title}</span>
                   </CardTitle>
@@ -42,26 +45,15 @@ export default function HomeAdminPage() {
                   <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                     {item.description}
                   </p>
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="mt-4 w-full h-80 object-cover rounded-lg"
+                  />
                 </CardContent>
               </Card>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-12">
-          <Card className="border-2 border-primary/20">
-            <CardHeader className="bg-primary/5">
-              <CardTitle className="text-2xl text-primary">
-                Resumen de Actividad
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-6">
-              <p className="text-sm text-muted-foreground">
-                Aquí puedes ver un resumen de tu actividad reciente y
-                estadísticas importantes.
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </main>
     </div>
