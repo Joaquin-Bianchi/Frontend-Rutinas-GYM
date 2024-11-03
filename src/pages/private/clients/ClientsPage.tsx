@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "@/components/header/SectionHeader";
 import { ActionModal } from "@/components/modal/ActionModal";
+import { getClients } from "@/services/clientService";
+import ClientForm from "./components/ClientForm";
 
 export default function ClientsPage() {
   const { data: clients } = useQuery({
@@ -19,11 +21,12 @@ export default function ClientsPage() {
               dialogTitle="Crear Nuevo Cliente"
             >
               <></>
-              {/* //TODO crear client form
-              <ClientForm /> */}
+              {/* //TODO crear client form */}
+              <ClientForm />
             </ActionModal>
           }
         />
+        <div>{/* //TODO: mapear los clients */}</div>
       </main>
     </div>
   );
