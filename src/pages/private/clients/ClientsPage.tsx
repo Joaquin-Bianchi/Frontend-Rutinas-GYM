@@ -35,7 +35,7 @@ export default function ClientsPage() {
             </ActionModal>
           }
         />
-        <ClientGrid clients={clients?.data}/>
+        <ClientGrid clients={clients}/>
       </main>
     </div>
   );
