@@ -20,7 +20,7 @@ export default function ButtonDelete({
 }: Props) {
   const queryClient = useQueryClient();
 
-  const deleteExerciseMutation = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: () => deleteFn(id),
     mutationKey: [`${nameMutationKey}`],
     onSuccess: () => {
@@ -33,7 +33,7 @@ export default function ButtonDelete({
   });
 
   const handleDelete = () => {
-    deleteExerciseMutation.mutate();
+    deleteMutation.mutate();
   };
 
   return (
@@ -41,9 +41,9 @@ export default function ButtonDelete({
       variant="destructive"
       size="sm"
       onClick={handleDelete}
-      disabled={deleteExerciseMutation.isPending}
+      disabled={deleteMutation.isPending}
     >
-      {deleteExerciseMutation.isPending ? "Eliminando..." : "Eliminar"}
+      {deleteMutation.isPending ? "Eliminando..." : "Eliminar"}
     </Button>
   );
 }

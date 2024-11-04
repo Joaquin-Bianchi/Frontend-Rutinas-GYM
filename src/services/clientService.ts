@@ -1,10 +1,11 @@
 import { Client } from "@/interfaces/client.interface";
-import { User } from "@/interfaces/user.interface";
 import api from "@/lib/axios";
 
 export const getClients = async () => {
   const response = await api.get("/user");
-  const clients = response.data.filter((user: User) => user.role === "CLIENT");
+  const clients = response.data.filter(
+    (user: Client) => user.role === "CLIENT"
+  );
   return clients;
 };
 
