@@ -1,4 +1,9 @@
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   Table,
   TableBody,
   TableCell,
@@ -10,6 +15,7 @@ import {
 // import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import { toast } from "sonner";
 import { Client } from "@/interfaces/client.interface";
+import { Ellipsis } from "lucide-react";
 
 interface Props {
   clients?: Client[];
@@ -32,7 +38,7 @@ function ClientGrid({ clients }: Props) {
 
   // const handleDelete = (clientId: string) => {
   //   deleteClientMutation.mutate(clientId);
-  // };  
+  // };
 
   return (
     <div className="container mx-auto py-10">
@@ -45,13 +51,14 @@ function ClientGrid({ clients }: Props) {
             <TableHead>Edad</TableHead>
             <TableHead>Dirección</TableHead>
             <TableHead>Plan</TableHead>
-            <TableHead>Acciones</TableHead>
+            <TableHead className="text-right">Acciones</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {clients?.map((client) => (
             <TableRow key={client.id}>
               <TableCell className="font-medium">{client.name}</TableCell>
+              <TableCell>{client.email}</TableCell>
               <TableCell>{client.phone}</TableCell>
               <TableCell>{client.age}</TableCell>
               <TableCell>{client.address}</TableCell>
@@ -62,15 +69,17 @@ function ClientGrid({ clients }: Props) {
                   <span>Sin rutina</span>
                 )}
               </TableCell>
+
               <TableCell>
-                {/* <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => handleDelete(client.id)}
-                  disabled={deleteClientMutation.isPending}
-                >
-                  {deleteClientMutation.isPending ? "Eliminando..." : "Eliminar"}
-                </Button> */}
+                <Popover>
+                  <PopoverTrigger className="ml-auto mr-2" asChild>
+                    <Ellipsis className="cursor-pointer" />
+                  </PopoverTrigger>
+
+                  <PopoverContent className="w-full">
+                    <div className="items-end flex gap-1"></div>
+                  </PopoverContent>
+                </Popover>
               </TableCell>
             </TableRow>
           ))}
