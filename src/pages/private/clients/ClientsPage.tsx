@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "@/components/header/SectionHeader";
 import { ActionModal } from "@/components/modal/ActionModal";
 import { getClients } from "@/services/clientService";
-import ClientForm from "./components/ClientForm";
+import CreateClientForm from "./components/forms/CreateClientForm";
 import ClientGrid from "./components/table/ClientGrid";
 
 export default function ClientsPage() {
@@ -30,12 +30,11 @@ export default function ClientsPage() {
               dialogTitle="Crear Nuevo Cliente"
             >
               <></>
-              {/* //TODO crear client form */}
-              <ClientForm />
+              <CreateClientForm />
             </ActionModal>
           }
         />
-        <ClientGrid clients={clients}/>
+        <ClientGrid clients={clients} />
       </main>
     </div>
   );

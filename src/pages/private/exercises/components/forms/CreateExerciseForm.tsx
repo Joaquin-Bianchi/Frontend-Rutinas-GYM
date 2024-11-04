@@ -8,12 +8,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-interface Props {
-  onSuccess?: () => void;
-}
-//? FUNCION PARA CERRAR EL MODAL
 
-function CreateExerciseForm({ onSuccess }: Props) {
+function CreateExerciseForm() {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
 
@@ -23,7 +19,6 @@ function CreateExerciseForm({ onSuccess }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
       toast.success("Ejercicio creado correctamente");
-      onSuccess?.();
     },
     onError: (error) => {
       toast.error(error.message || "Error al crear el ejercicio");

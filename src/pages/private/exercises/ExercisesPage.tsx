@@ -7,10 +7,18 @@ import { ActionModal } from "@/components/modal/ActionModal";
 import CreateExerciseForm from "./components/forms/CreateExerciseForm";
 
 export default function ExercisesPage() {
-  const { data: exercises } = useQuery({
+  const {
+    data: exercises,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["exercises"],
     queryFn: () => getExercises(),
   });
+
+  if (isLoading) return <div>Cargando ejercicios...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
