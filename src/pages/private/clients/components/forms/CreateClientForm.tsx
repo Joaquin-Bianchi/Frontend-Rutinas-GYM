@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Client } from "@/interfaces/client.interface";
 import { createClient } from "@/services/clientService";
 import { getCategoryPlans } from "@/services/categoryPlan";
+import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 
 function CreateClientForm() {
   const queryClient = useQueryClient();
@@ -90,7 +91,9 @@ function CreateClientForm() {
           name="categoryPlan"
           label="Plan de entrenamiento"
           control={control}
-          options={categoryPlans.map((category) => category.name) || []}
+          options={
+            categoryPlans?.map((category: CategoryPlan) => category.name) || []
+          }
           rules={{
             required: "Debes seleccionar al menos un plan de entrenamiento",
           }}

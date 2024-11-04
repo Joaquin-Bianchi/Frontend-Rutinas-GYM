@@ -29,7 +29,6 @@ export default function ClientsPage() {
               title="Nuevo Cliente"
               dialogTitle="Crear Nuevo Cliente"
             >
-              <></>
               <CreateClientForm />
             </ActionModal>
           }

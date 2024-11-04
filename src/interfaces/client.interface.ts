@@ -1,5 +1,5 @@
 import { Role } from "@/enums/role.enum";
-import { CategoryPlan } from "./categotyPlay.interface";
+import { CategoryPlan } from "./categotyPlan.interface";
 import { Routine } from "./routine.interface";
 
 export interface Client {
