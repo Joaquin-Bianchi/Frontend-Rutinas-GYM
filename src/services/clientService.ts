@@ -11,3 +11,8 @@ export const createClient = async (client: Client) => {
   console.log(response);
   return response.data;
 };
+export const deleteClientById = async (clientId: string) => {
+  const response = await api.delete(`/user/${clientId}`);
+  console.log(response);
+  return response;
+};

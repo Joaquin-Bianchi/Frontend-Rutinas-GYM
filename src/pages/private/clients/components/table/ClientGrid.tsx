@@ -1,3 +1,4 @@
+import ButtonDelete from "@/components/buttons/ButtonDelete";
 import {
   Popover,
   PopoverContent,
@@ -15,6 +16,7 @@ import {
 // import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import { toast } from "sonner";
 import { Client } from "@/interfaces/client.interface";
+import { deleteClientById } from "@/services/clientService";
 import { Ellipsis } from "lucide-react";
 
 interface Props {
@@ -77,7 +79,15 @@ function ClientGrid({ clients }: Props) {
                   </PopoverTrigger>
 
                   <PopoverContent className="w-full">
-                    <div className="items-end flex gap-1"></div>
+                    <div className="items-end flex gap-1">
+                      <ButtonDelete
+                        id={client.id}
+                        deleteFn={deleteClientById}
+                        nameMutationKey="deleteClient"
+                        nameQueryKey="clients"
+                        textObjectDelete="cliente"
+                      />
+                    </div>
                   </PopoverContent>
                 </Popover>
               </TableCell>
