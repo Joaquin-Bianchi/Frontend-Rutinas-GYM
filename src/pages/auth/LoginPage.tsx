@@ -26,7 +26,8 @@ export default function LoginPage() {
       navigate("/dashboard");
     },
     onError: (error: any) => {
-      const errorMessage = error.response?.data?.error || "Error al iniciar sesión";
+      const errorMessage =
+        error.response?.data?.error || "Error al iniciar sesión";
       toast.error(errorMessage);
     },
   });

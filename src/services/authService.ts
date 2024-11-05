@@ -16,9 +16,6 @@ export const signIn = async (credentials: LoginFormData) => {
     }
     return response;
   } catch (error: any) {
-    console.log('Error completo:', error);
-    console.log('Response data:', error.response?.data);
-    console.log('Error message:', error.response?.data?.error);
     throw error;
   }
 };

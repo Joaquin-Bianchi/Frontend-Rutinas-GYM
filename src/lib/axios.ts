@@ -31,7 +31,6 @@ api.interceptors.response.use(
       error.response?.status === 401 &&
       window.location.pathname !== "/login"
     ) {
-      // Solo limpiamos el token y redirigimos si NO estamos ya en la página de login
       localStorage.removeItem("token");
       window.location.href = "/login";
     }
