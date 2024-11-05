@@ -25,8 +25,12 @@ function CreateClientForm() {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       toast.success("Cliente creado correctamente");
     },
-    onError: (error) => {
-      toast.error(error.message || "Error al crear el cliente");
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Error al crear el cliente";
+      toast.error(errorMessage);
     },
   });
 
