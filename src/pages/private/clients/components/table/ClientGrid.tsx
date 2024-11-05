@@ -65,7 +65,7 @@ function ClientGrid({ clients }: Props) {
                         deleteFn={deleteClientById}
                         nameMutationKey="deleteClient"
                         nameQueryKey="clients"
-                        textObjectDelete="cliente"
+                        textObjectDelete="Cliente"
                       />
                     </div>
                   </PopoverContent>

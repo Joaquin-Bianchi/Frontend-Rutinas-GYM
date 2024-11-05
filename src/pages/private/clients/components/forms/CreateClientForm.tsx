@@ -25,12 +25,8 @@ function CreateClientForm() {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       toast.success("Cliente creado correctamente");
     },
-    onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.message ||
-        error.message ||
-        "Error al crear el cliente";
-      toast.error(errorMessage);
+    onError: (error) => {
+      toast.error(error.message || "Error al crear el cliente");
     },
   });
 
@@ -118,7 +114,7 @@ function CreateClientForm() {
           label="Plan de entrenamiento"
           control={control}
           options={
-            categoryPlans?.map((category: CategoryPlan) => category.name) || []
+            categoryPlans?.map((category: CategoryPlan) => category.id) || []
           }
           rules={{
             required: "Debes seleccionar al menos un plan de entrenamiento",
@@ -126,7 +122,6 @@ function CreateClientForm() {
           placeholder="Plan de entrenamineto"
         />
       )}
-
       <Button type="submit" disabled={createClientMutation.isPending}>
         {createClientMutation.isPending ? "Creando..." : "Crear Cliente"}
       </Button>
