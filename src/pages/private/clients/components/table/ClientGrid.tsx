@@ -12,9 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-// import { Button } from "@/components/ui/button";
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
-// import { toast } from "sonner";
 import { Client } from "@/interfaces/client.interface";
 import { deleteClientById } from "@/services/clientService";
 import { Ellipsis } from "lucide-react";
@@ -24,24 +21,7 @@ interface Props {
 }
 
 function ClientGrid({ clients }: Props) {
-  // const queryClient = useQueryClient();
-
-  // const deleteClientMutation = useMutation({
-  //   mutationFn: deleteClientById,
-  //   mutationKey: ["deleteClient"],
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["clients"] });
-  //     toast.success("Cliente eliminado correctamente");
-  //   },
-  //   onError: (error: Error) => {
-  //     toast.error(error.message || "Error al eliminar el cliente");
-  //   },
-  // });
-
-  // const handleDelete = (clientId: string) => {
-  //   deleteClientMutation.mutate(clientId);
-  // };
-
+  
   return (
     <div className="container mx-auto py-10">
       <Table>
