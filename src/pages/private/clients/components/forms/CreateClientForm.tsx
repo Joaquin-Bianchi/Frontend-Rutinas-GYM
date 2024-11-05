@@ -114,7 +114,7 @@ function CreateClientForm() {
           label="Plan de entrenamiento"
           control={control}
           options={
-            categoryPlans?.map((category: CategoryPlan) => category.id) || []
+            categoryPlans?.map((category: CategoryPlan) => category.name) || []
           }
           rules={{
             required: "Debes seleccionar al menos un plan de entrenamiento",
