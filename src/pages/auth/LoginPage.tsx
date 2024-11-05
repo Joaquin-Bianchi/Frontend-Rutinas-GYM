@@ -6,40 +6,39 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signIn } from "@/services/authService";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
-  const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: (data: LoginFormData) => signIn(data),
+    onSuccess: () => {
+      toast.success("Inicio de sesión exitoso");
+      navigate("/dashboard");
+    },
+    onError: (error: any) => {
+      const errorMessage = error.response?.data?.error || "Error al iniciar sesión";
+      toast.error(errorMessage);
+    },
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormData>();
 
-  const onSubmit = handleSubmit(async (data) => {
-    setIsLoading(true);
-    setError(null);
-
-    setIsLoading(false);
-
-    try {
-      const res = await signIn({
-        email: data.email,
-        password: data.password,
-      });
-      if (res?.data?.error) {
-        setError(res.data.error);
-      } else {
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      setError(err as string);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = handleSubmit((data) => {
+    mutate(data);
   });
 
   return (
@@ -53,11 +52,6 @@ export default function LoginPage() {
           <p className="text-muted-foreground">Inicia sesión para acceder</p>
         </div>
         <form onSubmit={onSubmit} className="space-y-4">
-          {error && (
-            <p className="bg-destructive text-destructive-foreground p-3 rounded mb-2">
-              {error}
-            </p>
-          )}
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
@@ -65,7 +59,7 @@ export default function LoginPage() {
               type="text"
               placeholder="Email"
               className="mt-2"
-              disabled={isLoading}
+              disabled={isPending}
               {...register("email", {
                 required: "El email es requerido",
               })}
@@ -84,7 +78,7 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 placeholder="********"
                 className="mt-2"
-                disabled={isLoading}
+                disabled={isPending}
                 {...register("password", {
                   required: "La contraseña es requerida",
                 })}
@@ -112,8 +106,8 @@ export default function LoginPage() {
               </p>
             )}
           </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? (
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Cargando...

@@ -27,10 +27,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    if (
+      error.response?.status === 401 &&
+      window.location.pathname !== "/login"
+    ) {
+      // Solo limpiamos el token y redirigimos si NO estamos ya en la página de login
       localStorage.removeItem("token");
-      const navigate = useNavigate();
-      navigate("/login");
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }

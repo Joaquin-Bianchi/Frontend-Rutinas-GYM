@@ -7,12 +7,14 @@ import ExercisesPage from "./pages/private/exercises/ExercisesPage";
 import { Toaster } from "sonner";
 import { PrivateLayout } from "./layouts/PrivateLayout";
 import ClientsPage from "./pages/private/clients/ClientsPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
+  const queryClient = new QueryClient();
   return (
-    <>
-      <Toaster richColors />
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <Toaster richColors />
         <Routes>
           {/* Ruta pública */}
           <Route path="/login" element={<LoginPage />} />
@@ -22,12 +24,12 @@ const App = () => {
             <Route element={<PrivateLayout />}>
               <Route path="dashboard" element={<HomeAdminPage />} />{" "}
               <Route path="dashboard/clients" element={<ClientsPage />} />
-              <Route path="/dashboard/exercises" element={<ExercisesPage />} />
+              <Route path="dashboard/exercises" element={<ExercisesPage />} />
             </Route>
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </QueryClientProvider>
   );
 };
 

@@ -1,18 +1,27 @@
 import api from "@/lib/axios";
 
-export const signIn = async (credentials: {
+type LoginFormData = {
   email: string;
   password: string;
-}) => {
-  const response = await api.post("/auth/login", credentials);
-  if (response.data.token) {
-    localStorage.setItem("token", response.data.token);
-  }
-  return response;
 };
 interface JwtPayload {
   exp?: number;
 }
+
+export const signIn = async (credentials: LoginFormData) => {
+  try {
+    const response = await api.post("/auth/login", credentials);
+    if (response.data.token) {
+      localStorage.setItem("token", response.data.token);
+    }
+    return response;
+  } catch (error: any) {
+    console.log('Error completo:', error);
+    console.log('Response data:', error.response?.data);
+    console.log('Error message:', error.response?.data?.error);
+    throw error;
+  }
+};
 
 export const signOut = () => {
   localStorage.removeItem("token");
