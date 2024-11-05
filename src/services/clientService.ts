@@ -10,10 +10,12 @@ export const getClients = async () => {
 };
 
 export const createClient = async (client: Client) => {
-  const response = await api.post("/user", client);
+  console.log(client);
+  const response = await api.post("/auth/register", client);
   console.log(response);
   return response.data;
 };
+
 export const deleteClientById = async (clientId: string) => {
   const response = await api.delete(`/user/${clientId}`);
   console.log(response);

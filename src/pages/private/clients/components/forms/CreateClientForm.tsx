@@ -31,7 +31,13 @@ function CreateClientForm() {
   });
 
   const onSubmit = handleSubmit((data: Client) => {
-    createClientMutation.mutate(data);
+    const formattedData = {
+      ...data,
+      age: Number(data.age),
+      phone: Number(data.phone),
+      phoneEmergency: Number(data.phoneEmergency),
+    };
+    createClientMutation.mutate(formattedData);
   });
 
   return (
@@ -42,6 +48,22 @@ function CreateClientForm() {
         control={control}
         rules={{ required: "El nombre es requerido" }}
         placeholder="Nombre completo"
+      />
+
+      <FormField
+        name="email"
+        label="Email"
+        control={control}
+        rules={{ required: "El email es requerido" }}
+        placeholder="Email"
+      />
+
+      <FormField
+        name="password"
+        label="DNI (contraseña)"
+        control={control}
+        rules={{ required: "El DNI es requerido" }}
+        placeholder="DNI"
       />
 
       <FormField
@@ -88,11 +110,11 @@ function CreateClientForm() {
         />
       ) : (
         <MultiSelectField
-          name="categoryPlan"
+          name="categoryPlans"
           label="Plan de entrenamiento"
           control={control}
           options={
-            categoryPlans?.map((category: CategoryPlan) => category.name) || []
+            categoryPlans?.map((category: CategoryPlan) => category.id) || []
           }
           rules={{
             required: "Debes seleccionar al menos un plan de entrenamiento",
@@ -102,7 +124,7 @@ function CreateClientForm() {
       )}
 
       <Button type="submit" disabled={createClientMutation.isPending}>
-        {createClientMutation.isPending ? "Creando..." : "Crear ejercicio"}
+        {createClientMutation.isPending ? "Creando..." : "Crear Cliente"}
       </Button>
     </form>
   );
