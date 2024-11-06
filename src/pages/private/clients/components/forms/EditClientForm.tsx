@@ -19,7 +19,13 @@ function EditClientForm({ client }: Props) {
   const { control, handleSubmit } = useForm<Client>({
     defaultValues: {
       name: client.name,
-      categoryPlan: client.categoryPlan,
+      email: client.email,
+      age: client.age,
+      address: client.address,
+      phone: client.phone,
+      phoneEmergency: client.phoneEmergency,
+      routines: client.routines,
+      categoryPlans: client.categoryPlans,
     },
   });
   const { data: categoryPlans, isLoading } = useQuery({
@@ -31,8 +37,8 @@ function EditClientForm({ client }: Props) {
     mutationFn: editClient,
     mutationKey: ["editClient"],
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exercises"] });
-      toast.success("Ejercicio editado correctamente");
+      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      toast.success("Cliente editado correctamente");
     },
     onError: (error) => {
       console.error("Error al editar el client:", error);
@@ -41,12 +47,13 @@ function EditClientForm({ client }: Props) {
   });
 
   const onSubmit = handleSubmit((data: Client) => {
-    editClientMutation.mutate(data);
+    const clientWithId = { ...data, id: client.id };
+    editClientMutation.mutate(clientWithId);
   });
 
   return (
     <form className="grid gap-4 py-4" onSubmit={onSubmit}>
-      <div className="col-span-1">
+      <div className="col-span-2">
         <FormField
           name="name"
           label="Nombre completo"
@@ -55,17 +62,6 @@ function EditClientForm({ client }: Props) {
           placeholder="Nombre completo"
         />
       </div>
-
-      <div className="col-span-1">
-        <FormField
-          name="password"
-          label="DNI (contraseña)"
-          control={control}
-          rules={{ required: "El DNI es requerido" }}
-          placeholder="DNI"
-        />
-      </div>
-
       <div className="col-span-2">
         <FormField
           name="email"

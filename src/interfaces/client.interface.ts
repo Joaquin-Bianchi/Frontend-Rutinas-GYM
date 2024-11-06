@@ -10,7 +10,7 @@ export interface Client {
   phone: number;
   phoneEmergency: number;
   address: string;
-  categoryPlan?: CategoryPlan[];
+  categoryPlans?: CategoryPlan[];
   role: Role;
   routines?: Routine[];
 }
