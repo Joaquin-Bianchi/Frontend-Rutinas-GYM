@@ -29,9 +29,10 @@ function EditExerciseForm({ exercise }: Props) {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
       toast.success("Ejercicio editado correctamente");
     },
-    onError: (error) => {
-      console.error("Error al editar el ejercicio:", error);
-      toast.error(error.message || "Error al editar el ejercicio");
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.error || "Error al editar el ejercicio";
+      toast.error(errorMessage);
     },
   });
 

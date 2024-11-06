@@ -14,10 +14,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Client } from "@/interfaces/client.interface";
-import EditExerciseForm from "@/pages/private/exercises/components/forms/EditExerciseForm";
 import { deleteClientById } from "@/services/clientService";
 import { Ellipsis } from "lucide-react";
 import EditClientForm from "../forms/EditClientForm";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   clients?: Client[];
@@ -35,7 +36,9 @@ function ClientGrid({ clients }: Props) {
             <TableHead>Edad</TableHead>
             <TableHead>Dirección</TableHead>
             <TableHead>Plan</TableHead>
-            <TableHead className="text-right">Acciones</TableHead>
+            <TableCell>Rutinas</TableCell>
+
+            <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -46,12 +49,20 @@ function ClientGrid({ clients }: Props) {
               <TableCell>{client.phone}</TableCell>
               <TableCell>{client.age}</TableCell>
               <TableCell>{client.address}</TableCell>
+              <TableCell></TableCell>
               <TableCell>
-                {client.routines?.find((routine) => routine.day === "lunes") ? (
-                  <span>Lunes</span>
-                ) : (
-                  <span>Sin rutina</span>
-                )}
+                <Link
+                  to={`/dashboard/client/routine/${client.id}`}
+                  className="flex items-center space-x-2"
+                >
+                  <Button
+                    variant="default"
+                    size="default"
+                    className="font-semibold"
+                  >
+                    Ver
+                  </Button>
+                </Link>
               </TableCell>
 
               <TableCell>

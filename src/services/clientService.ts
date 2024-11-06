@@ -28,3 +28,8 @@ export const deleteClientById = async (clientId: string) => {
   console.log(response);
   return response;
 };
+
+export const getClientById = async (clientId: string) => {
+  const response = await api.get(`/user/${clientId}`);
+  return response.data;
+};

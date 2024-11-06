@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { DumbbellIcon, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 interface Props {
