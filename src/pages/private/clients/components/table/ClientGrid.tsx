@@ -1,4 +1,5 @@
 import ButtonDelete from "@/components/buttons/ButtonDelete";
+import { ActionModal } from "@/components/modal/ActionModal";
 import {
   Popover,
   PopoverContent,
@@ -13,15 +14,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Client } from "@/interfaces/client.interface";
+import EditExerciseForm from "@/pages/private/exercises/components/forms/EditExerciseForm";
 import { deleteClientById } from "@/services/clientService";
 import { Ellipsis } from "lucide-react";
+import EditClientForm from "../forms/EditClientForm";
 
 interface Props {
   clients?: Client[];
 }
 
 function ClientGrid({ clients }: Props) {
-  
   return (
     <div className="container mx-auto py-10">
       <Table>
@@ -57,7 +59,6 @@ function ClientGrid({ clients }: Props) {
                   <PopoverTrigger className="ml-auto mr-2" asChild>
                     <Ellipsis className="cursor-pointer" />
                   </PopoverTrigger>
-
                   <PopoverContent className="w-full">
                     <div className="items-end flex gap-1">
                       <ButtonDelete
@@ -67,6 +68,9 @@ function ClientGrid({ clients }: Props) {
                         nameQueryKey="clients"
                         textObjectDelete="Cliente"
                       />
+                      <ActionModal title="Editar" dialogTitle="Editar Cliente">
+                        <EditClientForm client={client} />
+                      </ActionModal>
                     </div>
                   </PopoverContent>
                 </Popover>

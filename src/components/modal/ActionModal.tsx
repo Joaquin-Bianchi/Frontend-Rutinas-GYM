@@ -25,7 +25,6 @@ export function ActionModal({ children, title, dialogTitle }: Props) {
           <Plus />
           {/*titulo del boton */}
           <p className="font-bold">{title}</p>
-          <DumbbellIcon className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

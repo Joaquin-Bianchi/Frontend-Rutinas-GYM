@@ -39,7 +39,7 @@ export default function ButtonDelete({
   return (
     <Button
       variant="destructive"
-      size="sm"
+      size="default"
       onClick={handleDelete}
       disabled={deleteMutation.isPending}
     >
