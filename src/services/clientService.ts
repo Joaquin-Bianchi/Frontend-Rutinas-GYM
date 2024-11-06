@@ -11,8 +11,15 @@ export const getClients = async () => {
 
 export const createClient = async (client: Client) => {
   console.log(client);
-  const response = await api.post("/auth/register", client);
-  console.log(response);
+  try {
+    const response = await api.post("/auth/register", client);
+    return response.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+export const editClient = async (client: Client) => {
+  const response = await api.put(`/user/${client.id}`, client);
   return response.data;
 };
 

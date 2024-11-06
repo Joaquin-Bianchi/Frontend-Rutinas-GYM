@@ -25,8 +25,10 @@ function CreateClientForm() {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       toast.success("Cliente creado correctamente");
     },
-    onError: (error) => {
-      toast.error(error.message || "Error al crear el cliente");
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.error || "Error al iniciar sesión";
+      toast.error(errorMessage);
     },
   });
 
@@ -41,90 +43,114 @@ function CreateClientForm() {
   });
 
   return (
-    <form className="grid gap-4 py-4" onSubmit={onSubmit}>
-      <FormField
-        name="name"
-        label="Nombre completo"
-        control={control}
-        rules={{ required: "El nombre es requerido" }}
-        placeholder="Nombre completo"
-      />
-
-      <FormField
-        name="email"
-        label="Email"
-        control={control}
-        rules={{ required: "El email es requerido" }}
-        placeholder="Email"
-      />
-
-      <FormField
-        name="password"
-        label="DNI (contraseña)"
-        control={control}
-        rules={{ required: "El DNI es requerido" }}
-        placeholder="DNI"
-      />
-
-      <FormField
-        name="age"
-        label="Edad"
-        control={control}
-        rules={{ required: "La edad es requerida" }}
-        placeholder="Edad"
-        type="number"
-      />
-
-      <FormField
-        name="phone"
-        label="Teléfono"
-        control={control}
-        rules={{ required: "El telefono es requerido" }}
-        placeholder="Teléfono"
-        type="number"
-      />
-
-      <FormField
-        name="phoneEmergency"
-        label="Teléfono de emergencia"
-        control={control}
-        rules={{ required: "El teléfono de emergencia es requerido" }}
-        placeholder="Teléfono de emergencia"
-        type="number"
-      />
-
-      <FormField
-        name="address"
-        label="Dirección"
-        control={control}
-        rules={{ required: "La dirección es requerida" }}
-        placeholder="Dirección"
-      />
-
-      {isLoading ? (
+    <form className="grid grid-cols-2 gap-4 py-4" onSubmit={onSubmit}>
+      <div className="col-span-1">
         <FormField
-          name="."
-          label="Plan de entrenamiento"
+          name="name"
+          label="Nombre completo"
           control={control}
-          placeholder="Plan de entrenamiento"
+          rules={{ required: "El nombre es requerido" }}
+          placeholder="Nombre completo"
         />
-      ) : (
-        <MultiSelectField
-          name="categoryPlans"
-          label="Plan de entrenamiento"
+      </div>
+
+      <div className="col-span-1">
+        <FormField
+          name="password"
+          label="DNI (contraseña)"
           control={control}
-          options={
-            categoryPlans?.map((category: CategoryPlan) => category.id) || []
-          }
-          rules={{
-            required: "Debes seleccionar al menos un plan de entrenamiento",
-          }}
-          placeholder="Plan de entrenamineto"
+          rules={{ required: "El DNI es requerido" }}
+          placeholder="DNI"
         />
-      )}
-      <Button type="submit" disabled={createClientMutation.isPending}>
-        {createClientMutation.isPending ? "Creando..." : "Crear Cliente"}
-      </Button>
+      </div>
+
+      <div className="col-span-2">
+        <FormField
+          name="email"
+          label="Email"
+          control={control}
+          rules={{ required: "El email es requerido" }}
+          placeholder="Email"
+        />
+      </div>
+
+      <div className="col-span-1">
+        <FormField
+          name="age"
+          label="Edad"
+          control={control}
+          rules={{ required: "La edad es requerida" }}
+          placeholder="Edad"
+          type="number"
+        />
+      </div>
+
+      <div className="col-span-1">
+        <FormField
+          name="phone"
+          label="Teléfono"
+          control={control}
+          rules={{ required: "El telefono es requerido" }}
+          placeholder="Teléfono"
+          type="number"
+        />
+      </div>
+
+      <div className="col-span-1">
+        <FormField
+          name="phoneEmergency"
+          label="Teléfono de emergencia"
+          control={control}
+          rules={{ required: "El teléfono de emergencia es requerido" }}
+          placeholder="Teléfono de emergencia"
+          type="number"
+        />
+      </div>
+
+      <div className="col-span-2">
+        <FormField
+          name="address"
+          label="Dirección"
+          control={control}
+          rules={{ required: "La dirección es requerida" }}
+          placeholder="Dirección"
+        />
+      </div>
+
+      <div className="col-span-2">
+        {isLoading ? (
+          <FormField
+            name="."
+            label="Plan de entrenamiento"
+            control={control}
+            placeholder="Plan de entrenamiento"
+          />
+        ) : (
+          <MultiSelectField
+            name="categoryPlans"
+            label="Plan de entrenamiento"
+            control={control}
+            options={
+              categoryPlans?.map((category: CategoryPlan) => category.name) ||
+              []
+            }
+            rules={{
+              required: "Debes seleccionar al menos un plan de entrenamiento",
+            }}
+            placeholder="Plan de entrenamineto"
+          />
+        )}
+      </div>
+
+      <div className="col-span-2">
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={createClientMutation.isPending}
+        >
+          {createClientMutation.isPending ? "Creando..." : "Crear Cliente"}
+        </Button>
+      </div>
     </form>
   );
 }
