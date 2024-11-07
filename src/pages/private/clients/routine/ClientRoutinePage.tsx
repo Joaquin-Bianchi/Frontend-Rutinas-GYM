@@ -8,15 +8,6 @@ import { Edit } from "lucide-react";
 import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine";
 import CreateClientRoutineForm from "./forms/CreateClientRoutineForm";
 
-const daysOfWeek = [
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "Viernes",
-  "Sábado",
-  "Domingo",
-];
 
 export default function ClientRoutinePage() {
   const { id } = useParams();
@@ -31,54 +22,57 @@ export default function ClientRoutinePage() {
     queryFn: () => getClientById(id as string),
   });
 
-  console.log(client);
+  console.log("Cliente: ", client);
 
-  if (isLoading) return <div>Cargando clientes...</div>;
+  if (isLoading) return <div>Cargando rutinas del cliente...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Rutinas de {client?.name}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {daysOfWeek.map((day, index) => (
-            <Card key={day} className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>{day}</span>
-                  {index % 2 === 0 ? (
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => console.log(`Editar rutina de ${day}`)}
-                    >
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                  ) : (
-                    <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                      <CreateClientRoutineForm />
-                    </ActionModalUserRutine>
-                  )}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {index % 2 === 0 ? (
-                  <div>
-                    <h3 className="font-semibold">Rutina de ejemplo</h3>
-                    <ul className="list-disc list-inside">
-                      <li>Press de banca - 3 series x 10 repeticiones</li>
-                      <li>Sentadillas - 4 series x 12 repeticiones</li>
-                      <li>Dominadas - 3 series x 8 repeticiones</li>
-                    </ul>
-                  </div>
-                ) : (
-                  <p className="text-gray-500">
-                    No hay rutina asignada para este día.
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-        ))}
+
+        {client?.routines?.map((routine) =>
+          <Card key={routine.id} className="shadow-lg" >
+            <CardHeader>
+              <CardTitle className="flex justify-between items-center">
+                <span className="capitalize">{routine.day}</span>
+
+                <Button
+                  variant="outline"
+                  size="icon"
+                >
+                  <Edit className="h-4 w-4" />
+                </Button>
+
+                <ActionModalUserRutine dialogTitle="Asignar Rutina">
+                  <CreateClientRoutineForm />
+                </ActionModalUserRutine>
+
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {routine.routineExercises?.length > 0 ? (
+                <div>
+                  <h3 className="font-semibold">Ejercicios asignados</h3>
+                  <ul className="list-disc list-inside">
+                    {routine.routineExercises.map((exercise) => (
+                      <li key={exercise.id}>
+                        {exercise.sets} series x {exercise.reps} repeticiones
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-gray-500">No hay rutina asignada para este día.</p>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+
+
       </div>
-    </div>
+    </div >
   );
 }

@@ -44,23 +44,13 @@ function CreateClientRoutineForm() {
 
   return (
     <form className="grid grid-cols-2 gap-4 py-4" onSubmit={onSubmit}>
-      <div className="col-span-1">
-        <FormField
-          name="name"
-          label="Nombre de la rutina"
-          control={control}
-          rules={{ required: "El nombre es requerido" }}
-          placeholder="Nombre de la rutina"
-        />
-      </div>
-
-      <div className="col-span-1">
+      <div className="col-span-2">
         <FormField
           name="day"
           label="Día"
           control={control}
           rules={{ required: "El dia es requerido" }}
-          placeholder="Día"
+          placeholder="Tiene que aparecer el dia seleccionado"
         />
       </div>
 

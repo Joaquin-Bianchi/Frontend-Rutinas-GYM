@@ -2,8 +2,8 @@ import { Day } from "@/enums/day.enum";
 import { RoutineExercise } from "./routineExercise.interface";
 
 export interface Routine {
-  // userId: string;
-  name: string;
+  id: string;
+  userId: string;
   day: Day;
   routineExercises: RoutineExercise[];
 }
