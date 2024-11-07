@@ -3,10 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Client } from "@/interfaces/client.interface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Edit } from "lucide-react";
 import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine";
-import CreateClientRoutineForm from "./forms/CreateClientRoutineForm";
+import AddExerciseForm from "./forms/AddExerciseForm";
 
 
 export default function ClientRoutinePage() {
@@ -38,15 +36,15 @@ export default function ClientRoutinePage() {
               <CardTitle className="flex justify-between items-center">
                 <span className="capitalize">{routine.day}</span>
 
-                <Button
+                {/* <Button
                   variant="outline"
                   size="icon"
                 >
                   <Edit className="h-4 w-4" />
-                </Button>
+                </Button> */}
 
                 <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                  <CreateClientRoutineForm />
+                  <AddExerciseForm />
                 </ActionModalUserRutine>
 
               </CardTitle>
@@ -69,9 +67,6 @@ export default function ClientRoutinePage() {
             </CardContent>
           </Card>
         )}
-
-
-
       </div>
     </div >
   );
