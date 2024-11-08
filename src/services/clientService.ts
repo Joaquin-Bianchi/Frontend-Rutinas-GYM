@@ -1,6 +1,6 @@
 import { Client } from "@/interfaces/client.interface";
 import api from "@/lib/axios";
-import { log } from "console";
+
 
 export const getClients = async () => {
   const response = await api.get("/user");
@@ -18,8 +18,8 @@ export const createClient = async (client: Client) => {
     throw error;
   }
 };
+
 export const editClient = async (client: Client) => {
-  console.log(client);
   const response = await api.put(`/user/${client.id}`, client);
   return response.data;
 };
