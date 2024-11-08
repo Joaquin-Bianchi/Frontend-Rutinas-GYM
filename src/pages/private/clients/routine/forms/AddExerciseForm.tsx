@@ -35,8 +35,9 @@ function AddExerciseForm() {
   });
 
   return (
-    <form className="grid grid-cols-2 gap-4 py-4" onSubmit={onSubmit}>
-      <div className="col-span-1">
+    <form className="grid grid-cols-3 gap-4 py-4" onSubmit={onSubmit}>
+
+      <div className="col-span-3">
         <FormField
           name="exerciseId"
           label="Ejercicio"
@@ -46,25 +47,32 @@ function AddExerciseForm() {
         />
       </div>
 
-      <div className="col-span-1">
-        <FormField
-          name="sets"
-          label="Series"
-          control={control}
-          placeholder="Series"
-          type="number"
-        />
-      </div>
 
-      <div className="col-span-1">
-        <FormField
-          name="reps"
-          label="Repeticiones"
-          control={control}
-          rules={{ required: "" }}
-          placeholder="Repeticiones"
-          type="number"
-        />
+      <div className="col-span-2 flex items-end space-x-2">
+        <div className="flex-1">
+          <FormField
+            name="sets"
+            label="Series"
+            control={control}
+            placeholder="Series"
+            type="number"
+          />
+        </div>
+
+        <div className="flex items-center justify-center pb-2">
+          <span className="text-lg font-bold">x</span>
+        </div>
+
+        <div className="flex-1">
+          <FormField
+            name="reps"
+            label="Repeticiones"
+            control={control}
+            rules={{ required: "Este campo es requerido" }}
+            placeholder="Repeticiones"
+            type="number"
+          />
+        </div>
       </div>
 
       <div className="col-span-1">
@@ -77,7 +85,7 @@ function AddExerciseForm() {
         />
       </div>
 
-      <div className="col-span-2">
+      <div className="col-span-3">
         <FormField
           name="comment"
           label="Comentario"
