@@ -5,6 +5,7 @@ import { Client } from "@/interfaces/client.interface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine";
 import AddExerciseForm from "./forms/AddExerciseForm";
+import { getExercises } from "@/services/exerciseService";
 
 
 export default function ClientRoutinePage() {
@@ -18,6 +19,13 @@ export default function ClientRoutinePage() {
   } = useQuery<Client>({
     queryKey: ["client"],
     queryFn: () => getClientById(id as string),
+  });
+
+  const {
+    data: exercises,
+  } = useQuery({
+    queryKey: ["exercises"],
+    queryFn: () => getExercises(),
   });
 
   console.log("Cliente: ", client);
@@ -44,7 +52,7 @@ export default function ClientRoutinePage() {
                 </Button> */}
 
                 <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                  <AddExerciseForm />
+                  <AddExerciseForm exercises={exercises?.data}/>
                 </ActionModalUserRutine>
 
               </CardTitle>

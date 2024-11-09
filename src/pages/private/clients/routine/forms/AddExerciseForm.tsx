@@ -1,52 +1,102 @@
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/form/FormField";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { Client } from "@/interfaces/client.interface";
-import { createClient } from "@/services/clientService";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { useState } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Exercise } from "@/interfaces/exercise.interface";
+import { cn } from "@/lib/utils";
 
-function AddExerciseForm() {
-  const queryClient = useQueryClient();
-  const { control, handleSubmit } = useForm<Client>();
+interface Props {
+  exercises: Exercise[];
+}
 
-  const createClientMutation = useMutation({
-    mutationFn: createClient,
-    mutationKey: ["createClient"],
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clients"] });
-      toast.success("Cliente creado correctamente");
-    },
-    onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.error || "Error al iniciar sesión";
-      toast.error(errorMessage);
-    },
-  });
-
-  const onSubmit = handleSubmit((data: Client) => {
-    const formattedData = {
-      ...data,
-      age: Number(data.age),
-      phone: Number(data.phone),
-      phoneEmergency: Number(data.phoneEmergency),
-    };
-    createClientMutation.mutate(formattedData);
-  });
+function AddExerciseForm({ exercises }: Props) {
+  const { control, handleSubmit } = useForm<Exercise>();
+  const [openExercise, setOpenExercise] = useState(false);
+  const [exercise, setExercise] = useState<Exercise>();
+  const [valueExercise, setValueExercise] = useState("");
 
   return (
-    <form className="grid grid-cols-3 gap-4 py-4" onSubmit={onSubmit}>
-
+    <form className="grid grid-cols-3 gap-4 py-4">
       <div className="col-span-3">
-        <FormField
-          name="exerciseId"
-          label="Ejercicio"
-          control={control}
-          rules={{ required: "El ejercicio es requerido" }}
-          placeholder="Seleccionar el ejercicio"
-        />
-      </div>
+        {/* Elegir ejercicio */}
+        <Popover
+          modal={true}
+          open={openExercise}
+          onOpenChange={setOpenExercise}
+        >
+          <Label htmlFor="Client">Ejercicio</Label>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={openExercise}
+              className="w-full capitalize justify-between"
+            >
+              {exercises
+                ? exercises.find((exercise) => exercise.id === exercise.id)
+                    ?.name || "Buscar ejercicio..."
+                : "Cargando ejercicios..."}
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
 
+          <PopoverContent className="p-0">
+            <Command>
+              <CommandInput placeholder="Buscar cliente..." />
+              <CommandList>
+                <CommandEmpty>Cliente no encontrado</CommandEmpty>
+                <ScrollArea className="h-48 overflow-auto">
+                  <CommandGroup>
+                    {exercises.map((exercise) => (
+                      <CommandItem
+                        key={exercise.id}
+                        className="capitalize"
+                        value={exercise.name}
+                        onSelect={(currentValue) => {
+                          const selectedExercise = exercises.find(
+                            (exercise) => exercise.name === currentValue,
+                            setExercise(exercise)
+                          );
+                          setValueExercise(
+                            selectedExercise ? selectedExercise.id : ""
+                          );
+                          setOpenExercise(false);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            valueExercise === exercise.id
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {exercise.name}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </ScrollArea>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </div>
 
       <div className="col-span-2 flex items-end space-x-2">
         <div className="flex-1">
@@ -95,13 +145,7 @@ function AddExerciseForm() {
       </div>
 
       <div className="col-span-2">
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={createClientMutation.isPending}
-        >
-          {createClientMutation.isPending ? "Creando..." : "Crear Cliente"}
-        </Button>
+        <Button type="submit" className="w-full"></Button>
       </div>
     </form>
   );
