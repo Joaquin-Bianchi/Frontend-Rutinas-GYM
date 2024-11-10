@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/form/FormField";
-import { useForm, Control, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
   Popover,
   PopoverContent,
@@ -20,17 +20,51 @@ import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Exercise } from "@/interfaces/exercise.interface";
 import { cn } from "@/lib/utils";
+import { RoutineExercise } from "@/interfaces/routineExercise.interface";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { createRoutineExercises } from "@/services/routineExerciseService";
 
 interface Props {
   exercises: Exercise[];
+  routineId: string
 }
 
-function AddExerciseForm({ exercises }: Props) {
+function AddExerciseForm({ exercises, routineId }: Props) {
+  const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
   const [openExercise, setOpenExercise] = useState(false);
 
+  const createRoutineExerciseMutation = useMutation({
+    mutationFn: createRoutineExercises,
+    mutationKey: ["createRoutineExercise"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["routineExercise"] });
+      toast.success("Rutina creada correctamente");
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.error || "Error al crear la rutina";
+      toast.error(errorMessage);
+    },
+  });
+
+  const onSubmit = handleSubmit((data: RoutineExercise) => {
+    const formattedData = {
+      ...data,
+      reps: Number(data.reps),
+      sets: Number(data.sets),
+      time: Number(data.time),
+      routineId,
+    };
+
+    console.log(formattedData);
+    
+    createRoutineExerciseMutation.mutate(formattedData);
+  });
+
   return (
-    <form className="grid grid-cols-3 gap-4 py-4">
+    <form className="grid grid-cols-3 gap-4 py-4" onSubmit={onSubmit}>
       <div className="col-span-3">
         <Controller
           name="exerciseId"
@@ -48,7 +82,7 @@ function AddExerciseForm({ exercises }: Props) {
                 >
                   {field.value
                     ? exercises.find((exercise) => exercise.id === field.value)
-                        ?.name
+                      ?.name
                     : "Buscar ejercicio..."}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -137,8 +171,14 @@ function AddExerciseForm({ exercises }: Props) {
         />
       </div>
 
-      <div className="col-span-2">
-        <Button type="submit" className="w-full"></Button>
+      <div className="col-span-3">
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={createRoutineExerciseMutation.isPending}
+        >
+          {createRoutineExerciseMutation.isPending ? "Creando..." : "Crear Rutina"}
+        </Button>
       </div>
     </form>
   );

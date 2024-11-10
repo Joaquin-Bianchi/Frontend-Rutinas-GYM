@@ -52,7 +52,7 @@ export default function ClientRoutinePage() {
                 </Button> */}
 
                 <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                  <AddExerciseForm exercises={exercises?.data}/>
+                  <AddExerciseForm exercises={exercises?.data} routineId={routine.id}/>
                 </ActionModalUserRutine>
 
               </CardTitle>
