@@ -39,7 +39,7 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     mutationFn: createRoutineExercises,
     mutationKey: ["createRoutineExercise"],
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["routineExercise"] });
+      queryClient.invalidateQueries({ queryKey: ["client"] });
       toast.success("Rutina creada correctamente");
     },
     onError: (error: any) => {
@@ -53,11 +53,17 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     const formattedData = {
       ...data,
       sets:
-        typeof data.sets === "number" && !isNaN(data.sets) ? data.sets : undefined,
+        typeof data.sets === "number" && !isNaN(data.sets)
+          ? data.sets
+          : undefined,
       reps:
-        typeof data.reps === "number" && !isNaN(data.reps) ? data.reps : undefined,
+        typeof data.reps === "number" && !isNaN(data.reps)
+          ? data.reps
+          : undefined,
       time:
-        typeof data.time === "number" && !isNaN(data.time) ? data.time : undefined,
+        typeof data.time === "number" && !isNaN(data.time)
+          ? data.time
+          : undefined,
       routineId,
     };
 

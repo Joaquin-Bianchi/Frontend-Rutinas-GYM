@@ -7,7 +7,6 @@ import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine"
 import AddExerciseForm from "./forms/AddExerciseForm";
 import { getExercises } from "@/services/exerciseService";
 
-
 export default function ClientRoutinePage() {
   const { id } = useParams();
 
@@ -21,9 +20,7 @@ export default function ClientRoutinePage() {
     queryFn: () => getClientById(id as string),
   });
 
-  const {
-    data: exercises,
-  } = useQuery({
+  const { data: exercises } = useQuery({
     queryKey: ["exercises"],
     queryFn: () => getExercises(),
   });
@@ -37,9 +34,8 @@ export default function ClientRoutinePage() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Rutinas de {client?.name}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-        {client?.routines?.map((routine) =>
-          <Card key={routine.id} className="shadow-lg" >
+        {client?.routines?.map((routine) => (
+          <Card key={routine.id} className="shadow-lg">
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
                 <span className="capitalize">{routine.day}</span>
@@ -52,9 +48,11 @@ export default function ClientRoutinePage() {
                 </Button> */}
 
                 <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                  <AddExerciseForm exercises={exercises?.data} routineId={routine.id}/>
+                  <AddExerciseForm
+                    exercises={exercises?.data}
+                    routineId={routine.id}
+                  />
                 </ActionModalUserRutine>
-
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -63,19 +61,19 @@ export default function ClientRoutinePage() {
                   <h3 className="font-semibold">Ejercicios asignados</h3>
                   <ul className="list-disc list-inside">
                     {routine.routineExercises.map((exercise) => (
-                      <li key={exercise.id}>
-                        {exercise.sets} series x {exercise.reps} repeticiones
-                      </li>
+                      <li key={exercise.id}>{exercise.comment}</li>
                     ))}
                   </ul>
                 </div>
               ) : (
-                <p className="text-gray-500">No hay rutina asignada para este día.</p>
+                <p className="text-gray-500">
+                  No hay rutina asignada para este día.
+                </p>
               )}
             </CardContent>
           </Card>
-        )}
+        ))}
       </div>
-    </div >
+    </div>
   );
 }
