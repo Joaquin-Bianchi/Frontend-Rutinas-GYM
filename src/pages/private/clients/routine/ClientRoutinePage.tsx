@@ -61,7 +61,7 @@ export default function ClientRoutinePage() {
                   <h3 className="font-semibold">Ejercicios asignados</h3>
                   <ul className="list-disc list-inside">
                     {routine.routineExercises.map((exercise) => (
-                      <li key={exercise.id}>{exercise.comment}</li>
+                      <li key={exercise.id}>{exercise.exercise.name}</li>
                     ))}
                   </ul>
                 </div>

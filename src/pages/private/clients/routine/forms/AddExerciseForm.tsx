@@ -40,11 +40,11 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     mutationKey: ["createRoutineExercise"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["client"] });
-      toast.success("Rutina creada correctamente");
+      toast.success("Ejercicio agregado correctamente");
     },
     onError: (error: any) => {
       const errorMessage =
-        error.response?.data?.error || "Error al crear la rutina";
+        error.response?.data?.error || "Error al asignar el ejercicio";
       toast.error(errorMessage);
     },
   });
@@ -65,6 +65,7 @@ function AddExerciseForm({ exercises, routineId }: Props) {
           ? data.time
           : undefined,
       routineId,
+      exerciseId: data.id
     };
 
     createRoutineExerciseMutation.mutate(formattedData);
@@ -74,7 +75,7 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     <form className="grid grid-cols-3 gap-4 py-4" onSubmit={onSubmit}>
       <div className="col-span-3">
         <Controller
-          name="exerciseId"
+          name="id"
           control={control}
           rules={{ required: "Debes seleccionar un ejercicio" }}
           render={({ field }) => (
