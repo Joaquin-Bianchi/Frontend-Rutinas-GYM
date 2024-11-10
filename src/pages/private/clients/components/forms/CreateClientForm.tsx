@@ -27,7 +27,7 @@ function CreateClientForm() {
     },
     onError: (error: any) => {
       const errorMessage =
-        error.response?.data?.error || "Error al iniciar sesión";
+        error.response?.data?.error || "Error al crear el cliente";
       toast.error(errorMessage);
     },
   });

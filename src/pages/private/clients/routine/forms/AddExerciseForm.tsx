@@ -27,7 +27,7 @@ import { createRoutineExercises } from "@/services/routineExerciseService";
 
 interface Props {
   exercises: Exercise[];
-  routineId: string
+  routineId: string;
 }
 
 function AddExerciseForm({ exercises, routineId }: Props) {
@@ -52,14 +52,15 @@ function AddExerciseForm({ exercises, routineId }: Props) {
   const onSubmit = handleSubmit((data: RoutineExercise) => {
     const formattedData = {
       ...data,
-      reps: Number(data.reps),
-      sets: Number(data.sets),
-      time: Number(data.time),
+      sets:
+        typeof data.sets === "number" && !isNaN(data.sets) ? data.sets : undefined,
+      reps:
+        typeof data.reps === "number" && !isNaN(data.reps) ? data.reps : undefined,
+      time:
+        typeof data.time === "number" && !isNaN(data.time) ? data.time : undefined,
       routineId,
     };
 
-    console.log(formattedData);
-    
     createRoutineExerciseMutation.mutate(formattedData);
   });
 
@@ -82,7 +83,7 @@ function AddExerciseForm({ exercises, routineId }: Props) {
                 >
                   {field.value
                     ? exercises.find((exercise) => exercise.id === field.value)
-                      ?.name
+                        ?.name
                     : "Buscar ejercicio..."}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -145,7 +146,6 @@ function AddExerciseForm({ exercises, routineId }: Props) {
             name="reps"
             label="Repeticiones"
             control={control}
-            rules={{ required: "Este campo es requerido" }}
             placeholder="Repeticiones"
             type="number"
           />
@@ -177,7 +177,9 @@ function AddExerciseForm({ exercises, routineId }: Props) {
           className="w-full"
           disabled={createRoutineExerciseMutation.isPending}
         >
-          {createRoutineExerciseMutation.isPending ? "Creando..." : "Crear Rutina"}
+          {createRoutineExerciseMutation.isPending
+            ? "Creando..."
+            : "Crear Rutina"}
         </Button>
       </div>
     </form>
