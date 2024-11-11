@@ -25,6 +25,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createRoutineExercises } from "@/services/routineExerciseService";
 
+
 interface Props {
   exercises: Exercise[];
   routineId: string;
@@ -32,7 +33,7 @@ interface Props {
 
 function AddExerciseForm({ exercises, routineId }: Props) {
   const queryClient = useQueryClient();
-  const { control, handleSubmit } = useForm<Exercise>();
+  const { control, handleSubmit } = useForm<RoutineExercise>();
   const [openExercise, setOpenExercise] = useState(false);
 
   const createRoutineExerciseMutation = useMutation({
@@ -50,22 +51,14 @@ function AddExerciseForm({ exercises, routineId }: Props) {
   });
 
   const onSubmit = handleSubmit((data: RoutineExercise) => {
+    console.log(data);
     const formattedData = {
       ...data,
-      sets:
-        typeof data.sets === "number" && !isNaN(data.sets)
-          ? data.sets
-          : undefined,
-      reps:
-        typeof data.reps === "number" && !isNaN(data.reps)
-          ? data.reps
-          : undefined,
-      time:
-        typeof data.time === "number" && !isNaN(data.time)
-          ? data.time
-          : undefined,
+      sets: Number(data.sets),
+      reps: Number(data.reps),
+      time: Number(data.time),
       routineId,
-      exerciseId: data.id
+      exerciseId: data.id,
     };
 
     createRoutineExerciseMutation.mutate(formattedData);

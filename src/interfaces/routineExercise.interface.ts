@@ -1,4 +1,7 @@
+import { Exercise } from "./exercise.interface";
+
 export interface RoutineExercise {
+  exercise: Exercise;
   id: string;
   exerciseId: string;
   routineId: string;
