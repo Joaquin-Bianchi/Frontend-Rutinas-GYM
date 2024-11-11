@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import { PrivateLayout } from "./layouts/PrivateLayout";
 import ClientsPage from "./pages/private/clients/ClientsPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ClientRoutinesPage from "./pages/private/clients/routines/ClientRoutinesPage";
 import ClientRoutinePage from "./pages/private/clients/routine/ClientRoutinePage";
 
 const App = () => {
@@ -27,7 +28,11 @@ const App = () => {
               <Route path="dashboard/clients" element={<ClientsPage />} />
               <Route path="dashboard/exercises" element={<ExercisesPage />} />
               <Route
-                path="dashboard/client/routine/:id"
+                path="dashboard/client/routines/:id"
+                element={<ClientRoutinesPage />}
+              />
+              <Route
+                path="dashboard/client/routine/:routineId"
                 element={<ClientRoutinePage />}
               />
             </Route>
