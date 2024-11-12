@@ -1,13 +1,14 @@
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Client } from "@/interfaces/client.interface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine";
 
 import { getExercises } from "@/services/exerciseService";
 import { Badge } from "@/components/ui/badge";
-import AddExerciseForm from "../routines/forms/AddExerciseForm";
+import AddExerciseForm from "./forms/AddExerciseForm";
+import { Button } from "@/components/ui/button";
 
 export default function ClientRoutinePage() {
   const { id } = useParams();
