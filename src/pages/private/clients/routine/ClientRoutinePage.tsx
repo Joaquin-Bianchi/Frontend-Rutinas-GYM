@@ -7,8 +7,9 @@ import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine"
 import { getExercises } from "@/services/exerciseService";
 import { Badge } from "@/components/ui/badge";
 import AddExerciseForm from "./forms/AddExerciseForm";
+import { Calendar } from "lucide-react";
 import ButtonIconDelete from "@/components/buttons/ButtonIconDelete";
-import { Calendar, Trash2 } from "lucide-react";
+import { deleteRoutinExercise } from "@/services/routineExerciseService";
 
 export default function ClientRoutinePage() {
   const { id } = useParams();
@@ -28,7 +29,6 @@ export default function ClientRoutinePage() {
     queryFn: () => getExercises(),
   });
 
-  console.log("Cliente: ", client);
 
   if (isLoading) return <div>Cargando rutinas del cliente...</div>;
   if (isError) return <div>Error: {error.message}</div>;
@@ -66,22 +66,35 @@ export default function ClientRoutinePage() {
                           <span className="font-semibold text text-primary">
                             {exercise.exercise.name}
                           </span>
-                          <div className="flex flex-wrap items-center gap-2">
-                            <Badge variant="secondary">
-                              {exercise.sets} series
-                            </Badge>
-                            <Badge variant="secondary">
-                              {exercise.reps} repeticiones
-                            </Badge>
-                            <Badge variant="secondary">
-                              {exercise.time} min descanso
-                            </Badge>
+                          <div className="flex flex-col flex-wrap items-center gap-2">
+                            {exercise.sets !== null ?
+                              <Badge variant="default">
+                                {exercise.sets} series
+                              </Badge> : <Badge variant="secondary">
+                                No asignado
+                              </Badge>
+                            }
+                            {exercise.sets !== null ?
+                              <Badge variant="default">
+                                {exercise.reps} reps
+                              </Badge> : <Badge variant="secondary">
+                                No asignado
+                              </Badge>
+                            } {exercise.time !== null ?
+                              <Badge variant="default">
+                                {exercise.time} minutos
+                              </Badge> : <Badge variant="secondary">
+                                No asignado
+                              </Badge>
+                            }
                             <ButtonIconDelete
-                              deleteFn={() => {}}
-                              nameMutationKey=""
-                              nameQueryKey=""
-                              textObjectDelete=""
+                               id={exercise.id}
+                               deleteFn={deleteRoutinExercise}
+                               nameMutationKey="deleteRoutineExercise"
+                               nameQueryKey="client"
+                               textObjectDelete="Ejercicio"
                             />
+                            
                           </div>
                         </div>
                       </li>

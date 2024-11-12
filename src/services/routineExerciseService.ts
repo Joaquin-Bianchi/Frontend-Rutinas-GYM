@@ -6,3 +6,8 @@ export const createRoutineExercises = async (data: RoutineExercise) => {
   console.log(response);
   return response.data;
 };
+
+export const deleteRoutinExercise = async (id: string) => {
+    const response = await api.delete(`/routine/${id}`)
+    return response
+}

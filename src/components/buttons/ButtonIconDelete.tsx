@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { AxiosResponse } from "axios";
-import { DeleteIcon, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 interface Props {
   id: string;
