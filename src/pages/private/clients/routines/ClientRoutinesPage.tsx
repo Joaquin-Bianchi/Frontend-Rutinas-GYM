@@ -1,15 +1,14 @@
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Client } from "@/interfaces/client.interface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActionModalUserRutine } from "@/components/modal/ActionModalUserRutine";
-
+import AddExerciseForm from "./forms/AddExerciseForm";
 import { getExercises } from "@/services/exerciseService";
-import { Badge } from "@/components/ui/badge";
-import AddExerciseForm from "../routines/forms/AddExerciseForm";
+import { Button } from "@/components/ui/button";
 
-export default function ClientRoutinePage() {
+export default function ClientRoutinesPage() {
   const { id } = useParams();
 
   const {
@@ -41,6 +40,14 @@ export default function ClientRoutinePage() {
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
                 <span className="capitalize">{routine.day}</span>
+
+                {/* <Button
+                  variant="outline"
+                  size="icon"
+                >
+                  <Edit className="h-4 w-4" />
+                </Button> */}
+
                 <ActionModalUserRutine dialogTitle="Asignar Rutina">
                   <AddExerciseForm
                     exercises={exercises?.data}
@@ -52,37 +59,28 @@ export default function ClientRoutinePage() {
             <CardContent>
               {routine.routineExercises?.length > 0 ? (
                 <div>
-                  <h3 className="font-semibold mb-4 text-xl text-primary">
-                    Ejercicios
-                  </h3>
-                  <ul className="space-y-4">
-                    {routine.routineExercises.map((exercise) => (
-                      <li
-                        key={exercise.id}
-                        className="bg-secondary/10 rounded-lg p-4 shadow-sm"
-                      >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                          <span className="font-semibold text-lg text-primary">
-                            {exercise.exercise.name}
-                          </span>
-                          <div className="flex flex-wrap gap-2">
-                            <Badge variant="secondary">
-                              {exercise.sets} series
-                            </Badge>
-                            <Badge variant="secondary">
-                              {exercise.reps} repeticiones
-                            </Badge>
-                            <Badge variant="secondary">
-                              {exercise.time} min descanso
-                            </Badge>
-                          </div>
-                        </div>
-                      </li>
+                  <h3 className="font-semibold">Ejercicios asignados</h3>
+                  <ul className="list-disc list-inside">
+                    {routine.routineExercises.map((routineExercise) => (
+                      <li key={routineExercise.id}>{routineExercise.exercise.name}</li>
                     ))}
                   </ul>
+
+                  <div className="flex justify-end">
+                    <Link to={`/dashboard/client/routine/${routine.id}`}>
+                      <Button
+                        variant="default"
+                        size="default"
+                        className="font-semibold ml-auto"
+                      >
+                        Ver
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
+
               ) : (
-                <p className="text-muted-foreground">
+                <p className="text-gray-500">
                   No hay rutina asignada para este día.
                 </p>
               )}

@@ -52,7 +52,7 @@ function ClientGrid({ clients }: Props) {
               <TableCell></TableCell>
               <TableCell>
                 <Link
-                  to={`/dashboard/client/routine/${client.id}`}
+                  to={`/dashboard/client/routines/${client.id}`}
                   className="flex items-center space-x-2"
                 >
                   <Button
