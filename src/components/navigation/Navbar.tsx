@@ -7,7 +7,6 @@ import {
   Home,
   Users,
   Dumbbell,
-  ClipboardList,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,7 +27,6 @@ const navItems: NavItem[] = [
   { title: "Inicio", href: "/dashboard", icon: Home },
   { title: "Clientes", href: "/dashboard/clients", icon: Users },
   { title: "Ejercicios", href: "/dashboard/exercises", icon: Dumbbell },
-  { title: "Rutinas", href: "/dashboard/routines", icon: ClipboardList },
 ];
 
 export function Navbar() {

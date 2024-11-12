@@ -1,4 +1,4 @@
-import { Users, Dumbbell, ClipboardList } from "lucide-react";
+import { Users, Dumbbell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -7,7 +7,7 @@ export default function HomeAdminPage() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-semibold mb-8 text-primary">Inicio</h2>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {[
             {
               to: "/dashboard/clients",
@@ -23,14 +23,6 @@ export default function HomeAdminPage() {
               title: "Ejercicios",
               description: "Explora y administra tu catálogo de ejercicios.",
               imageUrl: "img/gym-ejercicios.jpg",
-            },
-            {
-              to: "/dashboard/routines",
-              icon: ClipboardList,
-              title: "Rutinas",
-              description:
-                "Crea y modifica rutinas de entrenamiento para tus clientes.",
-              imageUrl: "img/gym-rutinas.jpg",
             },
           ].map((item) => (
             <Link key={item.to} to={item.to} className="block group">
