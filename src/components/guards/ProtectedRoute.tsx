@@ -1,15 +1,17 @@
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { isAuthenticated } from "@/services/authService";
 
 const ProtectedRoutes = () => {
-  const user = isAuthenticated(); 
-  // La función getUser() devuelve el usuario si está logueado o null si no lo está.
+  const { isAuthenticated: auth, role } = isAuthenticated();
+  const location = useLocation();
 
-  if (!user) {
+  if (!auth) {
     return <Navigate to="/login" />;
-  }  
+  }
 
-  if (user.role === "CLIENT") {
+  // Si el usuario tiene rol CLIENT y está intentando acceder 
+  // a cualquier ruta distinta de /home, redirigir a /home
+  if (role === "CLIENT" && location.pathname !== "/home") {
     return <Navigate to="/home" />;
   }
 

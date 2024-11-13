@@ -21,18 +21,17 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           {/* Rutas privadas */}
           <Route path="/" element={<ProtectedRoutes />}>
-            <Route path="/home" element={<HomeClientPage />} />
+            <Route path="/home" element={<HomeClientPage />} /> {/* Página específica para CLIENT */}
+            {/* Rutas privadas para otros roles */}
             <Route element={<PrivateLayout />}>
-              <Route path="dashboard" element={<HomeAdminPage />} />{" "}
+              <Route path="dashboard" element={<HomeAdminPage />} />
               <Route path="dashboard/clients" element={<ClientsPage />} />
               <Route path="dashboard/exercises" element={<ExercisesPage />} />
-              <Route
-                path="dashboard/client/routine/:id"
-                element={<ClientRoutinePage />}
-              />
+              <Route path="dashboard/client/routine/:id" element={<ClientRoutinePage />} />
             </Route>
           </Route>
         </Routes>
+
       </BrowserRouter>
     </QueryClientProvider>
   );

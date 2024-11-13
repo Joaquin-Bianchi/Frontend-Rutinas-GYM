@@ -22,7 +22,6 @@ export default function LoginPage() {
     mutationKey: ["login"],
     mutationFn: (data: LoginFormData) => signIn(data),
     onSuccess: () => {
-      toast.success("Inicio de sesión exitoso");
       navigate("/dashboard");
     },
     onError: (error: any) => {
