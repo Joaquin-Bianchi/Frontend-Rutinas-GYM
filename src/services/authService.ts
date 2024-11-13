@@ -4,9 +4,6 @@ type LoginFormData = {
   email: string;
   password: string;
 };
-interface JwtPayload {
-  exp?: number;
-}
 
 export const signIn = async (credentials: LoginFormData) => {
   try {
@@ -28,25 +25,26 @@ export const signOut = () => {
 export const isAuthenticated = () => {
   const token = localStorage.getItem("token");
 
-  if (!token) return false;
+  if (!token) return { isAuthenticated: false, role: null };
 
   try {
     // Decodificar el token (que está en base64)
-    const payload = JSON.parse(atob(token.split(".")[1])) as JwtPayload;
+    const payload = JSON.parse(atob(token.split(".")[1]));
 
     // Verificar si el token ha expirado
     if (payload.exp) {
       const expired = payload.exp * 1000 < Date.now();
       if (expired) {
         localStorage.removeItem("token");
-        return false;
+        return { isAuthenticated: false, role: null };
       }
     }
 
-    return true;
+    // Retornar autenticación verdadera junto con el rol
+    return { isAuthenticated: true, role: payload.role || null };
   } catch {
     // Si hay algún error al decodificar el token, lo consideramos inválido
     localStorage.removeItem("token");
-    return false;
+    return { isAuthenticated: false, role: null };
   }
 };

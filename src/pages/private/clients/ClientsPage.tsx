@@ -15,7 +15,7 @@ export default function ClientsPage() {
     queryKey: ["clients"],
     queryFn: () => getClients(),
   });
-
+  
   if (isLoading) return <div>Cargando clientes...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 

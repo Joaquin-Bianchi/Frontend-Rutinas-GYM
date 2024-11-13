@@ -21,7 +21,7 @@ export default function ClientRoutinePage() {
     error,
   } = useQuery<Client>({
     queryKey: ["client"],
-    queryFn: () => getClientById(id as string),
+    queryFn: () => getClientById(id as string), 
   });
 
   const { data: exercises } = useQuery({

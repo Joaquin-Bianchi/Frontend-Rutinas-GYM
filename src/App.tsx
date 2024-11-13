@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
 import HomeAdminPage from "./pages/private/HomeAdminPage";
-import HomePage from "./pages/public/HomePage";
 import ProtectedRoutes from "./components/guards/ProtectedRoute";
 import ExercisesPage from "./pages/private/exercises/ExercisesPage";
 import { Toaster } from "sonner";
@@ -9,6 +8,7 @@ import { PrivateLayout } from "./layouts/PrivateLayout";
 import ClientsPage from "./pages/private/clients/ClientsPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ClientRoutinePage from "./pages/private/clients/routine/ClientRoutinePage";
+import HomeClientPage from "./pages/private/HomeClientPage";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -19,9 +19,9 @@ const App = () => {
         <Routes>
           {/* Ruta pública */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
           {/* Rutas privadas */}
           <Route path="/" element={<ProtectedRoutes />}>
+            <Route path="/home" element={<HomeClientPage />} />
             <Route element={<PrivateLayout />}>
               <Route path="dashboard" element={<HomeAdminPage />} />{" "}
               <Route path="dashboard/clients" element={<ClientsPage />} />
