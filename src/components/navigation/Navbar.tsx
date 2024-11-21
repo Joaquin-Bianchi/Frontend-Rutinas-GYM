@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Menu,
-  User,
-  LogOut,
-  Home,
-  Users,
-  Dumbbell,
-} from "lucide-react";
+import { Menu, User, LogOut, Home, Users, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -68,7 +61,7 @@ export function Navbar() {
                 to={item.href}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary dark:hover:bg-muted  hover:bg-white/90 ${
                   pathname === item.href
-                    ? " text-primary dark:bg-muted bg-white/90"
+                    ? " text-white dark:bg-muted bg-white/90"
                     : "text-primary-foreground/80"
                 }`}
               >
@@ -78,15 +71,6 @@ export function Navbar() {
             ))}
           </nav>
           <div className="flex items-center space-x-2">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleClientMode}
-              className="justify-start"
-            >
-              <User className="mr-2 h-4 w-4" />
-              Modo Cliente
-            </Button>
             <Button
               variant="destructive"
               size="sm"
