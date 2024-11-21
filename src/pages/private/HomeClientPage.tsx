@@ -1,37 +1,138 @@
-import { Dumbbell } from "lucide-react";
+import { Calendar } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ClientNavbar } from "@/components/navigation/ClientNavbar";
 
-const HomeClientPage = () => {
+// Datos de ejemplo para las rutinas
+const routines = [
+  {
+    day: "Lunes",
+    exercises: [
+      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+      {
+        name: "Press de banca",
+        reps: 10,
+        sets: 4,
+        imageUrl: "/img/bench-press.jpg",
+      },
+    ],
+  },
+  {
+    day: "Lunes",
+    exercises: [
+      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+      {
+        name: "Press de banca",
+        reps: 10,
+        sets: 4,
+        imageUrl: "/img/bench-press.jpg",
+      },
+    ],
+  },
+  {
+    day: "Lunes",
+    exercises: [
+      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+      {
+        name: "Press de banca",
+        reps: 10,
+        sets: 4,
+        imageUrl: "/img/bench-press.jpg",
+      },
+    ],
+  },
+  {
+    day: "Lunes",
+    exercises: [
+      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+      {
+        name: "Press de banca",
+        reps: 10,
+        sets: 4,
+        imageUrl: "/img/bench-press.jpg",
+      },
+    ],
+  },
+  {
+    day: "Miércoles",
+    exercises: [
+      { name: "Peso muerto", reps: 8, sets: 4, imageUrl: "/img/deadlift.jpg" },
+      { name: "Dominadas", reps: 8, sets: 3, imageUrl: "/img/pull-ups.jpg" },
+    ],
+  },
+  {
+    day: "Viernes",
+    exercises: [
+      {
+        name: "Prensa de piernas",
+        reps: 12,
+        sets: 3,
+        imageUrl: "/img/leg-press.jpg",
+      },
+      {
+        name: "Curl de bíceps",
+        reps: 12,
+        sets: 3,
+        imageUrl: "/img/bicep-curl.jpg",
+      },
+    ],
+  },
+];
+
+export default function HomeClientPage() {
   return (
-    <div className="min-h-screen bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat bg-black/75 bg-blend-multiply">
-      <div className="container mx-auto px-4 py-12  ">
-        <div className="flex flex-col items-center justify-center">
-          <Dumbbell className="h-16 w-16 text-primary mb-4" />
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-2">
-            Nombre de Gym
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-white/90 text-center">
-            Bienvenido NOMBRE
+    <>
+      <ClientNavbar />
+
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-semibold mb-8 text-primary">
+            Rutina Semanal
           </h2>
-          <p className="mb-8">Revisa tus rutinas</p>
-        </div>
-
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-background/80 backdrop-blur-lg rounded-lg shadow-lg p-6 mb-8">
-            
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {routines.map((routine) => (
+              <Card
+                key={routine.day}
+                className="transition-all duration-300 border border-black/40 hover:border-primary hover:shadow-lg"
+              >
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-3 text-2xl">
+                    <Calendar className="h-8 w-8 text-primary" />
+                    <span>{routine.day}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible className="w-full">
+                    {routine.exercises.map((exercise, index) => (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{exercise.name}</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="mt-2 space-y-2">
+                            <p className="text-sm text-muted-foreground">
+                              Repeticiones: {exercise.reps} | Series:{" "}
+                              {exercise.sets}
+                            </p>
+                            <img
+                              src={exercise.imageUrl}
+                              alt={exercise.name}
+                              className="w-full h-48 object-cover rounded-lg"
+                            />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-
-          {/* <div className="bg-background/80 backdrop-blur-lg rounded-lg shadow-lg p-6">
-            <h3 className="text-xl font-semibold mb-4 text-white">
-              Rutinas Disponibles
-            </h3>
-            <div className="text-white/90">
-              lista de rutinas
-            </div>
-          </div> */}
-        </div>
+        </main>
       </div>
-    </div>
+    </>
   );
-};
-
-export default HomeClientPage;
+}
