@@ -7,95 +7,117 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ClientNavbar } from "@/components/navigation/ClientNavbar";
+import { useLocation } from "react-router-dom";
+import { getClientById } from "@/services/clientService";
+import { useQuery } from "@tanstack/react-query";
+import { RoutineExercise } from "../../../../BACK-END/src/interfaces/routineExercise.interface";
 
 // Datos de ejemplo para las rutinas
-const routines = [
-  {
-    day: "Lunes",
-    exercises: [
-      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-      {
-        name: "Press de banca",
-        reps: 10,
-        sets: 4,
-        imageUrl: "/img/bench-press.jpg",
-      },
-    ],
-  },
-  {
-    day: "Lunes",
-    exercises: [
-      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-      {
-        name: "Press de banca",
-        reps: 10,
-        sets: 4,
-        imageUrl: "/img/bench-press.jpg",
-      },
-    ],
-  },
-  {
-    day: "Lunes",
-    exercises: [
-      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-      {
-        name: "Press de banca",
-        reps: 10,
-        sets: 4,
-        imageUrl: "/img/bench-press.jpg",
-      },
-    ],
-  },
-  {
-    day: "Lunes",
-    exercises: [
-      { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-      {
-        name: "Press de banca",
-        reps: 10,
-        sets: 4,
-        imageUrl: "/img/bench-press.jpg",
-      },
-    ],
-  },
-  {
-    day: "Miércoles",
-    exercises: [
-      { name: "Peso muerto", reps: 8, sets: 4, imageUrl: "/img/deadlift.jpg" },
-      { name: "Dominadas", reps: 8, sets: 3, imageUrl: "/img/pull-ups.jpg" },
-    ],
-  },
-  {
-    day: "Viernes",
-    exercises: [
-      {
-        name: "Prensa de piernas",
-        reps: 12,
-        sets: 3,
-        imageUrl: "/img/leg-press.jpg",
-      },
-      {
-        name: "Curl de bíceps",
-        reps: 12,
-        sets: 3,
-        imageUrl: "/img/bicep-curl.jpg",
-      },
-    ],
-  },
-];
+// const routines = [
+//   {
+//     day: "Lunes",
+//     exercises: [
+//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+//       {
+//         name: "Press de banca",
+//         reps: 10,
+//         sets: 4,
+//         imageUrl: "/img/bench-press.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     day: "Lunes",
+//     exercises: [
+//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+//       {
+//         name: "Press de banca",
+//         reps: 10,
+//         sets: 4,
+//         imageUrl: "/img/bench-press.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     day: "Lunes",
+//     exercises: [
+//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+//       {
+//         name: "Press de banca",
+//         reps: 10,
+//         sets: 4,
+//         imageUrl: "/img/bench-press.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     day: "Lunes",
+//     exercises: [
+//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
+//       {
+//         name: "Press de banca",
+//         reps: 10,
+//         sets: 4,
+//         imageUrl: "/img/bench-press.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     day: "Miércoles",
+//     exercises: [
+//       { name: "Peso muerto", reps: 8, sets: 4, imageUrl: "/img/deadlift.jpg" },
+//       { name: "Dominadas", reps: 8, sets: 3, imageUrl: "/img/pull-ups.jpg" },
+//     ],
+//   },
+//   {
+//     day: "Viernes",
+//     exercises: [
+//       {
+//         name: "Prensa de piernas",
+//         reps: 12,
+//         sets: 3,
+//         imageUrl: "/img/leg-press.jpg",
+//       },
+//       {
+//         name: "Curl de bíceps",
+//         reps: 12,
+//         sets: 3,
+//         imageUrl: "/img/bicep-curl.jpg",
+//       },
+//     ],
+//   },
+// ];
 
 export default function HomeClientPage() {
+  const location = useLocation();
+  const userId = location.state;
+
+  const {
+    data: client,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["client"],
+    queryFn: () => getClientById(userId),
+  });
+
+  if (isLoading) return <div>Cargando clientes...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+
+  console.log(client);
+
   return (
     <>
-      <ClientNavbar />
+      <ClientNavbar client={client} />
 
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-semibold mb-8 text-primary">
-            Rutina Semanal
+            Tus rutinas
           </h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {routines.map((routine) => (
+            {client.routines.map((routine) => (
               <Card
                 key={routine.day}
                 className="transition-all duration-300 border border-black/40 hover:border-primary hover:shadow-lg"
@@ -103,23 +125,41 @@ export default function HomeClientPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-3 text-2xl">
                     <Calendar className="h-8 w-8 text-primary" />
-                    <span>{routine.day}</span>
+                    <span className="capitalize">{routine.day}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Accordion type="single" collapsible className="w-full">
-                    {routine.exercises.map((exercise, index) => (
+                    {routine.routineExercises.map((routineExercise, index) => (
                       <AccordionItem key={index} value={`item-${index}`}>
-                        <AccordionTrigger>{exercise.name}</AccordionTrigger>
+                        <AccordionTrigger className="uppercase">
+                          {routineExercise.exercise.name}
+                        </AccordionTrigger>
                         <AccordionContent>
                           <div className="mt-2 space-y-2">
-                            <p className="text-sm text-muted-foreground">
-                              Repeticiones: {exercise.reps} | Series:{" "}
-                              {exercise.sets}
-                            </p>
+                            {routineExercise.reps && (
+                              <p className="text-sm text-muted-foreground">
+                                Repeticiones: {routineExercise.reps}
+                              </p>
+                            )}
+
+                            {routineExercise.sets && (
+                              <p className="text-sm text-muted-foreground">
+                                Series: {routineExercise.sets}
+                              </p>
+                            )}
+
+                            {routineExercise.comment && (
+                              <p className="text-sm text-primary">
+                                {routineExercise.comment}
+                              </p>
+                            )}
                             <img
-                              src={exercise.imageUrl}
-                              alt={exercise.name}
+                              src={
+                                routineExercise.exercise.image ||
+                                "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
+                              }
+                              alt={routineExercise.exercise.name}
                               className="w-full h-48 object-cover rounded-lg"
                             />
                           </div>

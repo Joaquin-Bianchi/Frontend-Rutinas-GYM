@@ -40,8 +40,15 @@ export const isAuthenticated = () => {
       }
     }
 
+    console.log(payload);
+    
+
     // Retornar autenticación verdadera junto con el rol
-    return { isAuthenticated: true, role: payload.role || null };
+    return {
+      isAuthenticated: true,
+      role: payload.role,
+      userId: payload.id || null,
+    };
   } catch {
     // Si hay algún error al decodificar el token, lo consideramos inválido
     localStorage.removeItem("token");
