@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Client } from "@/interfaces/client.interface";
 
 interface Props {
-  client: Client;
+  client?: Client;
 }
 
 export function ClientNavbar({ client }: Props) {
@@ -32,7 +32,7 @@ export function ClientNavbar({ client }: Props) {
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-1">
-            <h2>Bienvenido {client.name}</h2>
+            <h2>Bienvenido {client?.name}</h2>
           </nav>
           <div className="flex items-center space-x-2">
             <Button

@@ -10,83 +10,7 @@ import { ClientNavbar } from "@/components/navigation/ClientNavbar";
 import { useLocation } from "react-router-dom";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
-import { RoutineExercise } from "../../../../BACK-END/src/interfaces/routineExercise.interface";
-
-// Datos de ejemplo para las rutinas
-// const routines = [
-//   {
-//     day: "Lunes",
-//     exercises: [
-//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-//       {
-//         name: "Press de banca",
-//         reps: 10,
-//         sets: 4,
-//         imageUrl: "/img/bench-press.jpg",
-//       },
-//     ],
-//   },
-//   {
-//     day: "Lunes",
-//     exercises: [
-//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-//       {
-//         name: "Press de banca",
-//         reps: 10,
-//         sets: 4,
-//         imageUrl: "/img/bench-press.jpg",
-//       },
-//     ],
-//   },
-//   {
-//     day: "Lunes",
-//     exercises: [
-//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-//       {
-//         name: "Press de banca",
-//         reps: 10,
-//         sets: 4,
-//         imageUrl: "/img/bench-press.jpg",
-//       },
-//     ],
-//   },
-//   {
-//     day: "Lunes",
-//     exercises: [
-//       { name: "Sentadillas", reps: 12, sets: 3, imageUrl: "/img/squat.jpg" },
-//       {
-//         name: "Press de banca",
-//         reps: 10,
-//         sets: 4,
-//         imageUrl: "/img/bench-press.jpg",
-//       },
-//     ],
-//   },
-//   {
-//     day: "Miércoles",
-//     exercises: [
-//       { name: "Peso muerto", reps: 8, sets: 4, imageUrl: "/img/deadlift.jpg" },
-//       { name: "Dominadas", reps: 8, sets: 3, imageUrl: "/img/pull-ups.jpg" },
-//     ],
-//   },
-//   {
-//     day: "Viernes",
-//     exercises: [
-//       {
-//         name: "Prensa de piernas",
-//         reps: 12,
-//         sets: 3,
-//         imageUrl: "/img/leg-press.jpg",
-//       },
-//       {
-//         name: "Curl de bíceps",
-//         reps: 12,
-//         sets: 3,
-//         imageUrl: "/img/bicep-curl.jpg",
-//       },
-//     ],
-//   },
-// ];
+import { Client } from "@/interfaces/client.interface";
 
 export default function HomeClientPage() {
   const location = useLocation();
@@ -97,15 +21,13 @@ export default function HomeClientPage() {
     isLoading,
     isError,
     error,
-  } = useQuery({
+  } = useQuery<Client>({
     queryKey: ["client"],
-    queryFn: () => getClientById(userId),
+    queryFn: () => getClientById(userId as string),
   });
 
   if (isLoading) return <div>Cargando clientes...</div>;
   if (isError) return <div>Error: {error.message}</div>;
-
-  console.log(client);
 
   return (
     <>
@@ -117,7 +39,7 @@ export default function HomeClientPage() {
             Tus rutinas
           </h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {client.routines.map((routine) => (
+            {client?.routines?.map((routine) => (
               <Card
                 key={routine.day}
                 className="transition-all duration-300 border border-black/40 hover:border-primary hover:shadow-lg"
