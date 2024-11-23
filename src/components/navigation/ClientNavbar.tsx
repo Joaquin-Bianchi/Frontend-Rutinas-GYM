@@ -1,17 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Client } from "@/interfaces/client.interface";
 
-interface Props {
-  client?: Client;
-}
-
-export function ClientNavbar({ client }: Props) {
+export function ClientNavbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("Logging out...");
     navigate("/login");
   };
 
@@ -31,9 +25,6 @@ export function ClientNavbar({ client }: Props) {
               </span>
             </Link>
           </div>
-          <nav className="hidden md:flex items-center space-x-1">
-            <h2>Bienvenido {client?.name}</h2>
-          </nav>
           <div className="flex items-center space-x-2">
             <Button
               variant="destructive"

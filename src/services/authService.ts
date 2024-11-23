@@ -39,10 +39,7 @@ export const isAuthenticated = () => {
         return { isAuthenticated: false, role: null };
       }
     }
-
-    console.log(payload);
-    
-
+  
     // Retornar autenticación verdadera junto con el rol
     return {
       isAuthenticated: true,

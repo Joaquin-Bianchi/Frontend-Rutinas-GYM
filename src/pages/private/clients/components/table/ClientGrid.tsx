@@ -25,6 +25,7 @@ interface Props {
 }
 
 function ClientGrid({ clients }: Props) {
+  console.log(clients);
   return (
     <div className="container mx-auto py-10">
       <Table>
@@ -37,7 +38,6 @@ function ClientGrid({ clients }: Props) {
             <TableHead>Dirección</TableHead>
             <TableHead>Plan</TableHead>
             <TableCell>Rutinas</TableCell>
-
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
@@ -49,7 +49,16 @@ function ClientGrid({ clients }: Props) {
               <TableCell>{client.phone}</TableCell>
               <TableCell>{client.age}</TableCell>
               <TableCell>{client.address}</TableCell>
-              <TableCell></TableCell>
+              <TableCell>
+                {client.categoryPlans?.map((category) => (
+                  <span
+                    key={category.id}
+                    className="mx-1 bg-secondary rounded px-1 py-0.5"
+                  >
+                    {category}
+                  </span>
+                ))}
+              </TableCell>
               <TableCell>
                 <Link
                   to={`/dashboard/client/routine/${client.id}`}
@@ -57,7 +66,7 @@ function ClientGrid({ clients }: Props) {
                 >
                   <Button
                     variant="default"
-                    size="default"
+                    size="sm"
                     className="font-semibold"
                   >
                     Ver

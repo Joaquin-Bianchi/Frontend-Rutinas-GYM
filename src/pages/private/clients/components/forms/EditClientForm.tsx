@@ -47,8 +47,14 @@ function EditClientForm({ client }: Props) {
   });
 
   const onSubmit = handleSubmit((data: Client) => {
-    const clientWithId = { ...data, id: client.id };
-    editClientMutation.mutate(clientWithId);
+    const formattedData = {
+      ...data,
+      id: client.id,
+      age: Number(data.age),
+      phone: Number(data.phone),
+      phoneEmergency: Number(data.phoneEmergency),
+    };
+    editClientMutation.mutate(formattedData);
   });
 
   return (
@@ -88,7 +94,7 @@ function EditClientForm({ client }: Props) {
           name="phone"
           label="Teléfono"
           control={control}
-          rules={{ required: "El telefono es requerido" }}
+          rules={{ required: "El teléfono es requerido" }}
           placeholder="Teléfono"
           type="number"
         />

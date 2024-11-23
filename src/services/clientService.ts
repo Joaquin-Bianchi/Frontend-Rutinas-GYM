@@ -20,6 +20,9 @@ export const createClient = async (client: Client) => {
 };
 
 export const editClient = async (client: Client) => {
+  console.log("Data desde el front", client);
+  
+
   const response = await api.put(`/user/${client.id}`, client);
   return response.data;
 };
