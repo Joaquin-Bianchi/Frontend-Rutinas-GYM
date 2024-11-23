@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, User, LogOut, Home, Users, Dumbbell } from "lucide-react";
+import {
+  Menu,
+  User,
+  LogOut,
+  Home,
+  Users,
+  Dumbbell,
+  Puzzle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -20,6 +28,11 @@ const navItems: NavItem[] = [
   { title: "Inicio", href: "/dashboard", icon: Home },
   { title: "Clientes", href: "/dashboard/clients", icon: Users },
   { title: "Ejercicios", href: "/dashboard/exercises", icon: Dumbbell },
+  {
+    title: "Planes de entrenamiento",
+    href: "/dashboard/categoryPlans",
+    icon: Puzzle,
+  },
 ];
 
 export function Navbar() {

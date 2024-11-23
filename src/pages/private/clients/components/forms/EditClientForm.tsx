@@ -7,7 +7,7 @@ import { Client } from "@/interfaces/client.interface";
 import { editClient } from "@/services/clientService";
 import { MultiSelectField } from "@/components/form/MultiSelectField";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
-import { getCategoryPlans } from "@/services/categoryPlan";
+import { getCategoryPlans } from "@/services/categoryPlanService";
 
 interface Props {
   client: Client;
