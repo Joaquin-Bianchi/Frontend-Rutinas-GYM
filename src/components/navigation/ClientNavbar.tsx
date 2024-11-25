@@ -1,26 +1,9 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, User, LogOut, Home, Users, Dumbbell } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-type NavItem = {
-  title: string;
-  href: string;
-  icon: React.ElementType;
-};
 
 export function ClientNavbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
-  const pathname = location.pathname;
 
   const handleLogout = () => {
     console.log("Logging out...");
