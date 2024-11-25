@@ -13,68 +13,32 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Client } from "@/interfaces/client.interface";
 import { deleteClientById } from "@/services/clientService";
 import { Ellipsis } from "lucide-react";
-import EditClientForm from "../forms/EditClientForm";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 
 interface Props {
-  clients?: Client[];
+  plans?: CategoryPlan[];
 }
 
-function ClientGrid({ clients }: Props) {
-  console.log(clients);
+function CategoryPlanGrid({ plans }: Props) {
+  console.log(plans);
   return (
     <div className="container mx-auto py-10">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Nombre</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Teléfono</TableHead>
-            <TableHead>Edad</TableHead>
-            <TableHead>Dirección</TableHead>
-            <TableHead>Plan</TableHead>
-            <TableCell>Rutinas</TableCell>
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {clients?.map((client) => (
-            <TableRow key={client.id}>
-              <TableCell className="font-medium">{client.name}</TableCell>
-              <TableCell>{client.email}</TableCell>
-              <TableCell>{client.phone}</TableCell>
-              <TableCell>{client.age}</TableCell>
-              <TableCell>{client.address}</TableCell>
-              <TableCell>
-                {client.categoryPlans?.map((category) => (
-                  <span
-                    key={category.id}
-                    className="mx-1 bg-secondary rounded px-1 py-0.5"
-                  >
-                    {category}
-                  </span>
-                ))}
-              </TableCell>
-              <TableCell>
-                <Link
-                  to={`/dashboard/client/routine/${client.id}`}
-                  className="flex items-center space-x-2"
-                >
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="font-semibold"
-                  >
-                    Ver
-                  </Button>
-                </Link>
-              </TableCell>
-
-              <TableCell>
+          {plans?.map((plan) => (
+            <TableRow key={plan.id}>
+              <TableCell className="font-medium">{plan.name}</TableCell>
+              {/* <TableCell>
                 <Popover>
                   <PopoverTrigger className="ml-auto mr-2" asChild>
                     <Ellipsis className="cursor-pointer" />
@@ -94,7 +58,7 @@ function ClientGrid({ clients }: Props) {
                     </div>
                   </PopoverContent>
                 </Popover>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
@@ -103,4 +67,4 @@ function ClientGrid({ clients }: Props) {
   );
 }
 
-export default ClientGrid;
+export default CategoryPlanGrid;

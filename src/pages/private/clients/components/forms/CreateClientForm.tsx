@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Client } from "@/interfaces/client.interface";
 import { createClient } from "@/services/clientService";
-import { getCategoryPlans } from "@/services/categoryPlan";
+import { getCategoryPlans } from "@/services/categoryPlanService";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 
 function CreateClientForm() {

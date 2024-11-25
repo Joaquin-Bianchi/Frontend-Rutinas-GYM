@@ -6,7 +6,6 @@ export function ClientNavbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("Logging out...");
     navigate("/login");
   };
 
@@ -26,9 +25,6 @@ export function ClientNavbar() {
               </span>
             </Link>
           </div>
-          <nav className="hidden md:flex items-center space-x-1">
-            <h2>Bienvenido CLiente</h2>
-          </nav>
           <div className="flex items-center space-x-2">
             <Button
               variant="destructive"

@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { AxiosResponse } from "axios";
 import { Trash2 } from "lucide-react";
@@ -38,18 +37,16 @@ export default function ButtonIconDelete({
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="group hover:bg-destructive hover:text-white"
+    <button
+      className="group hover:bg-destructive hover:text-white px-1 rounded"
       onClick={handleDelete}
       disabled={deleteMutation.isPending}
     >
       {deleteMutation.isPending ? (
         "..."
       ) : (
-        <Trash2 className="h-4 w-4 text-destructive group-hover:text-white" />
+        <Trash2 className="w-4 text-destructive group-hover:text-white" />
       )}
-    </Button>
+    </button>
   );
 }
