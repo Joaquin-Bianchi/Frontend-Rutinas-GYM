@@ -2,11 +2,12 @@ import axios from "axios";
 
 //? Crear una instancia de axios
 const api = axios.create({
-  baseURL: import.meta.env.API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
+console.log(import.meta.env.API_URL);
 
 //? Interceptor para requests - añade el token a las peticiones
 api.interceptors.request.use(

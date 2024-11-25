@@ -12,6 +12,7 @@ import HomeClientPage from "./pages/private/HomeClientPage";
 import CategoryPlansPage from "./pages/private/categoryPlans/CategoryPlansPage";
 
 const App = () => {
+  console.log(import.meta.env.API_URL);
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
