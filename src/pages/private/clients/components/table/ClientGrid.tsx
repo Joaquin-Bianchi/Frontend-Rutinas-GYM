@@ -55,7 +55,7 @@ function ClientGrid({ clients }: Props) {
                     key={category.id}
                     className="mx-1 bg-secondary rounded px-1 py-0.5"
                   >
-                    {category}
+                    {category.name}
                   </span>
                 ))}
               </TableCell>

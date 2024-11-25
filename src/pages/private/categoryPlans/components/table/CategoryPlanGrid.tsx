@@ -1,10 +1,3 @@
-import ButtonDelete from "@/components/buttons/ButtonDelete";
-import { ActionModal } from "@/components/modal/ActionModal";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Table,
   TableBody,
@@ -13,10 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteClientById } from "@/services/clientService";
-import { Ellipsis } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 
 interface Props {

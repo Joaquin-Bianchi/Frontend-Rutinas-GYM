@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 //? Crear una instancia de axios
 const api = axios.create({
-  baseURL: import.meta.env.API_URL || "http://localhost:3002",
+  baseURL: import.meta.env.API_URL,
   headers: {
     "Content-Type": "application/json",
   },
