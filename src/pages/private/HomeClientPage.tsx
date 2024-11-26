@@ -11,10 +11,10 @@ import { useLocation } from "react-router-dom";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
 import { Client } from "@/interfaces/client.interface";
+import { isAuthenticated } from "@/services/authService";
 
 export default function HomeClientPage() {
-  const location = useLocation();
-  const userId = location.state;
+  const { userId } = isAuthenticated();
 
   const {
     data: client,
@@ -29,7 +29,6 @@ export default function HomeClientPage() {
   if (isLoading) return <div>Cargando...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
-  console.log(client);
 
   return (
     <>
@@ -40,14 +39,7 @@ export default function HomeClientPage() {
           <h2 className="text-xl text-center md:text-3xl font-semibold mb-2 text-white">
             Bienvenido {client?.name} 👋
           </h2>
-          <h3 className="text-sm text-center md:text-xl font-semibold mb-8 text-white">
-            Plan de entrenamiento:{" "}
-            {client?.categoryPlans?.map((category) => (
-              <span key={category.id} className="text-sm mx-1 px-1 bg-primary rounded md:text-base md:p-1">
-                {category.categoryPlan?.name}
-              </span>
-            ))}
-          </h3>
+
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {client?.routines?.map(
               (routine) =>
