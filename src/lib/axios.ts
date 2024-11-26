@@ -7,7 +7,6 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
-console.log(import.meta.env.API_URL);
 
 //? Interceptor para requests - añade el token a las peticiones
 api.interceptors.request.use(
