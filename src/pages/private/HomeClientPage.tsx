@@ -7,7 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ClientNavbar } from "@/components/navigation/ClientNavbar";
-import { useLocation } from "react-router-dom";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
 import { Client } from "@/interfaces/client.interface";

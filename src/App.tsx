@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
 import HomeAdminPage from "./pages/private/HomeAdminPage";
 import ProtectedRoutes from "./components/guards/ProtectedRoute";
@@ -12,9 +12,6 @@ import HomeClientPage from "./pages/private/HomeClientPage";
 import CategoryPlansPage from "./pages/private/categoryPlans/CategoryPlansPage";
 import NotFound from "./components/navigation/notFound/NotFound";
 
-const NotFoundRedirect = () => {
-  return <Navigate to="/home" replace />;
-};
 const App = () => {
   const queryClient = new QueryClient();
 
