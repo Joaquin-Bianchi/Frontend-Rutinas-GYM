@@ -7,6 +7,7 @@ import { editExercise } from "@/services/exerciseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   exercise: Exercise;
@@ -30,9 +31,7 @@ function EditExerciseForm({ exercise }: Props) {
       toast.success("Ejercicio editado correctamente");
     },
     onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.error || "Error al editar el ejercicio";
-      toast.error(errorMessage);
+      handlerError(error);
     },
   });
 

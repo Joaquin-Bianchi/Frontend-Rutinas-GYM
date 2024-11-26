@@ -24,7 +24,7 @@ function CreateClientForm() {
     mutationKey: ["createClient"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
-      toast.success("Cliente creado correctamente");
+      toast.success("Cliente creado");
     },
     onError: (error: any) => {
       handlerError(error);

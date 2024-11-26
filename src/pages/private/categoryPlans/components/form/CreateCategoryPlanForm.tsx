@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 import { createCategoryPlan } from "@/services/categoryPlanService";
+import { handlerError } from "@/utils/handlerError";
 
 export default function CreateCategoryPlanForm() {
   const queryClient = useQueryClient();
@@ -15,12 +16,10 @@ export default function CreateCategoryPlanForm() {
     mutationKey: ["createCategoryPlan"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categoryPlans"] });
-      toast.success("Plan creado correctamente");
+      toast.success("Plan creado");
     },
     onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.error || "Error al crear el plan";
-      toast.error(errorMessage);
+      handlerError(error);
     },
   });
 

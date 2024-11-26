@@ -7,7 +7,7 @@ import { createExercise } from "@/services/exerciseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
+import { handlerError } from "@/utils/handlerError";
 
 function CreateExerciseForm() {
   const queryClient = useQueryClient();
@@ -18,10 +18,10 @@ function CreateExerciseForm() {
     mutationKey: ["createExercise"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
-      toast.success("Ejercicio creado correctamente");
+      toast.success("Ejercicio creado");
     },
     onError: (error) => {
-      toast.error(error.message || "Error al crear el ejercicio");
+      handlerError(error);
     },
   });
 

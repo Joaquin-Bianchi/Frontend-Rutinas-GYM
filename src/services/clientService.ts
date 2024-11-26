@@ -20,16 +20,12 @@ export const createClient = async (client: Client) => {
 };
 
 export const editClient = async (client: Client) => {
-  console.log("Data desde el front", client);
-  
-
   const response = await api.put(`/user/${client.id}`, client);
   return response.data;
 };
 
 export const deleteClientById = async (clientId: string) => {
   const response = await api.delete(`/user/${clientId}`);
-  console.log(response);
   return response;
 };
 

@@ -24,7 +24,7 @@ import { RoutineExercise } from "@/interfaces/routineExercise.interface";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createRoutineExercises } from "@/services/routineExerciseService";
-
+import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   exercises: Exercise[];
@@ -41,12 +41,10 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     mutationKey: ["createRoutineExercise"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["client"] });
-      toast.success("Ejercicio agregado correctamente");
+      toast.success("Ejercicio agregado");
     },
     onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.error || "Error al asignar el ejercicio";
-      toast.error(errorMessage);
+      handlerError(error);
     },
   });
 

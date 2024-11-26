@@ -8,6 +8,7 @@ import { editClient } from "@/services/clientService";
 import { MultiSelectField } from "@/components/form/MultiSelectField";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 import { getCategoryPlans } from "@/services/categoryPlanService";
+import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   client: Client;
@@ -28,6 +29,7 @@ function EditClientForm({ client }: Props) {
       categoryPlans: client.categoryPlans,
     },
   });
+
   const { data: categoryPlans, isLoading } = useQuery({
     queryKey: ["categoryPlans"],
     queryFn: () => getCategoryPlans(),
@@ -38,11 +40,10 @@ function EditClientForm({ client }: Props) {
     mutationKey: ["editClient"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
-      toast.success("Cliente editado correctamente");
+      toast.success("Cliente editado");
     },
     onError: (error) => {
-      console.error("Error al editar el client:", error);
-      toast.error(error.message || "Error al editar el cliente");
+      handlerError(error);
     },
   });
 
