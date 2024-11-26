@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "serve dist -s -n -L -p $PORT"
+    "start": "serve dist -s -n -L -p 8080"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
