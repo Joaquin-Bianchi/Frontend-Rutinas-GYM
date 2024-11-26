@@ -26,9 +26,23 @@ function CreateClientForm() {
       toast.success("Cliente creado correctamente");
     },
     onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.error || "Error al crear el cliente";
-      toast.error(errorMessage);
+      const errorZod = error.response?.data[0]?.message;
+
+      const errorPathZod = error.response?.data[0]?.path[1].toUpperCase();
+
+      const errorBD = error.response?.data?.error;
+
+      if (errorZod && errorPathZod) {
+        toast.error(`${errorPathZod}: ${errorZod}`);
+        return;
+      }
+
+      if (errorBD) {
+        toast.error(errorBD);
+        return;
+      }
+
+      toast.error("Ups! Intentelo de nuevo más tarde");
     },
   });
 
