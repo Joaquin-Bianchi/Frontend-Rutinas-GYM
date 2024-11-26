@@ -52,10 +52,10 @@ function ClientGrid({ clients }: Props) {
               <TableCell>
                 {client.categoryPlans?.map((category) => (
                   <span
-                    key={category.id}
+                    key={category}
                     className="mx-1 bg-secondary rounded px-1 py-0.5"
                   >
-                    {category.name}
+                    {category}
                   </span>
                 ))}
               </TableCell>
@@ -64,11 +64,7 @@ function ClientGrid({ clients }: Props) {
                   to={`/dashboard/client/routine/${client.id}`}
                   className="flex items-center space-x-2"
                 >
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="font-semibold"
-                  >
+                  <Button variant="default" size="sm" className="font-semibold">
                     Ver
                   </Button>
                 </Link>

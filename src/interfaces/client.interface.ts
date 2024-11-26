@@ -1,5 +1,4 @@
 import { Role } from "@/enums/role.enum";
-import { CategoryPlan } from "./categotyPlan.interface";
 import { Routine } from "./routine.interface";
 
 export interface Client {
@@ -10,7 +9,7 @@ export interface Client {
   phone: number;
   phoneEmergency: number;
   address: string;
-  categoryPlans?: CategoryPlan[];
+  categoryPlans?: string[];
   role: Role;
   routines?: Routine[];
 }
