@@ -4,6 +4,8 @@ import { ActionModal } from "@/components/modal/ActionModal";
 import { getCategoryPlans } from "@/services/categoryPlanService";
 import CategoryPlanGrid from "./components/table/CategoryPlanGrid";
 import CreateCategoryPlanForm from "./components/form/CreateCategoryPlanForm";
+import ErrorDisplay from "@/components/erros/ErrorDisplay";
+import ClientsSkeletonLoader from "@/components/loaders/ClientsSkeletonLoader";
 
 export default function CategoryPlansPage() {
   const {
@@ -16,9 +18,6 @@ export default function CategoryPlansPage() {
     queryFn: () => getCategoryPlans(),
   });
 
-  if (isLoading) return <div>Cargando planes de entrenamiento...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
-
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -30,7 +29,13 @@ export default function CategoryPlansPage() {
             </ActionModal>
           }
         />
-        <CategoryPlanGrid plans={categoryPlans} />
+        {isLoading ? (
+          <ClientsSkeletonLoader />
+        ) : isError ? (
+          <ErrorDisplay message={error.message} />
+        ) : (
+          <CategoryPlanGrid plans={categoryPlans} />
+        )}
       </main>
     </div>
   );
