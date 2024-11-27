@@ -5,8 +5,6 @@ import { getExercises } from "@/services/exerciseService";
 import CreateExerciseForm from "./components/forms/CreateExerciseForm";
 import ExerciseCard from "./components/cards/ExerciseCard";
 import ExercisesSkeletonLoader from "@/components/loaders/ExercisesSkeletonLoader";
-
-import { Button } from "@/components/ui/button";
 import { Exercise } from "@/interfaces/exercise.interface";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
 

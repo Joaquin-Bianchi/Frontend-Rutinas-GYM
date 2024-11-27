@@ -1,31 +1,38 @@
-import { Calendar } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ClientNavbar } from "@/components/navigation/ClientNavbar";
-import { getClientById } from "@/services/clientService";
-import { useQuery } from "@tanstack/react-query";
-import { Client } from "@/interfaces/client.interface";
-import { isAuthenticated } from "@/services/authService";
-import ErrorDisplay from "@/components/erros/ErrorDisplay";
-import { HomeClientSkeletonLoader } from "@/components/loaders/HomeClientSkeletonLoader";
+} from "@/components/ui/accordion"
+import { ClientNavbar } from "@/components/navigation/ClientNavbar"
+import { getClientById } from "@/services/clientService"
+import { useQuery } from "@tanstack/react-query"
+import { Client } from "@/interfaces/client.interface"
+import { isAuthenticated } from "@/services/authService"
+import { HomeClientSkeletonLoader } from "@/components/loaders/HomeClientSkeletonLoader"
+import { ErrorDisplay } from "@/components/errors/ErrorDisplay"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function HomeClientPage() {
-  const { userId } = isAuthenticated();
+  const { userId } = isAuthenticated()
 
   const {
     data: client,
     isLoading,
     isError,
     error,
+    refetch
   } = useQuery<Client>({
     queryKey: ["client"],
     queryFn: () => getClientById(userId as string),
-  });
+  })
+
+  const handleRetry = () => {
+    refetch()
+  }
 
   return (
     <>
@@ -36,7 +43,8 @@ export default function HomeClientPage() {
             <HomeClientSkeletonLoader />
           ) : isError ? (
             <div className="space-y-4">
-              <ErrorDisplay message={error.message} />
+              <ErrorDisplay message={error instanceof Error ? error.message : 'Ocurrió un error desconocido'} />
+              <Button onClick={handleRetry}>Intentar de nuevo</Button>
             </div>
           ) : (
             <>
@@ -59,17 +67,10 @@ export default function HomeClientPage() {
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <Accordion
-                            type="single"
-                            collapsible
-                            className="w-full"
-                          >
+                          <Accordion type="single" collapsible className="w-full">
                             {routine.routineExercises.map(
                               (routineExercise, index) => (
-                                <AccordionItem
-                                  key={index}
-                                  value={`item-${index}`}
-                                >
+                                <AccordionItem key={index} value={`item-${index}`}>
                                   <AccordionTrigger className="uppercase">
                                     {routineExercise.exercise.name}
                                   </AccordionTrigger>
@@ -93,13 +94,15 @@ export default function HomeClientPage() {
                                         </p>
                                       )}
                                       <div className="relative w-full h-48">
-                                        <img
+                                        <Image
                                           src={
                                             routineExercise.exercise.image ||
-                                            "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
+                                            "/placeholder.svg?height=192&width=384"
                                           }
                                           alt={routineExercise.exercise.name}
-                                          className="w-full h-48 object-cover rounded-lg"
+                                          layout="fill"
+                                          objectFit="cover"
+                                          className="rounded-lg"
                                         />
                                       </div>
                                     </div>
@@ -118,5 +121,6 @@ export default function HomeClientPage() {
         </main>
       </div>
     </>
-  );
+  )
 }
+
