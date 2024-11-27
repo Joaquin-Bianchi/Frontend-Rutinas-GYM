@@ -47,7 +47,7 @@ export default function LoginPage() {
         <div className="mb-8 text-center">
           <Dumbbell className="mx-auto h-12 w-12 text-primary" />
           <h1 className="text-3xl font-bold text-foreground mt-4">
-            Nombre de Gym
+            Fitness Center
           </h1>
           <p className="text-muted-foreground">Inicia sesión para acceder</p>
         </div>

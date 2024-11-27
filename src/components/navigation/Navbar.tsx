@@ -58,12 +58,12 @@ export function Navbar() {
           <div className="flex items-center space-x-4">
             <Link to="/dashboard" className="flex items-center space-x-2">
               <img
-                src="/img/logo.jpeg"
+                src="/img/logo.png"
                 alt="Gym Logo"
-                className="h-8 w-auto rounded-full"
+                className="h-10 w-[4.3rem] -mr-1 rounded-full"
               />
               <span className="text-xl font-bold text-primary-foreground hidden sm:inline">
-                RutinasGym
+                Fitness Center
               </span>
             </Link>
           </div>

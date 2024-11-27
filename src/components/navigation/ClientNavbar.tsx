@@ -14,14 +14,14 @@ export function ClientNavbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/dashboard" className="flex items-center space-x-2">
+            <Link to="/dashboard" className="flex items-center ">
               <img
-                src="/img/logo.jpeg"
+                src="/img/logo.png"
                 alt="Gym Logo"
-                className="h-8 w-auto rounded-full"
+                className="h-10 w-[4.3rem] -mr-1 rounded-full"
               />
               <span className="text-xl font-bold text-primary-foreground hidden sm:inline">
-                Nombre Gym
+                Fitness Center
               </span>
             </Link>
           </div>
