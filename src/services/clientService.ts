@@ -1,7 +1,6 @@
 import { Client } from "@/interfaces/client.interface";
 import api from "@/lib/axios";
 
-
 export const getClients = async () => {
   const response = await api.get("/user");
   const clients = response.data.filter(

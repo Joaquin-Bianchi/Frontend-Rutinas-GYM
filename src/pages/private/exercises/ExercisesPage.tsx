@@ -1,10 +1,14 @@
-import ExerciseCard from "./components/cards/ExerciseCard";
-import { getExercises } from "@/services/exerciseService";
 import { useQuery } from "@tanstack/react-query";
-import { Exercise } from "@/interfaces/exercise.interface";
 import SectionHeader from "@/components/header/SectionHeader";
 import { ActionModal } from "@/components/modal/ActionModal";
+import { getExercises } from "@/services/exerciseService";
 import CreateExerciseForm from "./components/forms/CreateExerciseForm";
+import ExerciseCard from "./components/cards/ExerciseCard";
+import ExercisesSkeletonLoader from "@/components/loaders/ExercisesSkeletonLoader";
+
+import { Button } from "@/components/ui/button";
+import { Exercise } from "@/interfaces/exercise.interface";
+import ErrorDisplay from "@/components/erros/ErrorDisplay";
 
 export default function ExercisesPage() {
   const {
@@ -16,9 +20,6 @@ export default function ExercisesPage() {
     queryKey: ["exercises"],
     queryFn: () => getExercises(),
   });
-
-  if (isLoading) return <div>Cargando ejercicios...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -34,11 +35,19 @@ export default function ExercisesPage() {
             </ActionModal>
           }
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {exercises?.data.map((exercise: Exercise) => (
-            <ExerciseCard key={exercise.id} exercise={exercise} />
-          ))}
-        </div>
+        {isLoading ? (
+          <ExercisesSkeletonLoader />
+        ) : isError ? (
+          <div className="space-y-4">
+            <ErrorDisplay message={error.message} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {exercises?.data.map((exercise: Exercise) => (
+              <ExerciseCard key={exercise.id} exercise={exercise} />
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
