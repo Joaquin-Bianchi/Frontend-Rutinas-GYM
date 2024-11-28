@@ -4,19 +4,27 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
-import { createCategoryPlan } from "@/services/categoryPlanService";
+import { editCategoryPlan } from "@/services/categoryPlanService";
 import { handlerError } from "@/utils/handlerError";
 
-export default function CreateCategoryPlanForm() {
-  const queryClient = useQueryClient();
-  const { control, handleSubmit } = useForm<CategoryPlan>();
+interface Props {
+  plan: CategoryPlan;
+}
 
-  const createCategoryPlanMutation = useMutation({
-    mutationFn: createCategoryPlan,
-    mutationKey: ["createCategoryPlan"],
+export default function EditCategoryPlanForm({ plan }: Props) {
+  const queryClient = useQueryClient();
+  const { control, handleSubmit } = useForm<CategoryPlan>({
+    defaultValues: {
+      name: plan.name,
+    },
+  });
+
+  const editCategoryPlanMutation = useMutation({
+    mutationFn: editCategoryPlan,
+    mutationKey: ["editCategoryPlan"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categoryPlans"] });
-      toast.success("Plan creado");
+      toast.success("Plan editado");
     },
     onError: (error: any) => {
       handlerError(error);
@@ -24,7 +32,11 @@ export default function CreateCategoryPlanForm() {
   });
 
   const onSubmit = handleSubmit((data: CategoryPlan) => {
-    createCategoryPlanMutation.mutate(data);
+    const formattedData = {
+      ...data,
+      id: plan.id,
+    };
+    editCategoryPlanMutation.mutate(formattedData);
   });
 
   return (
@@ -42,9 +54,9 @@ export default function CreateCategoryPlanForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={createCategoryPlanMutation.isPending}
+          disabled={editCategoryPlanMutation.isPending}
         >
-          {createCategoryPlanMutation.isPending ? "Creando..." : "Crear Plan"}
+          {editCategoryPlanMutation.isPending ? "Editando..." : "Editar Plan"}
         </Button>
       </div>
     </form>

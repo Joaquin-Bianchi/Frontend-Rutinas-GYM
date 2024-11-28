@@ -1,5 +1,10 @@
 import ButtonDelete from "@/components/buttons/ButtonDelete";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ActionModal } from "@/components/modal/ActionModal";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Table,
   TableBody,
@@ -11,6 +16,7 @@ import {
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 import { deleteCategoryPlan } from "@/services/categoryPlanService";
 import { Ellipsis } from "lucide-react";
+import EditCategoryPlanForm from "../form/EditCategoryPlanForm";
 
 interface Props {
   plans?: CategoryPlan[];
@@ -44,9 +50,12 @@ function CategoryPlanGrid({ plans }: Props) {
                         nameQueryKey="categoryPlans"
                         textObjectDelete="Plan"
                       />
-                      {/* <ActionModal title="Editar" dialogTitle="Editar Cliente">
-                        <EditClientForm client={client} />
-                      </ActionModal> */}
+                      <ActionModal
+                        title="Editar"
+                        dialogTitle="Editar plan de entrenamiento"
+                      >
+                        <EditCategoryPlanForm plan={plan} />
+                      </ActionModal>
                     </div>
                   </PopoverContent>
                 </Popover>

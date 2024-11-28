@@ -11,6 +11,11 @@ export const createCategoryPlan = async (data: CategoryPlan) => {
   return response.data;
 };
 
+export const editCategoryPlan = async (data: CategoryPlan) => {
+  const response = await api.put("/categoryPlan", data);
+  return response.data;
+};
+
 export const deleteCategoryPlan = async (id: string) => {
   const response = await api.delete(`/categoryPlan/${id}`);
   return response.data;
