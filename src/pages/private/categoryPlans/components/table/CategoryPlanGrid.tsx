@@ -1,3 +1,5 @@
+import ButtonDelete from "@/components/buttons/ButtonDelete";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Table,
   TableBody,
@@ -7,13 +9,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
+import { deleteCategoryPlan } from "@/services/categoryPlanService";
+import { Ellipsis } from "lucide-react";
 
 interface Props {
   plans?: CategoryPlan[];
 }
 
 function CategoryPlanGrid({ plans }: Props) {
-  console.log(plans);
   return (
     <div className="container mx-auto py-10">
       <Table>
@@ -27,7 +30,7 @@ function CategoryPlanGrid({ plans }: Props) {
           {plans?.map((plan) => (
             <TableRow key={plan.id}>
               <TableCell className="font-medium">{plan.name}</TableCell>
-              {/* <TableCell>
+              <TableCell>
                 <Popover>
                   <PopoverTrigger className="ml-auto mr-2" asChild>
                     <Ellipsis className="cursor-pointer" />
@@ -35,19 +38,19 @@ function CategoryPlanGrid({ plans }: Props) {
                   <PopoverContent className="w-full">
                     <div className="items-end flex gap-1">
                       <ButtonDelete
-                        id={client.id}
-                        deleteFn={deleteClientById}
-                        nameMutationKey="deleteClient"
-                        nameQueryKey="clients"
-                        textObjectDelete="Cliente"
+                        id={plan.id}
+                        deleteFn={deleteCategoryPlan}
+                        nameMutationKey="deleteCategoryPlan"
+                        nameQueryKey="categoryPlans"
+                        textObjectDelete="Plan"
                       />
-                      <ActionModal title="Editar" dialogTitle="Editar Cliente">
+                      {/* <ActionModal title="Editar" dialogTitle="Editar Cliente">
                         <EditClientForm client={client} />
-                      </ActionModal>
+                      </ActionModal> */}
                     </div>
                   </PopoverContent>
                 </Popover>
-              </TableCell> */}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -25,7 +25,7 @@ export default function ButtonDelete({
     mutationKey: [`${nameMutationKey}`],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [`${nameQueryKey}`] });
-      toast.success(`${textObjectDelete} eliminado correctamente`);
+      toast.success(`${textObjectDelete} eliminado`);
     },
     onError: (error) => {
       toast.error(error.message || `Error al eliminar el ${textObjectDelete}`);

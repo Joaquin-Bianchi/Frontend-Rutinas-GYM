@@ -10,3 +10,8 @@ export const createCategoryPlan = async (data: CategoryPlan) => {
   const response = await api.post("/categoryPlan", data);
   return response.data;
 };
+
+export const deleteCategoryPlan = async (id: string) => {
+  const response = await api.delete(`/categoryPlan/${id}`);
+  return response.data;
+};
