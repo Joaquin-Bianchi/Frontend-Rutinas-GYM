@@ -6,6 +6,9 @@ import CreateClientForm from "./components/forms/CreateClientForm";
 import ClientGrid from "./components/table/ClientGrid";
 import ClientsSkeletonLoader from "@/components/loaders/ClientsSkeletonLoader";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
+import { useContext } from "react";
+import { SearchContext } from "@/context/SearchContext";
+import { filterClientsByName } from "@/utils/searchFilters/filterClients";
 
 export default function ClientsPage() {
   const {
@@ -17,6 +20,9 @@ export default function ClientsPage() {
     queryKey: ["clients"],
     queryFn: () => getClients(),
   });
+
+  const { searchText } = useContext(SearchContext);
+  const filteredClients = filterClientsByName(clients, searchText);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -37,7 +43,7 @@ export default function ClientsPage() {
         ) : isError ? (
           <ErrorDisplay message={error.message} />
         ) : (
-          <ClientGrid clients={clients} />
+          <ClientGrid clients={filteredClients} />
         )}
       </main>
     </div>

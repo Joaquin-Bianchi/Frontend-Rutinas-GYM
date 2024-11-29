@@ -11,40 +11,43 @@ import ClientRoutinePage from "./pages/private/clients/routine/ClientRoutinePage
 import HomeClientPage from "./pages/private/HomeClientPage";
 import CategoryPlansPage from "./pages/private/categoryPlans/CategoryPlansPage";
 import NotFound from "./components/navigation/notFound/NotFound";
+import { SearchProvider } from "./context/SearchContext";
 
 const App = () => {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Toaster richColors />
-        <Routes>
-          <Route path="*" element={<NotFound />} />
+      <SearchProvider>
+        <BrowserRouter>
+          <Toaster richColors />
+          <Routes>
+            <Route path="*" element={<NotFound />} />
 
-          {/* Ruta pública */}
-          <Route path="/login" element={<LoginPage />} />
-          {/* Rutas privadas */}
-          <Route path="/" element={<ProtectedRoutes />}>
-            <Route path="/home" element={<HomeClientPage />} />{" "}
-            {/* Página específica para CLIENT */}
-            {/* Rutas privadas para otros roles */}
-            <Route element={<PrivateLayout />}>
-              <Route path="dashboard" element={<HomeAdminPage />} />
-              <Route path="dashboard/clients" element={<ClientsPage />} />
-              <Route path="dashboard/exercises" element={<ExercisesPage />} />
-              <Route
-                path="dashboard/client/routine/:id"
-                element={<ClientRoutinePage />}
-              />
-              <Route
-                path="dashboard/categoryPlans"
-                element={<CategoryPlansPage />}
-              />
+            {/* Ruta pública */}
+            <Route path="/login" element={<LoginPage />} />
+            {/* Rutas privadas */}
+            <Route path="/" element={<ProtectedRoutes />}>
+              <Route path="/home" element={<HomeClientPage />} />{" "}
+              {/* Página específica para CLIENT */}
+              {/* Rutas privadas para otros roles */}
+              <Route element={<PrivateLayout />}>
+                <Route path="dashboard" element={<HomeAdminPage />} />
+                <Route path="dashboard/clients" element={<ClientsPage />} />
+                <Route path="dashboard/exercises" element={<ExercisesPage />} />
+                <Route
+                  path="dashboard/client/routine/:id"
+                  element={<ClientRoutinePage />}
+                />
+                <Route
+                  path="dashboard/categoryPlans"
+                  element={<CategoryPlansPage />}
+                />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </SearchProvider>
     </QueryClientProvider>
   );
 };

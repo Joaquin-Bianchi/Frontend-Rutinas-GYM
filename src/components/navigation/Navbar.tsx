@@ -29,7 +29,7 @@ const navItems: NavItem[] = [
   { title: "Clientes", href: "/dashboard/clients", icon: Users },
   { title: "Ejercicios", href: "/dashboard/exercises", icon: Dumbbell },
   {
-    title: "Planes de entrenamiento",
+    title: "Planes",
     href: "/dashboard/categoryPlans",
     icon: Puzzle,
   },

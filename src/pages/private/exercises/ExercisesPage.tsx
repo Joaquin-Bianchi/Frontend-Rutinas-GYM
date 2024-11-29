@@ -5,8 +5,10 @@ import { getExercises } from "@/services/exerciseService";
 import CreateExerciseForm from "./components/forms/CreateExerciseForm";
 import ExerciseCard from "./components/cards/ExerciseCard";
 import ExercisesSkeletonLoader from "@/components/loaders/ExercisesSkeletonLoader";
-import { Exercise } from "@/interfaces/exercise.interface";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
+import { SearchContext } from "@/context/SearchContext";
+import { useContext } from "react";
+import { filteExercicesByName } from "@/utils/searchFilters/filterExerciesByName";
 
 export default function ExercisesPage() {
   const {
@@ -18,7 +20,9 @@ export default function ExercisesPage() {
     queryKey: ["exercises"],
     queryFn: () => getExercises(),
   });
+  const { searchText } = useContext(SearchContext);
 
+  const filteredExercises = filteExercicesByName(exercises?.data, searchText);
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -41,7 +45,7 @@ export default function ExercisesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {exercises?.data.map((exercise: Exercise) => (
+            {filteredExercises?.map((exercise) => (
               <ExerciseCard key={exercise.id} exercise={exercise} />
             ))}
           </div>
