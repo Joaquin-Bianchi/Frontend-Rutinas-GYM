@@ -50,10 +50,13 @@ export default function ClientRoutinePage() {
                       <span className="capitalize">{routine.day} </span>
                     </div>
                     <ActionModalUserRutine dialogTitle="Asignar Rutina">
-                      <AddExerciseForm
-                        exercises={exercises?.data}
-                        routineId={routine.id}
-                      />
+                      {(closeModal) => (
+                        <AddExerciseForm
+                          exercises={exercises?.data}
+                          routineId={routine.id}
+                          closeModal={closeModal}
+                        />
+                      )}
                     </ActionModalUserRutine>
                   </CardTitle>
                 </CardHeader>

@@ -25,7 +25,6 @@ interface Props {
 }
 
 function ClientGrid({ clients }: Props) {
-  console.log(clients);
   return (
     <div className="container mx-auto py-10">
       <Table>
@@ -85,7 +84,12 @@ function ClientGrid({ clients }: Props) {
                         textObjectDelete="Cliente"
                       />
                       <ActionModal title="Editar" dialogTitle="Editar Cliente">
-                        <EditClientForm client={client} />
+                        {(closeModal) => (
+                          <EditClientForm
+                            client={client}
+                            closeModal={closeModal}
+                          />
+                        )}
                       </ActionModal>
                     </div>
                   </PopoverContent>

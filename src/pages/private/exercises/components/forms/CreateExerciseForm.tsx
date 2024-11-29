@@ -9,7 +9,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { handlerError } from "@/utils/handlerError";
 
-function CreateExerciseForm() {
+interface Props {
+  closeModal: () => void;
+}
+
+function CreateExerciseForm({ closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
 
@@ -19,6 +23,7 @@ function CreateExerciseForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
       toast.success("Ejercicio creado");
+      closeModal();
     },
     onError: (error) => {
       handlerError(error);

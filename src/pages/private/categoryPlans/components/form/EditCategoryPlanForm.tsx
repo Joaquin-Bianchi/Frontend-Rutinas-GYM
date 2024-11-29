@@ -9,9 +9,10 @@ import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   plan: CategoryPlan;
+  closeModal: () => void;
 }
 
-export default function EditCategoryPlanForm({ plan }: Props) {
+export default function EditCategoryPlanForm({ plan, closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<CategoryPlan>({
     defaultValues: {
@@ -25,6 +26,7 @@ export default function EditCategoryPlanForm({ plan }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categoryPlans"] });
       toast.success("Plan editado");
+      closeModal();
     },
     onError: (error: any) => {
       handlerError(error);

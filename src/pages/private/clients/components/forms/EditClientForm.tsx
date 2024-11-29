@@ -12,9 +12,10 @@ import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   client: Client;
+  closeModal: () => void;
 }
 
-function EditClientForm({ client }: Props) {
+function EditClientForm({ client, closeModal }: Props) {
   const queryClient = useQueryClient();
 
   const { control, handleSubmit } = useForm<Client>({
@@ -41,6 +42,7 @@ function EditClientForm({ client }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       toast.success("Cliente editado");
+      closeModal();
     },
     onError: (error) => {
       handlerError(error);

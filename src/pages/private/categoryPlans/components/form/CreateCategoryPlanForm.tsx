@@ -7,7 +7,11 @@ import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 import { createCategoryPlan } from "@/services/categoryPlanService";
 import { handlerError } from "@/utils/handlerError";
 
-export default function CreateCategoryPlanForm() {
+interface Props {
+  closeModal: () => void;
+}
+
+export default function CreateCategoryPlanForm({ closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<CategoryPlan>();
 
@@ -17,6 +21,7 @@ export default function CreateCategoryPlanForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categoryPlans"] });
       toast.success("Plan creado");
+      closeModal();
     },
     onError: (error: any) => {
       handlerError(error);

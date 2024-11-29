@@ -10,7 +10,11 @@ import { getCategoryPlans } from "@/services/categoryPlanService";
 import { CategoryPlan } from "@/interfaces/categotyPlan.interface";
 import { handlerError } from "@/utils/handlerError";
 
-function CreateClientForm() {
+interface Props {
+  closeModal: () => void;
+}
+
+function CreateClientForm({ closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Client>();
 
@@ -25,6 +29,7 @@ function CreateClientForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       toast.success("Cliente creado");
+      closeModal();
     },
     onError: (error: any) => {
       handlerError(error);

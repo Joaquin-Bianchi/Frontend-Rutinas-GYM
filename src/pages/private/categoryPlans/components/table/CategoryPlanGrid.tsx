@@ -54,7 +54,12 @@ function CategoryPlanGrid({ plans }: Props) {
                         title="Editar"
                         dialogTitle="Editar plan de entrenamiento"
                       >
-                        <EditCategoryPlanForm plan={plan} />
+                        {(closeModal) => (
+                          <EditCategoryPlanForm
+                            plan={plan}
+                            closeModal={closeModal}
+                          />
+                        )}
                       </ActionModal>
                     </div>
                   </PopoverContent>

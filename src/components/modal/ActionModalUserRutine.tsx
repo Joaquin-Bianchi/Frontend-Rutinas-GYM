@@ -10,12 +10,14 @@ import { PlusCircle } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 interface Props {
-  children: ReactNode;
+  children: (closeModal: () => void) => ReactNode;
   dialogTitle: string;
 }
 
 export function ActionModalUserRutine({ children, dialogTitle }: Props) {
   const [open, setOpen] = useState(false);
+
+  const closeModal = () => setOpen(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -30,7 +32,7 @@ export function ActionModalUserRutine({ children, dialogTitle }: Props) {
           <DialogTitle>{dialogTitle}</DialogTitle>
         </DialogHeader>
         {/*Pasar el  Formulario dentro del modal */}
-        {children}
+        {typeof children === "function" ? children(closeModal) : children}
       </DialogContent>
     </Dialog>
   );

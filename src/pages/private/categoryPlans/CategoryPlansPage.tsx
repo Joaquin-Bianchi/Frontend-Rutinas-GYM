@@ -21,8 +21,6 @@ export default function CategoryPlansPage() {
     queryFn: () => getCategoryPlans(),
   });
 
-  console.log(categoryPlans);
-
   const { searchText } = useContext(SearchContext);
 
   const filteredCategoryPlans = categoryPlans?.filter((plan: CategoryPlan) =>
@@ -35,7 +33,9 @@ export default function CategoryPlansPage() {
           title="Planes de entreamiento"
           createButton={
             <ActionModal title="Nuevo Plan" dialogTitle="Crear Nuevo Plan">
-              <CreateCategoryPlanForm />
+              {(closeModal) => (
+                <CreateCategoryPlanForm closeModal={closeModal} />
+              )}
             </ActionModal>
           }
         />

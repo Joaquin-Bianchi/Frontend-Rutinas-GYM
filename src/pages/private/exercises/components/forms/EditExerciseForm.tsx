@@ -11,9 +11,10 @@ import { handlerError } from "@/utils/handlerError";
 
 interface Props {
   exercise: Exercise;
+  closeModal: () => void;
 }
 
-function EditExerciseForm({ exercise }: Props) {
+function EditExerciseForm({ exercise, closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>({
     defaultValues: {
@@ -28,7 +29,8 @@ function EditExerciseForm({ exercise }: Props) {
     mutationKey: ["editExercise"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
-      toast.success("Ejercicio editado correctamente");
+      toast.success("Ejercicio editado");
+      closeModal();
     },
     onError: (error: any) => {
       handlerError(error);

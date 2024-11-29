@@ -34,7 +34,7 @@ export default function ClientsPage() {
               title="Nuevo Cliente"
               dialogTitle="Crear Nuevo Cliente"
             >
-              <CreateClientForm />
+              {(closeModal) => <CreateClientForm closeModal={closeModal} />}
             </ActionModal>
           }
         />

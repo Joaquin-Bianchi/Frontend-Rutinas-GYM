@@ -29,9 +29,10 @@ import { handlerError } from "@/utils/handlerError";
 interface Props {
   exercises: Exercise[];
   routineId: string;
+  closeModal: () => void;
 }
 
-function AddExerciseForm({ exercises, routineId }: Props) {
+function AddExerciseForm({ exercises, routineId, closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<RoutineExercise>();
   const [openExercise, setOpenExercise] = useState(false);
@@ -42,6 +43,7 @@ function AddExerciseForm({ exercises, routineId }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["client"] });
       toast.success("Ejercicio agregado");
+      closeModal();
     },
     onError: (error: any) => {
       handlerError(error);

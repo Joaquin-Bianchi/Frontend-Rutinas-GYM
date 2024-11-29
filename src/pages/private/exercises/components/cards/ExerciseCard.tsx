@@ -37,7 +37,9 @@ function ExerciseCard({ exercise }: Props) {
           />
           <div className="flex gap-2 mb-10">
             <ActionModal title="Editar" dialogTitle="Editar Ejercicio">
-              <EditExerciseForm exercise={exercise} />
+              {(closeModal) => (
+                <EditExerciseForm exercise={exercise} closeModal={closeModal} />
+              )}
             </ActionModal>
             <ButtonDelete
               id={exercise.id}
