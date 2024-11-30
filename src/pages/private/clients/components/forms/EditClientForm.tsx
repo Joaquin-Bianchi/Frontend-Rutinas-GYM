@@ -114,7 +114,7 @@ function EditClientForm({ client, closeModal }: Props) {
         />
       </div>
 
-      <div className="col-span-2">
+      <div className="col-span-1">
         <FormField
           name="address"
           label="Dirección"
