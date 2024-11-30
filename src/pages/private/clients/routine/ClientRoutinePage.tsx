@@ -32,7 +32,7 @@ export default function ClientRoutinePage() {
   });
 
   return (
-    <div className="container px-5 sm:px-0 mx-auto mt-5">
+    <div className="container px-5 sm:px-0 mx-auto my-5">
       {isLoading ? (
         <RoutineDetailsSkeleton />
       ) : isError ? (

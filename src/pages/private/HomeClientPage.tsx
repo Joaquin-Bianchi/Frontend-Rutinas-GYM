@@ -44,8 +44,7 @@ export default function HomeClientPage() {
                 Bienvenido/a {client?.name} 👋
               </h1>
               <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
-                Aquí están tus rutinas asignadas por tu profesor, si tienes
-                alguna pregunta no dudes en acercarte a tu profesor.
+                Aquí están tus rutinas asignadas por tu profesor.
               </p>
             </div>
 
