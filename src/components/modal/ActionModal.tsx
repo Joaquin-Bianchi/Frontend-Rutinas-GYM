@@ -13,9 +13,10 @@ interface Props {
   children: (closeModal: () => void) => ReactNode;
   title: string;
   dialogTitle: string;
+  showIcon?: boolean;
 }
 
-export function ActionModal({ children, title, dialogTitle }: Props) {
+export function ActionModal({ children, title, dialogTitle, showIcon = false }: Props) {
   const [open, setOpen] = useState(false);
 
   const closeModal = () => setOpen(false);
@@ -24,7 +25,7 @@ export function ActionModal({ children, title, dialogTitle }: Props) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="default" size="default">
-          <Plus />
+          {showIcon && <Plus />}
           {/*titulo del boton */}
           <p className="font-bold">{title}</p>
         </Button>

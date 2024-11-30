@@ -32,6 +32,7 @@ export default function ExercisesPage() {
             <ActionModal
               title="Nuevo Ejercicio"
               dialogTitle="Crear Nuevo Ejercicio"
+              showIcon={true}
             >
               {(closeModal) => <CreateExerciseForm closeModal={closeModal} />}
             </ActionModal>

@@ -32,7 +32,7 @@ export default function CategoryPlansPage() {
         <SectionHeader
           title="Planes de entreamiento"
           createButton={
-            <ActionModal title="Nuevo Plan" dialogTitle="Crear Nuevo Plan">
+            <ActionModal showIcon={true} title="Nuevo Plan" dialogTitle="Crear Nuevo Plan">
               {(closeModal) => (
                 <CreateCategoryPlanForm closeModal={closeModal} />
               )}

@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 import { Client } from "@/interfaces/client.interface";
 import { deleteClientById } from "@/services/clientService";
-import { Ellipsis } from "lucide-react";
+import { ChevronRight, Ellipsis } from "lucide-react";
 import EditClientForm from "../forms/EditClientForm";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -33,6 +33,7 @@ function ClientGrid({ clients }: Props) {
             <TableHead>Nombre</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Teléfono</TableHead>
+            <TableHead>Tel Emergencia</TableHead>
             <TableHead>Edad</TableHead>
             <TableHead>Dirección</TableHead>
             <TableHead>Plan</TableHead>
@@ -46,13 +47,14 @@ function ClientGrid({ clients }: Props) {
               <TableCell className="font-medium">{client.name}</TableCell>
               <TableCell>{client.email}</TableCell>
               <TableCell>{client.phone}</TableCell>
+              <TableCell>{client.phoneEmergency}</TableCell>
               <TableCell>{client.age}</TableCell>
               <TableCell>{client.address}</TableCell>
               <TableCell>
                 {client.categoryPlans?.map((category) => (
                   <span
                     key={category}
-                    className="mx-1 bg-secondary rounded px-1 py-0.5"
+                    className="mx-1 bg-orange-200 text-primary font-semibold rounded px-1 py-0.5"
                   >
                     {category}
                   </span>
@@ -64,7 +66,7 @@ function ClientGrid({ clients }: Props) {
                   className="flex items-center space-x-2"
                 >
                   <Button variant="default" size="sm" className="font-semibold">
-                    Ver
+                    <ChevronRight />
                   </Button>
                 </Link>
               </TableCell>

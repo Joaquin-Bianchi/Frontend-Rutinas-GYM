@@ -40,15 +40,15 @@ export default function HomeClientPage() {
         ) : (
           <>
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold mb-2 text-primary">
-                Bienvenido, {client?.name} 👋
+              <h1 className="text-xl md:text-4xl font-bold mb-2">
+                Bienvenido/a {client?.name} 👋
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-sm md:text-xl text-muted-foreground">
                 Aquí están tus rutinas asignadas por tu profesor
               </p>
             </div>
 
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-base md:text-2xl font-semibold mb-4">
               Tus Rutinas Asignadas
             </h2>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">

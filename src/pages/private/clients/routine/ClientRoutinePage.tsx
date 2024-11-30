@@ -39,7 +39,7 @@ export default function ClientRoutinePage() {
         <ErrorDisplay message={error.message} />
       ) : (
         <>
-          <h1 className="text-2xl font-bold mb-4">Rutinas de {client?.name}</h1>
+          <h1 className="text-2xl font-bold mb-4 mt-7">Rutinas de {client?.name}</h1>
           <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
             {client?.routines?.map((routine) => (
               <Card key={routine.id} className="shadow-lg">
@@ -62,75 +62,73 @@ export default function ClientRoutinePage() {
                 </CardHeader>
                 <CardContent>
                   {routine.routineExercises?.length > 0 ? (
-                    <div>
-                      <ul className="space-y-4">
-                        {routine.routineExercises.map((exercise) => (
-                          <li
-                            key={exercise.id}
-                            className="bg-secondary/10 rounded-lg p-4 shadow-sm"
-                          >
-                            <div className="flex flex-col sm:flex-row gap-4">
-                              <div className="w-full sm:w-1/3 aspect-video sm:aspect-square">
-                                <img
-                                  src={
-                                    exercise.exercise.image ||
-                                    "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
-                                  }
-                                  alt={exercise.exercise.name}
-                                  className="rounded-md w-full h-full object-cover object-center"
+                    <div className="space-y-4">
+                      {routine.routineExercises.map((exercise) => (
+                        <div
+                          key={exercise.id}
+                          className="bg-secondary/10 rounded-lg p-4 shadow-sm"
+                        >
+                          <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="w-full sm:w-1/3 aspect-video sm:aspect-square">
+                              <img
+                                src={
+                                  exercise.exercise.image ||
+                                  "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
+                                }
+                                alt={exercise.exercise.name}
+                                className="rounded-md w-full h-full object-cover object-center"
+                              />
+                            </div>
+                            <div className="flex flex-col w-full sm:w-2/3 justify-between flex-grow">
+                              <div>
+                                <span className="font-semibold text-md mb-2 block uppercase">
+                                  {exercise.exercise.name}
+                                </span>
+                                <div className="flex flex-wrap items-center gap-2 mb-4">
+                                  {exercise.sets !== null ? (
+                                    <Badge>{exercise.sets} Series</Badge>
+                                  ) : (
+                                    <Badge variant="outline">
+                                      <s>Series</s>
+                                    </Badge>
+                                  )}
+                                  {exercise.reps !== null ? (
+                                    <Badge>{exercise.reps} Reps</Badge>
+                                  ) : (
+                                    <Badge variant="outline">
+                                      <s>Reps</s>
+                                    </Badge>
+                                  )}
+                                  {exercise.time !== null ? (
+                                    <Badge>{exercise.time} Minutos</Badge>
+                                  ) : (
+                                    <Badge variant="outline">
+                                      <s>Minutos</s>
+                                    </Badge>
+                                  )}
+                                </div>
+                                <div>
+                                  {exercise.comment !== null && (
+                                    <p className="text-xs text-gray-200 font-medium">
+                                      <span className="text-primary">-</span>{" "}
+                                      {exercise.comment}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="self-end">
+                                <ButtonIconDelete
+                                  id={exercise.id}
+                                  deleteFn={deleteRoutinExercise}
+                                  nameMutationKey="deleteRoutineExercise"
+                                  nameQueryKey="client"
+                                  textObjectDelete="Ejercicio"
                                 />
                               </div>
-                              <div className="flex flex-col justify-between flex-grow">
-                                <div>
-                                  <span className="font-semibold text-md mb-2 block uppercase">
-                                    {exercise.exercise.name}
-                                  </span>
-                                  <div className="flex flex-wrap items-center gap-2 mb-4">
-                                    {exercise.sets !== null ? (
-                                      <Badge>{exercise.sets} Series</Badge>
-                                    ) : (
-                                      <Badge variant="outline">
-                                        <s>Series</s>
-                                      </Badge>
-                                    )}
-                                    {exercise.reps !== null ? (
-                                      <Badge>{exercise.reps} Reps</Badge>
-                                    ) : (
-                                      <Badge variant="outline">
-                                        <s>Reps</s>
-                                      </Badge>
-                                    )}
-                                    {exercise.time !== null ? (
-                                      <Badge>{exercise.time} Minutos</Badge>
-                                    ) : (
-                                      <Badge variant="outline">
-                                        <s>Minutos</s>
-                                      </Badge>
-                                    )}
-                                  </div>
-                                  <div>
-                                    {exercise.comment !== null && (
-                                      <p className="text-xs text-gray-200 font-medium">
-                                        <span className="text-primary">-</span>{" "}
-                                        {exercise.comment}
-                                      </p>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="self-end">
-                                  <ButtonIconDelete
-                                    id={exercise.id}
-                                    deleteFn={deleteRoutinExercise}
-                                    nameMutationKey="deleteRoutineExercise"
-                                    nameQueryKey="client"
-                                    textObjectDelete="Ejercicio"
-                                  />
-                                </div>
-                              </div>
                             </div>
-                          </li>
-                        ))}
-                      </ul>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   ) : (
                     <p className="text-muted-foreground">

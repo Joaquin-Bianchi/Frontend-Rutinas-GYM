@@ -17,10 +17,10 @@ function ExerciseCard({ exercise }: Props) {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="text-sm text-muted-foreground flex gap-2">
+          <div className="text-sm flex gap-2">
             {exercise.muscleGroups.map((muscle) => (
               <span
-                className="bg-primary px-2 p-0.5 text-white font-semibold capitalize rounded-md"
+                className="bg-orange-200 text-primary font-semibold px-2 p-0.5font-semibold capitalize rounded-md"
                 key={muscle}
               >
                 {muscle}{" "}

@@ -33,6 +33,7 @@ export default function ClientsPage() {
             <ActionModal
               title="Nuevo Cliente"
               dialogTitle="Crear Nuevo Cliente"
+              showIcon={true}
             >
               {(closeModal) => <CreateClientForm closeModal={closeModal} />}
             </ActionModal>

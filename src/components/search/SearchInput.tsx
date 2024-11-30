@@ -4,9 +4,11 @@ import { useContext, useEffect } from "react";
 import { SearchContext } from "@/context/SearchContext";
 
 function SearchInput() {
+  
   useEffect(() => {
     setSearchText("");
   }, []);
+
   const { searchText, setSearchText } = useContext(SearchContext);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {

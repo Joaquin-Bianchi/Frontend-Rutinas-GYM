@@ -13,7 +13,7 @@ function SectionHeader({ title, createButton }: Props) {
       <div className="mb-8">
         <Card>
           <CardHeader>
-            <CardTitle className="text-xl text-primary">{title}</CardTitle>
+            <CardTitle className="text-xl">{title}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex gap-4">

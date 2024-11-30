@@ -27,10 +27,9 @@ export function ClientNavbar() {
           </div>
           <div className="flex items-center space-x-2">
             <Button
-              variant="destructive"
               size="sm"
               onClick={handleLogout}
-              className="justify-start"
+              className="justify-start bg-secondary"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Cerrar Sesión

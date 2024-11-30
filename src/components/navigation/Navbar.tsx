@@ -72,7 +72,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary dark:hover:bg-muted  hover:bg-white/90 ${
+                className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted  hover:bg-white/90 ${
                   pathname === item.href
                     ? " text-white dark:bg-muted bg-white/90"
                     : "text-primary-foreground/80"
@@ -85,10 +85,9 @@ export function Navbar() {
           </nav>
           <div className="flex items-center space-x-2">
             <Button
-              variant="destructive"
               size="sm"
               onClick={handleLogout}
-              className="justify-start"
+              className="justify-start bg-secondary hidden md:flex"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Cerrar Sesión
@@ -130,19 +129,9 @@ export function Navbar() {
                     </Link>
                   ))}
                   <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={handleClientMode}
-                    className="justify-start"
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Modo Cliente
-                  </Button>
-                  <Button
-                    variant="destructive"
                     size="sm"
                     onClick={handleLogout}
-                    className="justify-start"
+                    className="justify-start bg-secondary"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
                     Cerrar Sesión

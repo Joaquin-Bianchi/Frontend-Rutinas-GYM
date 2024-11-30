@@ -6,7 +6,11 @@ export default function HomeAdminPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-semibold mb-8 text-primary">Inicio</h2>
+        <div className="text-center mb-8 mt-4">
+          <h1 className="text-xl md:text-4xl font-bold mb-2">
+            Bienvenido/a de nuevo 👋
+          </h1>
+        </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {[
             {
@@ -40,7 +44,7 @@ export default function HomeAdminPage() {
                   <img
                     src={item.imageUrl}
                     alt={item.title}
-                    className="mt-4 w-full h-80 object-cover rounded-lg"
+                    className="mt-4 w-full h-100 object-cover rounded-lg"
                   />
                 </CardContent>
               </Card>
