@@ -40,7 +40,7 @@ export default function ClientRoutinePage() {
       ) : (
         <>
           <h1 className="text-2xl font-bold mb-4 mt-7">Rutinas de {client?.name}</h1>
-          <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
+          <div className="flex flex-col gap-4">
             {client?.routines?.map((routine) => (
               <Card key={routine.id} className="shadow-lg">
                 <CardHeader>
@@ -69,7 +69,7 @@ export default function ClientRoutinePage() {
                           className="bg-secondary/10 rounded-lg p-4 shadow-sm"
                         >
                           <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="w-full sm:w-1/3 aspect-video sm:aspect-square">
+                            <div className="sm:w-[100px] aspect-video sm:aspect-square">
                               <img
                                 src={
                                   exercise.exercise.image ||

@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Menu,
-  User,
-  LogOut,
-  Home,
-  Users,
-  Dumbbell,
-  Puzzle,
-} from "lucide-react";
+import { Menu, LogOut, Home, Users, Dumbbell, Puzzle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -44,11 +36,6 @@ export function Navbar() {
   const handleLogout = () => {
     console.log("Logging out...");
     navigate("/login");
-  };
-
-  const handleClientMode = () => {
-    console.log("Switching to client mode...");
-    navigate("/home");
   };
 
   return (
@@ -117,9 +104,9 @@ export function Navbar() {
                     <Link
                       key={item.href}
                       to={item.href}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-primary dark:hover:bg-muted hover:bg-white/90 ${
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted hover:bg-white/90 ${
                         pathname === item.href
-                          ? "text-primary dark:bg-muted bg-white/90"
+                          ? "dark:bg-muted bg-white/90"
                           : "text-primary-foreground/80"
                       }`}
                       onClick={() => setIsOpen(false)}

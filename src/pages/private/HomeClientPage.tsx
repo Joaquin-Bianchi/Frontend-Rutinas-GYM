@@ -43,14 +43,12 @@ export default function HomeClientPage() {
               <h1 className="text-xl md:text-4xl font-bold mb-2">
                 Bienvenido/a {client?.name} 👋
               </h1>
-              <p className="text-sm md:text-xl text-muted-foreground">
-                Aquí están tus rutinas asignadas por tu profesor
+              <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
+                Aquí están tus rutinas asignadas por tu profesor, si tienes
+                alguna pregunta no dudes en acercarte a tu profesor.
               </p>
             </div>
 
-            <h2 className="text-base md:text-2xl font-semibold mb-4">
-              Tus Rutinas Asignadas
-            </h2>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
               {client?.routines?.map(
                 (routine) =>
@@ -80,22 +78,24 @@ export default function HomeClientPage() {
                                 </AccordionTrigger>
                                 <AccordionContent>
                                   <div className="mt-2 space-y-2">
-                                    {routineExercise.reps && (
-                                      <p className="text-sm text-muted-foreground">
-                                        Repeticiones: {routineExercise.reps}
-                                      </p>
-                                    )}
-
                                     {routineExercise.sets && (
                                       <p className="text-sm text-muted-foreground">
                                         Series: {routineExercise.sets}
                                       </p>
                                     )}
 
+                                    {routineExercise.reps && (
+                                      <p className="text-sm text-muted-foreground">
+                                        Repeticiones: {routineExercise.reps}
+                                      </p>
+                                    )}
+
                                     {routineExercise.comment && (
                                       <p className="text-sm text-primary">
                                         Nota del profesor:{" "}
-                                        {routineExercise.comment}
+                                        <span className="text-muted-foreground">
+                                          {routineExercise.comment}
+                                        </span>
                                       </p>
                                     )}
                                     <div className="relative w-full h-48 mt-4">
