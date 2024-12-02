@@ -1,11 +1,4 @@
-import { Calendar } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Calendar, Dumbbell } from "lucide-react";
 import { ClientNavbar } from "@/components/navigation/ClientNavbar";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
@@ -48,73 +41,72 @@ export default function HomeClientPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {client?.routines?.map(
                 (routine) =>
                   routine.routineExercises.length > 0 && (
-                    <Card
+                    <div
                       key={routine.day}
-                      className="transition-all duration-300 border border-primary/20 hover:border-primary hover:shadow-lg bg-card/50 backdrop-blur-sm"
+                      className="bg-card/30 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
                     >
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-between text-2xl">
-                          <span className="flex items-center space-x-3">
-                            <Calendar className="h-6 w-6 text-primary" />
-                            <span className="capitalize">{routine.day}</span>
-                          </span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <Accordion type="single" collapsible className="w-full">
-                          {routine.routineExercises.map(
-                            (routineExercise, index) => (
-                              <AccordionItem
-                                key={index}
-                                value={`item-${index}`}
-                              >
-                                <AccordionTrigger className="uppercase">
-                                  {routineExercise.exercise.name}
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                  <div className="mt-2 space-y-2">
+                      <div className="bg-primary/10 p-4">
+                        <h2 className="flex items-center text-xl font-semibold">
+                          <Calendar className="h-5 w-5 mr-2 text-primary" />
+                          <span className="capitalize">{routine.day}</span>
+                        </h2>
+                      </div>
+                      <div className="p-4">
+                        {routine.routineExercises.map(
+                          (routineExercise, index) => (
+                            <>
+                              <div key={index} className="mb-5 last:mb-0">
+                                <div className="flex items-center mb-2">
+                                  <Dumbbell className="h-4 w-4 mr-2 text-primary" />
+                                  <h3 className="font-medium text-lg">
+                                    {routineExercise.exercise.name}
+                                  </h3>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 text-sm mb-2">
+                                  <img
+                                    src={
+                                      routineExercise.exercise.image ||
+                                      "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
+                                    }
+                                    alt={routineExercise.exercise.name}
+                                    className="w-full h-32 object-cover rounded-md shadow-sm"
+                                  />
+                                  <div>
                                     {routineExercise.sets && (
-                                      <p className="text-sm text-muted-foreground">
-                                        Series: {routineExercise.sets}
-                                      </p>
-                                    )}
-
-                                    {routineExercise.reps && (
-                                      <p className="text-sm text-muted-foreground">
-                                        Repeticiones: {routineExercise.reps}
-                                      </p>
-                                    )}
-
-                                    {routineExercise.comment && (
-                                      <p className="text-sm text-primary">
-                                        Nota del profesor:{" "}
-                                        <span className="text-muted-foreground">
-                                          {routineExercise.comment}
+                                      <p className="text-muted-foreground">
+                                        Series:{" "}
+                                        <span className="font-semibold text-foreground">
+                                          {routineExercise.sets}
                                         </span>
                                       </p>
                                     )}
-                                    <div className="relative w-full h-48 mt-4">
-                                      <img
-                                        src={
-                                          routineExercise.exercise.image ||
-                                          "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
-                                        }
-                                        alt={routineExercise.exercise.name}
-                                        className="w-full h-48 object-cover rounded-lg shadow-md"
-                                      />
-                                    </div>
+                                    {routineExercise.reps && (
+                                      <p className="text-muted-foreground">
+                                        Repeticiones:{" "}
+                                        <span className="font-semibold text-foreground">
+                                          {routineExercise.reps}
+                                        </span>
+                                      </p>
+                                    )}
                                   </div>
-                                </AccordionContent>
-                              </AccordionItem>
-                            )
-                          )}
-                        </Accordion>
-                      </CardContent>
-                    </Card>
+                                </div>
+                                {routineExercise.comment && (
+                                  <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-gray-100">
+                                    <span className="font-medium text-white">Nota:</span>{" "}
+                                    {routineExercise.comment}
+                                  </p>
+                                )}
+                              </div>
+                              <span className="flex h-[2px] rounded-full bg-zinc-900 mb-4"></span>
+                            </>
+                          )
+                        )}
+                      </div>
+                    </div>
                   )
               )}
             </div>

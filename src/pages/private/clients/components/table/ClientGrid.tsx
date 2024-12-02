@@ -54,7 +54,7 @@ function ClientGrid({ clients }: Props) {
                 {client.categoryPlans?.map((category) => (
                   <span
                     key={category}
-                    className="mx-1 bg-orange-200 text-primary font-semibold rounded px-1 py-0.5"
+                    className="mx-1 bg-sky-200 text-sky-500 font-semibold rounded px-1 py-0.5"
                   >
                     {category}
                   </span>
@@ -66,7 +66,7 @@ function ClientGrid({ clients }: Props) {
                   className="flex items-center space-x-2"
                 >
                   <Button variant="default" size="sm" className="font-semibold">
-                    <ChevronRight />
+                    <ChevronRight className="text-white"/>
                   </Button>
                 </Link>
               </TableCell>

@@ -20,7 +20,7 @@ function ExerciseCard({ exercise }: Props) {
           <div className="text-sm flex gap-2">
             {exercise.muscleGroups.map((muscle) => (
               <span
-                className="bg-orange-200 text-primary font-semibold px-2 p-0.5font-semibold capitalize rounded-md"
+                className="bg-sky-200 text-sky-500 font-semibold px-2 p-0.5font-semibold capitalize rounded-md"
                 key={muscle}
               >
                 {muscle}{" "}

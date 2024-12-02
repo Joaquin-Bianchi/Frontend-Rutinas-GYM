@@ -29,9 +29,9 @@ export function ClientNavbar() {
             <Button
               size="sm"
               onClick={handleLogout}
-              className="justify-start bg-secondary"
+              className="justify-start bg-secondary hover:bg-secondary text-white"
             >
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className="mr-2 h-4 w-4 text-white" />
               Cerrar Sesión
             </Button>
           </div>

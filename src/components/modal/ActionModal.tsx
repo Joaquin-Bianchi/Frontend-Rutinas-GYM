@@ -25,9 +25,9 @@ export function ActionModal({ children, title, dialogTitle, showIcon = false }: 
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="default" size="default">
-          {showIcon && <Plus />}
+          {showIcon && <Plus className="text-white"/>}
           {/*titulo del boton */}
-          <p className="font-bold">{title}</p>
+          <p className="font-bold text-white">{title}</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

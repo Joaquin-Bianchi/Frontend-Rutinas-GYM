@@ -59,7 +59,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted  hover:bg-white/90 ${
+                className={`flex hover:text-white items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted  hover:bg-white/90 ${
                   pathname === item.href
                     ? " text-white dark:bg-muted bg-white/90"
                     : "text-primary-foreground/80"
@@ -74,7 +74,7 @@ export function Navbar() {
             <Button
               size="sm"
               onClick={handleLogout}
-              className="justify-start bg-secondary hidden md:flex"
+              className="justify-start bg-primary hidden md:flex transition-colors dark:hover:bg-muted hover:text-white"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Cerrar Sesión
@@ -87,7 +87,7 @@ export function Navbar() {
                   className="md:hidden text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10"
                   aria-label="Menu"
                 >
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-6 w-6 text-white" />
                 </Button>
               </SheetTrigger>
               <SheetContent
@@ -96,7 +96,7 @@ export function Navbar() {
               >
                 <SheetHeader>
                   <SheetTitle className="text-primary-foreground">
-                    Menu
+                    Menú
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col space-y-4 mt-4">
@@ -104,7 +104,7 @@ export function Navbar() {
                     <Link
                       key={item.href}
                       to={item.href}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted hover:bg-white/90 ${
+                      className={`flex hover:text-white items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors dark:hover:bg-muted hover:bg-white/90 ${
                         pathname === item.href
                           ? "dark:bg-muted bg-white/90"
                           : "text-primary-foreground/80"
@@ -118,7 +118,7 @@ export function Navbar() {
                   <Button
                     size="sm"
                     onClick={handleLogout}
-                    className="justify-start bg-secondary"
+                    className="justify-start hover:text-white dark:hover:bg-muted"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
                     Cerrar Sesión
