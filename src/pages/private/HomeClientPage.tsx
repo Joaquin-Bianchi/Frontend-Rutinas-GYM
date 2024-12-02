@@ -95,7 +95,7 @@ export default function HomeClientPage() {
                                   </div>
                                 </div>
                                 {routineExercise.comment && (
-                                  <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-gray-100">
+                                  <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-white">
                                     <span className="font-medium text-white">Nota:</span>{" "}
                                     {routineExercise.comment}
                                   </p>

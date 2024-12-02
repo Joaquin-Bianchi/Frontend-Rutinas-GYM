@@ -6,7 +6,7 @@ export default function HomeAdminPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 mt-4">
+        <div className="text-center mb-4 sm:mb-8 sm:mt-4">
           <h1 className="text-xl md:text-4xl font-bold mb-2">
             Bienvenido/a de nuevo 👋
           </h1>
