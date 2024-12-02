@@ -62,7 +62,7 @@ export default function ClientRoutinePage() {
                 </CardHeader>
                 <CardContent>
                   {routine.routineExercises?.length > 0 ? (
-                    <div className="space-y-4">
+                    <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-x-4">
                       {routine.routineExercises.map((exercise) => (
                         <div
                           key={exercise.id}

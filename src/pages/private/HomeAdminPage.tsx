@@ -1,4 +1,4 @@
-import { Users, Dumbbell } from "lucide-react";
+import { Users, Dumbbell, Puzzle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -10,15 +10,19 @@ export default function HomeAdminPage() {
           <h1 className="text-xl md:text-4xl font-bold mb-2">
             Bienvenido/a de nuevo 👋
           </h1>
+          <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
+            Administra y organiza tus clientes, ejercicios y planes en un solo
+            lugar.
+          </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {[
             {
               to: "/dashboard/clients",
               icon: Users,
               title: "Clientes",
               description:
-                "Gestiona tus clientes, revisa sus perfiles y seguimiento.",
+                "Gestiona tus clientes y sus rutinas personalizadas.",
               imageUrl: "img/gym-clientes.jpg",
             },
             {
@@ -27,6 +31,13 @@ export default function HomeAdminPage() {
               title: "Ejercicios",
               description: "Explora y administra tu catálogo de ejercicios.",
               imageUrl: "img/gym-ejercicios.jpg",
+            },
+            {
+              to: "/dashboard/categoryPlans",
+              icon: Puzzle,
+              title: "Planes",
+              description: "Explora y administra tu catálogo de planes.",
+              imageUrl: "img/gym-planes.jpeg",
             },
           ].map((item) => (
             <Link key={item.to} to={item.to} className="block group">
@@ -37,15 +48,17 @@ export default function HomeAdminPage() {
                     <span>{item.title}</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col h-full">
                   <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                     {item.description}
                   </p>
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="mt-4 w-full h-100 object-cover rounded-lg"
-                  />
+                  <div className="mt-4 aspect-[16/9] w-full">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </Link>

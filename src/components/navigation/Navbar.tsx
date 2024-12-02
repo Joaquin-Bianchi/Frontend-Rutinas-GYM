@@ -74,7 +74,7 @@ export function Navbar() {
             <Button
               size="sm"
               onClick={handleLogout}
-              className="justify-start bg-primary hidden md:flex transition-colors dark:hover:bg-muted hover:text-white"
+              className="justify-start bg-secondary text-white hidden md:flex transition-colors dark:hover:bg-muted hover:text-white"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Cerrar Sesión
