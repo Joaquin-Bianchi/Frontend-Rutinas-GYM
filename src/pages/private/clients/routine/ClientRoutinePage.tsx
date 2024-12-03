@@ -39,7 +39,9 @@ export default function ClientRoutinePage() {
         <ErrorDisplay message={error.message} />
       ) : (
         <>
-          <h1 className="text-2xl font-bold mb-4 mt-7">Rutinas de {client?.name}</h1>
+          <h1 className="text-2xl font-bold mb-4 mt-7">
+            Rutinas de {client?.name}
+          </h1>
           <div className="flex flex-col gap-4">
             {client?.routines?.map((routine) => (
               <Card key={routine.id} className="shadow-lg">
@@ -62,13 +64,13 @@ export default function ClientRoutinePage() {
                 </CardHeader>
                 <CardContent>
                   {routine.routineExercises?.length > 0 ? (
-                    <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
                       {routine.routineExercises.map((exercise) => (
                         <div
                           key={exercise.id}
                           className="bg-secondary/10 rounded-lg p-4 shadow-sm"
                         >
-                          <div className="flex flex-col sm:flex-row gap-4">
+                          <div className="flex flex-col sm:flex-row gap-4 h-full">
                             <div className="sm:w-[100px] aspect-video sm:aspect-square">
                               <img
                                 src={
@@ -79,6 +81,7 @@ export default function ClientRoutinePage() {
                                 className="rounded-md w-full h-full object-cover object-center"
                               />
                             </div>
+
                             <div className="flex flex-col w-full sm:w-2/3 justify-between flex-grow">
                               <div>
                                 <span className="font-semibold text-md mb-2 block uppercase">
@@ -116,15 +119,16 @@ export default function ClientRoutinePage() {
                                   )}
                                 </div>
                               </div>
-                              <div className="self-end">
-                                <ButtonIconDelete
-                                  id={exercise.id}
-                                  deleteFn={deleteRoutinExercise}
-                                  nameMutationKey="deleteRoutineExercise"
-                                  nameQueryKey="client"
-                                  textObjectDelete="Ejercicio"
-                                />
-                              </div>
+                            </div>
+
+                            <div className="self-end">
+                              <ButtonIconDelete
+                                id={exercise.id}
+                                deleteFn={deleteRoutinExercise}
+                                nameMutationKey="deleteRoutineExercise"
+                                nameQueryKey="client"
+                                textObjectDelete="Ejercicio"
+                              />
                             </div>
                           </div>
                         </div>

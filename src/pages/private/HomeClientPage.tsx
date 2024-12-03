@@ -32,7 +32,7 @@ export default function HomeClientPage() {
           </div>
         ) : (
           <>
-            <div className="text-center mb-8">
+            <div className="text-center mb-6 sm:mb-14 sm:mt-6">
               <h1 className="text-xl md:text-4xl font-bold mb-2">
                 Bienvenido/a {client?.name} 👋
               </h1>
@@ -47,12 +47,16 @@ export default function HomeClientPage() {
                   routine.routineExercises.length > 0 && (
                     <div
                       key={routine.day}
-                      className="bg-card/30 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                      className="bg-card/30 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-lg"
                     >
-                      <div className="bg-primary/10 p-4">
+                      <div className="bg-white/95 p-4 text-black">
                         <h2 className="flex items-center text-xl font-semibold">
-                          <Calendar className="h-5 w-5 mr-2 text-primary" />
-                          <span className="capitalize">{routine.day}</span>
+                          <Calendar className="h-5 w-5 mr-2" />
+                          <span className="capitalize">
+                            {routine.day === "miercoles"
+                              ? "Miércoles"
+                              : routine.day}
+                          </span>
                         </h2>
                       </div>
                       <div className="p-4">
@@ -92,16 +96,25 @@ export default function HomeClientPage() {
                                         </span>
                                       </p>
                                     )}
+                                    {routineExercise.time && (
+                                      <p className="text-muted-foreground">
+                                        Tiempo:{" "}
+                                        <span className="font-semibold text-foreground">
+                                          {routineExercise.time}m
+                                        </span>
+                                      </p>
+                                    )}
                                   </div>
                                 </div>
                                 {routineExercise.comment && (
                                   <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-white">
-                                    <span className="font-medium text-white">Nota:</span>{" "}
+                                    <span className="font-medium text-white">
+                                      Nota:
+                                    </span>{" "}
                                     {routineExercise.comment}
                                   </p>
                                 )}
                               </div>
-                              <span className="flex h-[2px] rounded-full bg-zinc-900 mb-4"></span>
                             </>
                           )
                         )}
