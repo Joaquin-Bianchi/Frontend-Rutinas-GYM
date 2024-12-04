@@ -54,7 +54,7 @@ function ClientGrid({ clients }: Props) {
                 {client.categoryPlans?.map((category) => (
                   <span
                     key={category}
-                    className="mx-1 bg-sky-200 text-sky-500 font-semibold rounded px-1 py-0.5"
+                    className="mx-1 bg-sky-200/10 text-sky-500 font-semibold rounded px-1 py-0.5"
                   >
                     {category}
                   </span>

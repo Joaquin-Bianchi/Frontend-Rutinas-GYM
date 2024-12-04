@@ -49,7 +49,13 @@ export default function ClientRoutinePage() {
                   <CardTitle className="flex justify-between items-center">
                     <div className="capitalize flex items-baseline">
                       <Calendar className="mr-2 h-4 w-4" />
-                      <span className="capitalize">{routine.day} </span>
+                      <span className="capitalize">
+                        {routine.day === "miercoles"
+                          ? "Miércoles"
+                          : routine.day === "sabado"
+                          ? "Sábado"
+                          : routine.day}
+                      </span>
                     </div>
                     <ActionModalUserRutine dialogTitle="Asignar Rutina">
                       {(closeModal) => (

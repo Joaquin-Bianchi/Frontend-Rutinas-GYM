@@ -55,6 +55,8 @@ export default function HomeClientPage() {
                           <span className="capitalize">
                             {routine.day === "miercoles"
                               ? "Miércoles"
+                              : routine.day === "sabado"
+                              ? "Sábado"
                               : routine.day}
                           </span>
                         </h2>
