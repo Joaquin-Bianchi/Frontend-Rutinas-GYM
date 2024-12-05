@@ -7,6 +7,9 @@ import AddExerciseForm from "../forms/AddExerciseForm";
 import ButtonIconDelete from "@/components/buttons/ButtonIconDelete";
 import { deleteRoutinExercise } from "@/services/routineExerciseService";
 import { Button } from "@/components/ui/button";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
+import { generarPDFRutina } from "../pdf/GeneratePdf";
 
 interface Props {
   routine: Routine;
@@ -14,10 +17,6 @@ interface Props {
 }
 
 export default function CardRoutines({ routine, exercises }: Props) {
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
     <Card key={routine.id} className="shadow-lg">
       <CardHeader className="">
@@ -33,14 +32,17 @@ export default function CardRoutines({ routine, exercises }: Props) {
             </span>
           </div>
           <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handlePrint}
-              className=""
-            >
-              <Printer className="h-4 w-4" />
-            </Button>
+            {routine.routineExercises?.length > 0 && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => generarPDFRutina(routine)}
+                className=""
+              >
+                <Printer className="h-4 w-4" />
+              </Button>
+            )}
+
             <div className="">
               <ActionModalUserRutine dialogTitle="Asignar Rutina">
                 {(closeModal) => (
