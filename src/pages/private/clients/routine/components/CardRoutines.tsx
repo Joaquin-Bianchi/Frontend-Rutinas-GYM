@@ -7,8 +7,6 @@ import AddExerciseForm from "../forms/AddExerciseForm";
 import ButtonIconDelete from "@/components/buttons/ButtonIconDelete";
 import { deleteRoutinExercise } from "@/services/routineExerciseService";
 import { Button } from "@/components/ui/button";
-import { jsPDF } from "jspdf";
-import "jspdf-autotable";
 import { generarPDFRutina } from "../pdf/GeneratePdf";
 
 interface Props {
