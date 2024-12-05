@@ -4,21 +4,18 @@ import api from "@/lib/axios";
 export const getClients = async ({ page = 1, limit = 10 }) => {
   const response = await api.get(`/user?page=${page}&limit=${limit}`);
 
-  // Extrae los datos relevantes de la respuesta
   const { formattedUsers, total, totalPages } = response.data;
 
-  // Filtra solo los usuarios con rol "CLIENT"
   const clients = formattedUsers.filter(
     (user: Client) => user.role === "CLIENT"
   );
 
-  // Devuelve un objeto con los datos necesarios
   return {
-    clients, // Lista de clientes filtrados
-    page, // Página actual
-    limit, // Límite de usuarios por página
-    total, // Total de usuarios
-    totalPages, // Total de páginas
+    clients,
+    page,
+    limit,
+    total,
+    totalPages,
   };
 };
 

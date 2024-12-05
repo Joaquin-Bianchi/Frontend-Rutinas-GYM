@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ClientsPage() {
   const [page, setPage] = useState(1);
-  const limit = 10; // Número de elementos por página
+  const limit = 10;
 
   const {
     data: clientsData,
@@ -27,7 +27,6 @@ export default function ClientsPage() {
 
   const { searchText } = useContext(SearchContext);
 
-  // Asegúrate de usar el nombre correcto del campo
   const filteredClients = filterClientsByName(
     clientsData?.clients || [],
     searchText
