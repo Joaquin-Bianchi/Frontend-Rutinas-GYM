@@ -8,10 +8,6 @@ interface Exercise {
 }
 
 export const getExercisesPagination = async ({ page = 1, limit = 1 }) => {
-
-  console.log("hola la ptm", limit);
-  
-
   const url =
     limit === 0 ? `/exercise` : `/exercise?page=${page}&limit=${limit}`;
   const response = await api.get(url);
