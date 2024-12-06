@@ -2,10 +2,10 @@ import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Client } from "@/interfaces/client.interface";
-import { getExercises } from "@/services/exerciseService";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
 import RoutineDetailsSkeleton from "@/components/loaders/RoutineDetailsSkeleton";
 import CardRoutines from "./components/CardRoutines";
+import { getExercisesPagination } from "@/services/exerciseService";
 
 export default function ClientRoutinePage() {
   const { id } = useParams();
@@ -22,7 +22,7 @@ export default function ClientRoutinePage() {
 
   const { data: exercises } = useQuery({
     queryKey: ["exercises"],
-    queryFn: () => getExercises(),
+    queryFn: () => getExercisesPagination({ limit: 0 }),
   });
 
   return (

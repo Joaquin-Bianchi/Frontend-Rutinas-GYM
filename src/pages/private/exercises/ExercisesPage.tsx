@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "@/components/header/SectionHeader";
 import { ActionModal } from "@/components/modal/ActionModal";
-import { getExercises } from "@/services/exerciseService";
+import { getExercisesPagination } from "@/services/exerciseService";
 import CreateExerciseForm from "./components/forms/CreateExerciseForm";
 import ExerciseCard from "./components/cards/ExerciseCard";
 import ExercisesSkeletonLoader from "@/components/loaders/ExercisesSkeletonLoader";
@@ -22,11 +22,9 @@ export default function ExercisesPage() {
     error,
   } = useQuery({
     queryKey: ["exercises", page],
-    queryFn: () => getExercises({ page, limit }),
+    queryFn: () => getExercisesPagination({ page, limit }),
   });
   const { searchText } = useContext(SearchContext);
-
-  console.log(exercises);
 
   const filteredExercises = filteExercicesByName(
     exercises?.exercises || [],
