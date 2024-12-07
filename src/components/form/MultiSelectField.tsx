@@ -40,7 +40,7 @@ export function MultiSelectField({
                 <MultiSelectorInput placeholder={placeholder} />
               </MultiSelectorTrigger>
               <MultiSelectorContent>
-                <MultiSelectorList className="capitalize">
+                <MultiSelectorList className="capitalize h-[200px] overflow-y-scroll scrollbar-hide">
                   {options.map((option) => (
                     <MultiSelectorItem key={option} value={option}>
                       {option}

@@ -33,8 +33,8 @@ export default function HomeClientPage() {
         ) : (
           <>
             <div className="text-center mb-6 sm:mb-14 sm:mt-6">
-              <h1 className="text-xl md:text-4xl font-bold mb-2">
-                Bienvenido/a {client?.name} 👋
+              <h1 className="text-xl w-[90%] m-auto md:text-4xl font-bold mb-2">
+                Bienvenido/a a tu perfil online {client?.name} 👋
               </h1>
               <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
                 Aquí están tus rutinas asignadas por tu profesor.
