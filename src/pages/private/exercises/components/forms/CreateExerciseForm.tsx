@@ -8,6 +8,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { handlerError } from "@/utils/handlerError";
+import { uploadImage } from "@/services/uploadImageService";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 interface Props {
   closeModal: () => void;
@@ -16,6 +20,7 @@ interface Props {
 function CreateExerciseForm({ closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const createExerciseMutation = useMutation({
     mutationFn: createExercise,
@@ -30,8 +35,16 @@ function CreateExerciseForm({ closeModal }: Props) {
     },
   });
 
-  const onSubmit = handleSubmit((data: Exercise) => {
-    createExerciseMutation.mutate(data);
+  const onSubmit = handleSubmit(async (data: Exercise) => {
+    try {
+      let imageUrl = "";
+      if (selectedFile) {
+        imageUrl = await uploadImage(selectedFile);
+      }
+      createExerciseMutation.mutate({ ...data, image: imageUrl });
+    } catch (error) {
+      handlerError(error);
+    }
   });
 
   return (
@@ -44,12 +57,18 @@ function CreateExerciseForm({ closeModal }: Props) {
         placeholder="Nombre"
       />
 
-      <FormField
-        name="image"
-        label="URL de la imagen"
-        control={control}
-        placeholder="Imagen"
-      />
+      <div className="form-field">
+        <Label className="label">Subir imagen</Label>
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            if (e.target.files && e.target.files.length > 0) {
+              setSelectedFile(e.target.files[0]);
+            }
+          }}
+        />
+      </div>
 
       <MultiSelectField
         name="muscleGroups"
