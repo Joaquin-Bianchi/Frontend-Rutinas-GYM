@@ -21,10 +21,10 @@ function CreateExerciseForm({ closeModal }: Props) {
   const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<Exercise>();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const createExerciseMutation = useMutation({
     mutationFn: createExercise,
-    mutationKey: ["createExercise"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
       toast.success("Ejercicio creado");
@@ -36,14 +36,17 @@ function CreateExerciseForm({ closeModal }: Props) {
   });
 
   const onSubmit = handleSubmit(async (data: Exercise) => {
+    setIsLoading(true);
     try {
       let imageUrl = "";
       if (selectedFile) {
         imageUrl = await uploadImage(selectedFile);
       }
-      createExerciseMutation.mutate({ ...data, image: imageUrl });
+      await createExerciseMutation.mutateAsync({ ...data, image: imageUrl });
     } catch (error) {
       handlerError(error);
+    } finally {
+      setIsLoading(false);
     }
   });
 
@@ -79,8 +82,8 @@ function CreateExerciseForm({ closeModal }: Props) {
         placeholder="Grupos musculares"
       />
 
-      <Button type="submit" disabled={createExerciseMutation.isPending}>
-        {createExerciseMutation.isPending ? "Creando..." : "Crear ejercicio"}
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? "Creando..." : "Crear ejercicio"}
       </Button>
     </form>
   );
