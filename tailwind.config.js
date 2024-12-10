@@ -1,8 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import { tailwindScrollbarHide } from "tailwind-scrollbar-hide";
-import { tailwindcssAnimate } from "tailwindcss-animate";
-
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -79,8 +76,5 @@ export default {
       },
     },
   },
-  plugins: [
-    tailwindcssAnimate, // Plugin para animaciones
-    tailwindScrollbarHide, // Plugin para ocultar barras de scroll
-  ],
+  plugins: [],
 };
