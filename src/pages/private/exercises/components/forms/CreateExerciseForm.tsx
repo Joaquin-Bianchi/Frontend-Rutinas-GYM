@@ -27,8 +27,16 @@ function CreateExerciseForm({ closeModal }: Props) {
     mutationFn: createExercise,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["exercises"] });
-      toast.success("Ejercicio creado");
-      closeModal();
+    },
+    onError: (error) => {
+      handlerError(error);
+    },
+  });
+
+  const uploadImageMutation = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["image"] });
     },
     onError: (error) => {
       handlerError(error);
@@ -37,12 +45,24 @@ function CreateExerciseForm({ closeModal }: Props) {
 
   const onSubmit = handleSubmit(async (data: Exercise) => {
     setIsLoading(true);
+
     try {
       let imageUrl = "";
+
       if (selectedFile) {
-        imageUrl = await uploadImage(selectedFile);
+        const uploadResponse = await uploadImageMutation.mutateAsync(
+          selectedFile
+        );
+        imageUrl = uploadResponse;
       }
-      await createExerciseMutation.mutateAsync({ ...data, image: imageUrl });
+
+      await createExerciseMutation.mutateAsync({
+        ...data,
+        image: imageUrl || undefined,
+      });
+
+      toast.success("Ejercicio creado");
+      closeModal();
     } catch (error) {
       handlerError(error);
     } finally {
