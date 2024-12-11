@@ -66,21 +66,23 @@ export default function HomeClientPage() {
                           (routineExercise, index) => (
                             <>
                               <div key={index} className="mb-5 last:mb-0">
-                                <div className="flex items-center mb-2">
+                                <div className="flex items-center mb-3">
                                   <Dumbbell className="h-4 w-4 mr-2 text-primary" />
                                   <h3 className="font-medium text-lg">
                                     {routineExercise.exercise.name}
                                   </h3>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2 text-sm mb-2">
-                                  <img
-                                    src={
-                                      routineExercise.exercise.image ||
-                                      "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
-                                    }
-                                    alt={routineExercise.exercise.name}
-                                    className="w-full h-32 object-cover rounded-md shadow-sm"
-                                  />
+                                <div className="grid grid-cols-2 gap-3 text-sm mb-2">
+                                  <div className="rounded-md overflow-hidden h-[220px]">
+                                    <img
+                                      src={
+                                        routineExercise.exercise.image ||
+                                        "https://res.cloudinary.com/djdcj4v1j/image/upload/v1733853813/ejercicios/no-imagen_jjzdgf.jpg"
+                                      }
+                                      alt={routineExercise.exercise.name}
+                                      className="rounded-md shadow-sm w-full h-full object-cover object-center bg-white p-3"
+                                    />
+                                  </div>
                                   <div>
                                     {routineExercise.sets && (
                                       <p className="text-muted-foreground">

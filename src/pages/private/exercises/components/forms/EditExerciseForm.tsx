@@ -4,10 +4,14 @@ import { MultiSelectField } from "@/components/form/MultiSelectField";
 import MuscleGroup from "@/enums/muscleGroup.enum";
 import { Exercise } from "@/interfaces/exercise.interface";
 import { editExercise } from "@/services/exerciseService";
+import { uploadImage } from "@/services/uploadImageService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { handlerError } from "@/utils/handlerError";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 interface Props {
   exercise: Exercise;
@@ -24,6 +28,12 @@ function EditExerciseForm({ exercise, closeModal }: Props) {
     },
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(
+    exercise.image || null
+  );
+  const [isLoading, setIsLoading] = useState(false);
+
   const editExerciseMutation = useMutation({
     mutationFn: editExercise,
     mutationKey: ["editExercise"],
@@ -37,9 +47,44 @@ function EditExerciseForm({ exercise, closeModal }: Props) {
     },
   });
 
-  const onSubmit = handleSubmit((data: Exercise) => {
-    editExerciseMutation.mutate({ exerciseId: exercise.id, data });
+  const uploadImageMutation = useMutation({
+    mutationFn: uploadImage,
+    onError: (error) => {
+      handlerError(error);
+    },
   });
+
+  const onSubmit = handleSubmit(async (data: Exercise) => {
+    setIsLoading(true);
+
+    try {
+      let imageUrl = exercise.image;
+
+      if (selectedFile) {
+        const uploadResponse = await uploadImageMutation.mutateAsync(
+          selectedFile
+        );
+        imageUrl = uploadResponse;
+      }
+
+      await editExerciseMutation.mutateAsync({
+        exerciseId: exercise.id,
+        data: { ...data, image: imageUrl },
+      });
+    } catch (error) {
+      handlerError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  });
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <form className="grid gap-4 py-4" onSubmit={onSubmit}>
@@ -48,15 +93,24 @@ function EditExerciseForm({ exercise, closeModal }: Props) {
         label="Nombre"
         control={control}
         rules={{ required: "El nombre es requerido" }}
-        placeholder={exercise.name}
+        placeholder="Nombre del ejercicio"
       />
 
-      <FormField
-        name="image"
-        label="URL de la imagen"
-        control={control}
-        placeholder="Imagen"
-      />
+      <div className="form-field">
+        <Label className="label">Imagen actual</Label>
+        {previewImage && (
+          <img
+            src={previewImage}
+            alt="Vista previa de la imagen"
+            className="w-32 h-32 object-cover rounded"
+          />
+        )}
+      </div>
+
+      <div className="form-field">
+        <Label className="label">Actualizar imagen</Label>
+        <Input type="file" accept="image/*" onChange={handleFileChange} />
+      </div>
 
       <MultiSelectField
         name="muscleGroups"
@@ -67,8 +121,8 @@ function EditExerciseForm({ exercise, closeModal }: Props) {
         placeholder="Grupos musculares"
       />
 
-      <Button type="submit" disabled={editExerciseMutation.isPending}>
-        {editExerciseMutation.isPending ? "Editando..." : "Editar ejercicio"}
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? "Editando..." : "Editar ejercicio"}
       </Button>
     </form>
   );
