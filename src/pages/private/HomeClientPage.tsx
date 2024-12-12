@@ -73,7 +73,7 @@ export default function HomeClientPage() {
                                   </h3>
                                 </div>
                                 <div className="grid grid-cols-2 gap-3 text-sm mb-2">
-                                  <div className="rounded-md overflow-hidden h-[220px]">
+                                  <div className="rounded-md overflow-hidden">
                                     <img
                                       src={
                                         routineExercise.exercise.image ||
