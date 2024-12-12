@@ -4,15 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function HomeAdminPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-4 sm:mb-8 sm:mt-4">
-          <h1 className="text-xl md:text-4xl font-bold mb-2">
-            Bienvenido/a de nuevo 👋
-          </h1>
-          <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
-            Administra y organiza tus clientes, ejercicios y planes en un solo
-            lugar.
+    <div className="bg-background text-foreground flex flex-col">
+      <main className="flex-grow container mx-auto pt-8 px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 sm:mt-[20px]">
+          <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
+          <p className="text-muted-foreground">
+            Bienvenido/a de nuevo. Aquí tienes las opciones principales de tu
+            gimnasio.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
