@@ -51,8 +51,6 @@ function AddExerciseForm({ exercises, routineId, closeModal }: Props) {
   });
 
   const onSubmit = handleSubmit((data: RoutineExercise) => {
-    console.log("Data: ", data);
-
     const formattedData = {
       ...data,
       sets: data.sets as any === "" ? (data.sets = NaN) : Number(data.sets),
@@ -61,9 +59,7 @@ function AddExerciseForm({ exercises, routineId, closeModal }: Props) {
       routineId,
       exerciseId: data.id,
     };
-
-    console.log("Data formateada: ", formattedData);
-
+    
     createRoutineExerciseMutation.mutate(formattedData);
   });
 
