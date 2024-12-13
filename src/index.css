@@ -102,3 +102,8 @@
     display: none;
   }
 }
+
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}

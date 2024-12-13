@@ -7,7 +7,6 @@ import { isAuthenticated } from "@/services/authService";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
 import { HomeClientSkeletonLoader } from "@/components/loaders/HomeClientSkeletonLoader";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function HomeClientPage() {
   const { userId } = isAuthenticated();
@@ -74,7 +73,7 @@ export default function HomeClientPage() {
               </p>
             </div>
 
-            <ScrollArea className="w-full whitespace-nowrap rounded-md border mb-8">
+            <div className="w-full overflow-x-auto rounded-md border mb-8">
               <div className="flex w-max space-x-4 p-4">
                 {client?.routines?.map(
                   (routine) =>
@@ -92,7 +91,7 @@ export default function HomeClientPage() {
                     )
                 )}
               </div>
-            </ScrollArea>
+            </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {client?.routines?.map(
