@@ -94,7 +94,7 @@ export default function HomeClientPage() {
               </div>
             </ScrollArea>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {client?.routines?.map(
                 (routine) =>
                   routine.routineExercises.length > 0 && (
@@ -111,7 +111,7 @@ export default function HomeClientPage() {
                           </span>
                         </h2>
                       </div>
-                      <div className="p-4">
+                      <div className="p-4 flex flex-col">
                         {routine.routineExercises.map(
                           (routineExercise, index) => (
                             <div key={index} className="mb-7 last:mb-0">
@@ -121,15 +121,15 @@ export default function HomeClientPage() {
                                   {routineExercise.exercise.name}
                                 </h3>
                               </div>
-                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm mb-2">
-                                <div className="rounded-md overflow-hidden">
+                              <div className="grid grid-cols-1 gap-3 text-sm mb-2">
+                                <div className="rounded-md overflow-hidden w-full max-h-[310px]">
                                   <img
                                     src={
                                       routineExercise.exercise.image ||
                                       "https://res.cloudinary.com/djdcj4v1j/image/upload/v1733853813/ejercicios/no-imagen_jjzdgf.jpg"
                                     }
                                     alt={routineExercise.exercise.name}
-                                    className="rounded-md shadow-sm w-64 h-52 object-cover object-center bg-white p-3"
+                                    className="w-full h-full object-cover"
                                   />
                                 </div>
                                 <div>
