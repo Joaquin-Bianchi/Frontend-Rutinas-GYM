@@ -68,7 +68,7 @@ export default function CardRoutines({ routine, exercises, client }: Props) {
               <ActionModalUserRutine dialogTitle="Asignar Rutina">
                 {(closeModal) => (
                   <AddExerciseForm
-                    exercises={exercises.exercises}
+                    exercises={exercises?.exercises}
                     routineId={routine.id}
                     closeModal={closeModal}
                   />
