@@ -68,10 +68,37 @@
   }
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	select:focus,
-	textarea:focus,
-	input:focus {
-		font-size: 16px;
-	}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+/* Estilos para impresión */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-only {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .card {
+    display: none;
+  }
 }

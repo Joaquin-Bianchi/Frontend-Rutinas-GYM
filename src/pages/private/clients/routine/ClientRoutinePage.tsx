@@ -26,19 +26,23 @@ export default function ClientRoutinePage() {
   });
 
   return (
-    <div className="container px-5 sm:px-0 mx-auto my-5">
+    <div className="container px-5 sm:px-0 mx-auto my-5 print:max-w-full">
       {isLoading ? (
         <RoutineDetailsSkeleton />
       ) : isError ? (
         <ErrorDisplay message={error.message} />
       ) : (
         <>
-          <h1 className="text-2xl font-bold mb-4 mt-7">
+          <h1 className="text-2xl font-bold mb-4 mt-7 no-print">
             Rutinas de {client?.name}
           </h1>
           <div className="flex flex-col gap-4">
             {client?.routines?.map((routine) => (
-              <CardRoutines routine={routine} exercises={exercises} />
+              <CardRoutines
+                key={routine.id}
+                routine={routine}
+                exercises={exercises}
+              />
             ))}
           </div>
         </>

@@ -7,7 +7,6 @@ import AddExerciseForm from "../forms/AddExerciseForm";
 import ButtonIconDelete from "@/components/buttons/ButtonIconDelete";
 import { deleteRoutinExercise } from "@/services/routineExerciseService";
 import { Button } from "@/components/ui/button";
-import { generarPDFRutina } from "../pdf/GeneratePdf";
 
 interface Props {
   routine: Routine;
@@ -15,13 +14,29 @@ interface Props {
 }
 
 export default function CardRoutines({ routine, exercises }: Props) {
+  const handlePrint = (id: string) => {
+    const cardElement = document.getElementById(`card-${id}`);
+
+    console.log(cardElement);
+
+    if (cardElement) {
+      cardElement.classList.add("print-only");
+      window.print();
+      cardElement.classList.remove("print-only");
+    }
+  };
+
   return (
-    <Card key={routine.id} className="shadow-lg">
-      <CardHeader className="">
+    <Card
+      key={routine.id}
+      id={`card-${routine.id}`}
+      className="card shadow-lg print:shadow-none print:border-none print:bg-white"
+    >
+      <CardHeader className="print:pb-0">
         <CardTitle className="flex justify-between items-center">
           <div className="capitalize flex items-baseline">
-            <Calendar className="mr-2 h-4 w-4 " />
-            <span className="capitalize">
+            <Calendar className="mr-2 h-4 w-4 print:hidden" />
+            <span className="capitalize text-lg font-bold print:text-3xl print:text-black">
               {routine.day === "miercoles"
                 ? "Miércoles"
                 : routine.day === "sabado"
@@ -29,13 +44,13 @@ export default function CardRoutines({ routine, exercises }: Props) {
                 : routine.day}
             </span>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 print:hidden">
             {routine.routineExercises?.length > 0 && (
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => generarPDFRutina(routine)}
-                className=""
+                onClick={() => handlePrint(routine.id)}
+                className="print-only-card"
               >
                 <Printer className="h-4 w-4" />
               </Button>
@@ -55,58 +70,54 @@ export default function CardRoutines({ routine, exercises }: Props) {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="">
+      <CardContent className="print:pt-4">
         {routine.routineExercises?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 print:grid-cols-1">
             {routine.routineExercises.map((exercise) => (
               <div
                 key={exercise.id}
-                className="bg-secondary/10 rounded-lg p-4 shadow-sm "
+                className="bg-secondary/10 rounded-lg p-4 shadow-sm print:shadow-none print:border-b print:border-gray-300 print:pb-6"
               >
                 <div className="flex flex-col sm:flex-row gap-4 h-full">
-                  <div className="sm:w-[100px] aspect-video sm:aspect-square">
+                  <div className="sm:w-[100px] aspect-video sm:aspect-square print:w-[120px] print:h-[120px]">
                     <img
                       src={
                         exercise.exercise.image ||
                         "https://app-media.fitbod.me/v2/102/images/landscape/0_960x540.jpg"
                       }
                       alt={exercise.exercise.name}
-                      className="rounded-md w-full h-full object-cover object-center "
+                      className="rounded-md w-full h-full object-cover object-center print:object-contain"
                     />
                   </div>
 
                   <div className="flex flex-col w-full sm:w-2/3 justify-between flex-grow">
                     <div>
-                      <span className="font-semibold text-md mb-2 block uppercase">
+                      <span className="font-semibold text-md mb-2 block uppercase print:text-xl print:text-black">
                         {exercise.exercise.name}
                       </span>
                       <div className="flex flex-wrap items-center gap-2 mb-4">
                         {exercise.sets !== null ? (
-                          <Badge className="  ">{exercise.sets} Series</Badge>
-                        ) : (
-                          <Badge variant="outline" className="  ">
-                            <s>Series</s>
+                          <Badge className="print:bg-gray-200 print:text-black print:border-none">
+                            {exercise.sets} Series
                           </Badge>
-                        )}
+                        ) : null}
                         {exercise.reps !== null ? (
-                          <Badge className="  ">{exercise.reps} Reps</Badge>
-                        ) : (
-                          <Badge variant="outline" className="  ">
-                            <s>Reps</s>
+                          <Badge className="print:bg-gray-200 print:text-black print:border-none">
+                            {exercise.reps} Reps
                           </Badge>
-                        )}
+                        ) : null}
                         {exercise.time !== null ? (
-                          <Badge className="  ">{exercise.time} Minutos</Badge>
-                        ) : (
-                          <Badge variant="outline" className="  ">
-                            <s>Minutos</s>
+                          <Badge className="print:bg-gray-200 print:text-black print:border-none">
+                            {exercise.time} Minutos
                           </Badge>
-                        )}
+                        ) : null}
                       </div>
                       <div>
                         {exercise.comment !== null && (
-                          <p className="text-xs text-gray-200 font-medium ">
-                            <span className="text-primary ">-</span>{" "}
+                          <p className="text-xs text-gray-200 font-medium print:text-gray-600 print:text-sm">
+                            <span className="text-primary print:text-blue-600">
+                              Nota:
+                            </span>{" "}
                             {exercise.comment}
                           </p>
                         )}
@@ -114,7 +125,7 @@ export default function CardRoutines({ routine, exercises }: Props) {
                     </div>
                   </div>
 
-                  <div className="self-end ">
+                  <div className="self-end print:hidden">
                     <ButtonIconDelete
                       id={exercise.id}
                       deleteFn={deleteRoutinExercise}
