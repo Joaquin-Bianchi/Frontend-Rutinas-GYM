@@ -16,12 +16,8 @@ interface Props {
 }
 
 export default function CardRoutines({ routine, exercises, client }: Props) {
-  console.log(client.categoryPlans);
-
   const handlePrint = (id: string) => {
     const cardElement = document.getElementById(`card-${id}`);
-
-    console.log(cardElement);
 
     if (cardElement) {
       cardElement.classList.add("print-only");
@@ -37,21 +33,16 @@ export default function CardRoutines({ routine, exercises, client }: Props) {
       className="card shadow-lg print:shadow-none print:border-none print:bg-white"
     >
       <CardHeader className="print:pb-0">
-        <CardTitle className="flex justify-between items-center">
+        <CardTitle className="flex justify-between items-end">
           <div className="capitalize flex justify-between items-baseline">
-            <div className="flex items-baseline">
-              <Calendar className="mr-2 h-4 w-4 print:text-black" />
-              <span className="capitalize text-lg font-bold print:text-3xl print:text-black">
-                {routine.day === "miercoles"
-                  ? "Miércoles"
-                  : routine.day === "sabado"
-                  ? "Sábado"
-                  : routine.day}
-              </span>
-            </div>
-            <p className="hidden print:text-black print:block">
-              &nbsp;- {client.name}
-            </p>
+            <Calendar className="mr-2 h-4 w-4 print:text-black" />
+            <span className="capitalize text-lg font-bold print:text-3xl print:text-black">
+              {routine.day === "miercoles"
+                ? "Miércoles"
+                : routine.day === "sabado"
+                ? "Sábado"
+                : routine.day}
+            </span>
           </div>
           <div className="flex items-center space-x-2 print:hidden">
             {routine.routineExercises?.length > 0 && (
@@ -76,6 +67,19 @@ export default function CardRoutines({ routine, exercises, client }: Props) {
                 )}
               </ActionModalUserRutine>
             </div>
+          </div>
+          <div className="hidden print:block text-base items-baseline">
+            <p className="hidden print:text-black print:block text-base">
+              Nombre: {client.name}
+            </p>
+          </div>
+          <div className="hidden print:block text-base items-baseline">
+            <p className="print:text-black print:block ml-auto">
+              Plan de entrenamiento:&nbsp;
+              {client.categoryPlans
+                ?.map((category: any) => category.categoryPlan.name)
+                .join(", ")}
+            </p>
           </div>
         </CardTitle>
       </CardHeader>
