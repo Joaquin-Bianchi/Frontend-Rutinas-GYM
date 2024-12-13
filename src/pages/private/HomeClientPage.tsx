@@ -1,4 +1,4 @@
-import { Calendar, Dumbbell } from "lucide-react";
+import { Calendar, Dumbbell, User, ChevronRight } from "lucide-react";
 import { ClientNavbar } from "@/components/navigation/ClientNavbar";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
@@ -6,6 +6,8 @@ import { Client } from "@/interfaces/client.interface";
 import { isAuthenticated } from "@/services/authService";
 import ErrorDisplay from "@/components/erros/ErrorDisplay";
 import { HomeClientSkeletonLoader } from "@/components/loaders/HomeClientSkeletonLoader";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function HomeClientPage() {
   const { userId } = isAuthenticated();
@@ -20,6 +22,35 @@ export default function HomeClientPage() {
     queryFn: () => getClientById(userId as string),
   });
 
+  const formatDayName = (day: string) => {
+    switch (day) {
+      case "miercoles":
+        return "Miércoles";
+      case "sabado":
+        return "Sábado";
+      default:
+        return day.charAt(0).toUpperCase() + day.slice(1);
+    }
+  };
+
+  const scrollToDay = (day: string) => {
+    const element = document.getElementById(day);
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      element.classList.add("highlight");
+      setTimeout(() => element.classList.remove("highlight"), 2000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background/80 text-foreground">
       <ClientNavbar />
@@ -32,20 +63,43 @@ export default function HomeClientPage() {
           </div>
         ) : (
           <>
-            <div className="text-center mb-6 sm:mb-14 sm:mt-6">
-              <h1 className="text-xl w-[90%] m-auto md:text-4xl font-bold mb-2">
-                Bienvenido/a a tu perfil online {client?.name} 👋
+            <div className="text-center mb-4 mt-2 sm:mb-8 sm:mt-8 lg:text-start">
+              <h1 className="flex text-lg md:text-4xl font-bold justify-center gap-1 md:items-center md:mb-2 lg:justify-start ">
+                <User className="hidden text-primary md:block" size={40} />
+                <User className="text-primary md:hidden" />
+                Bienvenido/a a tu perfil online
               </h1>
               <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
-                Aquí están tus rutinas asignadas por tu profesor.
+                Aquí tienes tus rutinas personalizadas asignadas por tu profesor
               </p>
             </div>
+
+            <ScrollArea className="w-full whitespace-nowrap rounded-md border mb-8">
+              <div className="flex w-max space-x-4 p-4">
+                {client?.routines?.map(
+                  (routine) =>
+                    routine.routineExercises.length > 0 && (
+                      <Button
+                        key={routine.day}
+                        variant="outline"
+                        onClick={() => scrollToDay(routine.day)}
+                        className="flex items-center"
+                      >
+                        <Calendar className="mr-2 h-4 w-4 text-primary" />
+                        {formatDayName(routine.day)}
+                        <ChevronRight className="ml-2 h-4 w-4 text-primary" />
+                      </Button>
+                    )
+                )}
+              </div>
+            </ScrollArea>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {client?.routines?.map(
                 (routine) =>
                   routine.routineExercises.length > 0 && (
                     <div
+                      id={routine.day}
                       key={routine.day}
                       className="bg-card/30 backdrop-blur-sm border border-zinc-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg"
                     >
@@ -53,81 +107,67 @@ export default function HomeClientPage() {
                         <h2 className="flex items-center text-xl font-semibold">
                           <Calendar className="h-5 w-5 mr-2 text-primary" />
                           <span className="capitalize">
-                            {routine.day === "miercoles"
-                              ? "Miércoles"
-                              : routine.day === "sabado"
-                              ? "Sábado"
-                              : routine.day}
+                            {formatDayName(routine.day)}
                           </span>
                         </h2>
                       </div>
                       <div className="p-4">
                         {routine.routineExercises.map(
                           (routineExercise, index) => (
-                            <>
-                              <div key={index} className="mb-7 last:mb-0">
-                                <div className="flex  items-center mb-3">
-                                  <Dumbbell className="h-4 w-4 mr-2 text-primary" />
-                                  <h3 className="font-medium text-lg capitalize">
-                                    {routineExercise.exercise.name}
-                                  </h3>
+                            <div key={index} className="mb-7 last:mb-0">
+                              <div className="flex items-center mb-3">
+                                <Dumbbell className="h-4 w-4 mr-2 text-primary" />
+                                <h3 className="font-medium text-lg capitalize">
+                                  {routineExercise.exercise.name}
+                                </h3>
+                              </div>
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm mb-2">
+                                <div className="rounded-md overflow-hidden">
+                                  <img
+                                    src={
+                                      routineExercise.exercise.image ||
+                                      "https://res.cloudinary.com/djdcj4v1j/image/upload/v1733853813/ejercicios/no-imagen_jjzdgf.jpg"
+                                    }
+                                    alt={routineExercise.exercise.name}
+                                    className="rounded-md shadow-sm w-64 h-52 object-cover object-center bg-white p-3"
+                                  />
                                 </div>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm mb-2">
-                                  <div className="rounded-md overflow-hidden">
-                                    <img
-                                      src={
-                                        routineExercise.exercise.image ||
-                                        "https://res.cloudinary.com/djdcj4v1j/image/upload/v1733853813/ejercicios/no-imagen_jjzdgf.jpg"
-                                      }
-                                      alt={routineExercise.exercise.name}
-                                      className="rounded-md shadow-sm w-64 h-52 object-cover object-center bg-white p-3"
-                                    />
-                                  </div>
-                                  <div>
-                                    {routineExercise.sets && (
-                                      <p className="text-muted-foreground">
-                                        Series:{" "}
-                                        <span className="font-semibold text-foreground">
-                                          {routineExercise.sets}
-                                        </span>
-                                      </p>
-                                    )}
-                                    {routineExercise.reps && (
-                                      <p className="text-muted-foreground">
-                                        Repeticiones:{" "}
-                                        <span className="font-semibold text-foreground">
-                                          {routineExercise.reps}
-                                        </span>
-                                      </p>
-                                    )}
-                                    {routineExercise.time && (
-                                      <p className="text-muted-foreground">
-                                        Tiempo:{" "}
-                                        <span className="font-semibold text-foreground">
-                                          {routineExercise.time}m
-                                        </span>
-                                      </p>
-                                    )}
-                                    {routineExercise.comment && (
-                                      <p className="text-primary">
-                                        Nota:{" "}
-                                        <span className="font-semibold text-foreground">
-                                          {routineExercise.comment}
-                                        </span>
-                                      </p>
-                                    )}
-                                    {/* {routineExercise.comment && (
-                                      <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-white">
-                                        <span className="font-medium text-white">
-                                          Nota:
-                                        </span>{" "}
+                                <div>
+                                  {routineExercise.sets && (
+                                    <p className="text-muted-foreground">
+                                      Series:{" "}
+                                      <span className="font-semibold text-foreground">
+                                        {routineExercise.sets}
+                                      </span>
+                                    </p>
+                                  )}
+                                  {routineExercise.reps && (
+                                    <p className="text-muted-foreground">
+                                      Repeticiones:{" "}
+                                      <span className="font-semibold text-foreground">
+                                        {routineExercise.reps}
+                                      </span>
+                                    </p>
+                                  )}
+                                  {routineExercise.time && (
+                                    <p className="text-muted-foreground">
+                                      Tiempo:{" "}
+                                      <span className="font-semibold text-foreground">
+                                        {routineExercise.time}m
+                                      </span>
+                                    </p>
+                                  )}
+                                  {routineExercise.comment && (
+                                    <p className="text-primary">
+                                      Nota:{" "}
+                                      <span className="font-semibold text-foreground">
                                         {routineExercise.comment}
-                                      </p>
-                                    )} */}
-                                  </div>
+                                      </span>
+                                    </p>
+                                  )}
                                 </div>
                               </div>
-                            </>
+                            </div>
                           )
                         )}
                       </div>
