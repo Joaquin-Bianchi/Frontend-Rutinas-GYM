@@ -47,11 +47,11 @@ export default function HomeClientPage() {
                   routine.routineExercises.length > 0 && (
                     <div
                       key={routine.day}
-                      className="bg-card/30 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-lg"
+                      className="bg-card/30 backdrop-blur-sm border border-zinc-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg"
                     >
-                      <div className="bg-white/95 p-4 text-black">
+                      <div className="bg-cyan-950 p-4 text-white ">
                         <h2 className="flex items-center text-xl font-semibold">
-                          <Calendar className="h-5 w-5 mr-2" />
+                          <Calendar className="h-5 w-5 mr-2 text-primary" />
                           <span className="capitalize">
                             {routine.day === "miercoles"
                               ? "Miércoles"
@@ -65,14 +65,14 @@ export default function HomeClientPage() {
                         {routine.routineExercises.map(
                           (routineExercise, index) => (
                             <>
-                              <div key={index} className="mb-5 last:mb-0">
-                                <div className="flex items-center mb-3">
+                              <div key={index} className="mb-7 last:mb-0">
+                                <div className="flex  items-center mb-3">
                                   <Dumbbell className="h-4 w-4 mr-2 text-primary" />
-                                  <h3 className="font-medium text-lg">
+                                  <h3 className="font-medium text-lg capitalize">
                                     {routineExercise.exercise.name}
                                   </h3>
                                 </div>
-                                <div className="grid grid-cols-2 gap-3 text-sm mb-2">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm mb-2">
                                   <div className="rounded-md overflow-hidden">
                                     <img
                                       src={
@@ -80,7 +80,7 @@ export default function HomeClientPage() {
                                         "https://res.cloudinary.com/djdcj4v1j/image/upload/v1733853813/ejercicios/no-imagen_jjzdgf.jpg"
                                       }
                                       alt={routineExercise.exercise.name}
-                                      className="rounded-md shadow-sm w-full h-full object-cover object-center bg-white p-3"
+                                      className="rounded-md shadow-sm w-64 h-52 object-cover object-center bg-white p-3"
                                     />
                                   </div>
                                   <div>
@@ -108,16 +108,24 @@ export default function HomeClientPage() {
                                         </span>
                                       </p>
                                     )}
+                                    {routineExercise.comment && (
+                                      <p className="text-primary">
+                                        Nota:{" "}
+                                        <span className="font-semibold text-foreground">
+                                          {routineExercise.comment}
+                                        </span>
+                                      </p>
+                                    )}
+                                    {/* {routineExercise.comment && (
+                                      <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-white">
+                                        <span className="font-medium text-white">
+                                          Nota:
+                                        </span>{" "}
+                                        {routineExercise.comment}
+                                      </p>
+                                    )} */}
                                   </div>
                                 </div>
-                                {routineExercise.comment && (
-                                  <p className="text-sm text-primary-foreground bg-primary/20 p-2 rounded-md mt-2 text-white">
-                                    <span className="font-medium text-white">
-                                      Nota:
-                                    </span>{" "}
-                                    {routineExercise.comment}
-                                  </p>
-                                )}
                               </div>
                             </>
                           )
