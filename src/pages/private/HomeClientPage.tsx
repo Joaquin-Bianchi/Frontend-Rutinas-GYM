@@ -133,35 +133,63 @@ export default function HomeClientPage() {
                                   />
                                 </div>
                                 <div>
-                                  {routineExercise.sets && (
+                                  {routineExercise.sets ? (
                                     <p className="text-muted-foreground">
                                       Series:{" "}
                                       <span className="font-semibold text-foreground">
                                         {routineExercise.sets}
                                       </span>
                                     </p>
+                                  ) : (
+                                    <p className="text-muted-foreground">
+                                      Series:{" "}
+                                      <span className="font-semibold text-muted-foreground">
+                                        -
+                                      </span>
+                                    </p>
                                   )}
-                                  {routineExercise.reps && (
+                                  {routineExercise.reps ? (
                                     <p className="text-muted-foreground">
                                       Repeticiones:{" "}
                                       <span className="font-semibold text-foreground">
                                         {routineExercise.reps}
                                       </span>
                                     </p>
-                                  )}
-                                  {routineExercise.time && (
+                                  ) : (
                                     <p className="text-muted-foreground">
-                                      Tiempo:{" "}
-                                      <span className="font-semibold text-foreground">
-                                        {routineExercise.time}m
+                                      Repeticiones:{" "}
+                                      <span className="font-semibold text-muted-foreground">
+                                        -
                                       </span>
                                     </p>
                                   )}
-                                  {routineExercise.comment && (
+                                  {routineExercise.time ? (
+                                    <p className="text-muted-foreground">
+                                      Tiempo:{" "}
+                                      <span className="font-semibold text-foreground">
+                                        {routineExercise.time}
+                                      </span>
+                                    </p>
+                                  ) : (
+                                    <p className="text-muted-foreground">
+                                      Tiempo:{" "}
+                                      <span className="font-semibold text-muted-foreground">
+                                        -
+                                      </span>
+                                    </p>
+                                  )}
+                                  {routineExercise.comment ? (
                                     <p className="text-primary">
                                       Nota:{" "}
                                       <span className="font-semibold text-foreground">
                                         {routineExercise.comment}
+                                      </span>
+                                    </p>
+                                  ) : (
+                                    <p className="text-primary">
+                                      Nota:{" "}
+                                      <span className="font-semibold text-muted-foreground">
+                                        -
                                       </span>
                                     </p>
                                   )}
