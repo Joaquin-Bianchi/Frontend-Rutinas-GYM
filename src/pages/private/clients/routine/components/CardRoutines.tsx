@@ -32,6 +32,14 @@ export default function CardRoutines({ routine, exercises, client }: Props) {
       id={`card-${routine.id}`}
       className="card shadow-lg print:shadow-none print:border-none print:bg-white"
     >
+      <div className="hidden print:flex items-center">
+        <img
+          src="/img/logo.png"
+          alt="Gym Logo"
+          className="h-10 w-[4.3rem] -mr-1 rounded-full"
+        />
+        <h3 className="print:text-black">Fitness Center</h3>
+      </div>
       <CardHeader className="print:pb-0">
         <CardTitle className="flex justify-between items-end">
           <div className="capitalize flex justify-between items-baseline">
