@@ -7,13 +7,17 @@ import AddExerciseForm from "../forms/AddExerciseForm";
 import ButtonIconDelete from "@/components/buttons/ButtonIconDelete";
 import { deleteRoutinExercise } from "@/services/routineExerciseService";
 import { Button } from "@/components/ui/button";
+import { Client } from "@/interfaces/client.interface";
 
 interface Props {
   routine: Routine;
   exercises?: any;
+  client: Client;
 }
 
-export default function CardRoutines({ routine, exercises }: Props) {
+export default function CardRoutines({ routine, exercises, client }: Props) {
+  console.log(client.categoryPlans);
+
   const handlePrint = (id: string) => {
     const cardElement = document.getElementById(`card-${id}`);
 
@@ -34,15 +38,20 @@ export default function CardRoutines({ routine, exercises }: Props) {
     >
       <CardHeader className="print:pb-0">
         <CardTitle className="flex justify-between items-center">
-          <div className="capitalize flex items-baseline">
-            <Calendar className="mr-2 h-4 w-4 print:hidden" />
-            <span className="capitalize text-lg font-bold print:text-3xl print:text-black">
-              {routine.day === "miercoles"
-                ? "Miércoles"
-                : routine.day === "sabado"
-                ? "Sábado"
-                : routine.day}
-            </span>
+          <div className="capitalize flex justify-between items-baseline">
+            <div className="flex items-baseline">
+              <Calendar className="mr-2 h-4 w-4 print:text-black" />
+              <span className="capitalize text-lg font-bold print:text-3xl print:text-black">
+                {routine.day === "miercoles"
+                  ? "Miércoles"
+                  : routine.day === "sabado"
+                  ? "Sábado"
+                  : routine.day}
+              </span>
+            </div>
+            <p className="hidden print:text-black print:block">
+              &nbsp;- {client.name}
+            </p>
           </div>
           <div className="flex items-center space-x-2 print:hidden">
             {routine.routineExercises?.length > 0 && (

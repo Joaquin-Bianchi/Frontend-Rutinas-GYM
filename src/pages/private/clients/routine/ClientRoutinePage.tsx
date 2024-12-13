@@ -42,6 +42,7 @@ export default function ClientRoutinePage() {
                 key={routine.id}
                 routine={routine}
                 exercises={exercises}
+                client={client}
               />
             ))}
           </div>
