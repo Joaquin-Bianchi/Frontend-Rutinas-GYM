@@ -1,4 +1,4 @@
-import { Users, Dumbbell, Puzzle } from "lucide-react";
+import { Users, Dumbbell, Puzzle, MonitorCog } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -7,7 +7,10 @@ export default function HomeAdminPage() {
     <div className="bg-background text-foreground flex flex-col">
       <main className="flex-grow container mx-auto pt-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8 sm:mt-[20px]">
-          <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <MonitorCog className="text-primary" />
+            <h1 className="text-3xl font-bold">Panel de Control</h1>
+          </div>
           <p className="text-muted-foreground">
             Bienvenido/a de nuevo. Aquí tienes las opciones principales de tu
             gimnasio.

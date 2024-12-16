@@ -1,4 +1,10 @@
-import { Calendar, Dumbbell, User, ChevronRight } from "lucide-react";
+import {
+  Calendar,
+  Dumbbell,
+  User,
+  ChevronRight,
+  BicepsFlexed,
+} from "lucide-react";
 import { ClientNavbar } from "@/components/navigation/ClientNavbar";
 import { getClientById } from "@/services/clientService";
 import { useQuery } from "@tanstack/react-query";
@@ -70,6 +76,13 @@ export default function HomeClientPage() {
               </h1>
               <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
                 Aquí tienes tus rutinas personalizadas asignadas por tu profesor
+              </p>
+            </div>
+
+            <div className="flex gap-2 mb-1 justify-center md:justify-start">
+              <BicepsFlexed className="text-primary" size={20}/>
+              <p className="text-sm md:text-base text-muted-foreground">
+                Seleccione la rutina del dia de hoy y a entrenar!
               </p>
             </div>
 
