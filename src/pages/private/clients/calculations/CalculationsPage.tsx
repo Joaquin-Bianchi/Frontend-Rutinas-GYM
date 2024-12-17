@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calculator, Activity, Utensils, Dumbbell } from "lucide-react";
+import { toast } from "sonner";
 
 export default function HealthCalculatorPage() {
   const [age, setAge] = useState("");
@@ -47,7 +48,7 @@ export default function HealthCalculatorPage() {
       isNaN(weightNum) ||
       heightNum === 0
     ) {
-      alert("Por favor, ingrese valores válidos para edad, altura y peso.");
+      toast.error("Por favor, ingrese valores válidos para edad, altura y peso.");
       return;
     }
 
@@ -115,15 +116,15 @@ export default function HealthCalculatorPage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-background/80 text-foreground">
       <ClientNavbar />
       <main className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="flex justify-center items-baseline gap-2 mb-4">
-            <Calculator className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl md:text-4xl font-bold">
-              Calculadora de Salud
-            </h1>
-          </div>
-          <p className="text-lg text-muted-foreground">
-            Calcula tu IMC, calorías diarias recomendadas y proteínas
+        <div className="text-center mb-4 mt-2 sm:mb-8 sm:mt-8">
+          <h1 className="flex text-lg md:text-4xl font-bold justify-center gap-1 md:items-center md:mb-2">
+            <Calculator className="hidden text-primary md:block" size={40} />
+            <Calculator className="text-primary md:hidden  text-lg md:text-xl" />
+            Calculadora de Salud
+          </h1>
+          <p className="mx-2  sm:mx-0 text-xs md:text-xl text-muted-foreground">
+            Calcula tu IMC (índice de masa corporal), calorías diarias
+            recomendadas y proteínas
           </p>
         </div>
 
