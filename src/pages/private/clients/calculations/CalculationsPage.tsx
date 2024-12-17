@@ -48,7 +48,9 @@ export default function HealthCalculatorPage() {
       isNaN(weightNum) ||
       heightNum === 0
     ) {
-      toast.error("Por favor, ingrese valores válidos para edad, altura y peso.");
+      toast.error(
+        "Por favor, ingrese valores válidos para edad, altura y peso."
+      );
       return;
     }
 
@@ -227,7 +229,7 @@ export default function HealthCalculatorPage() {
             </CardContent>
           </Card>
 
-          {(imc !== null || calories !== null || protein !== null) && (
+          {imc !== null || calories !== null || protein !== null ? (
             <Card className="w-full">
               <CardHeader>
                 <CardTitle className="text-2xl">Resultados</CardTitle>
@@ -279,6 +281,53 @@ export default function HealthCalculatorPage() {
                       <p className="text-xl">
                         Cantidad recomendada de proteínas por día
                       </p>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle className="text-2xl">Resultados</CardTitle>
+                <CardDescription>
+                  Sus resultados personalizados estarán disponibles una vez
+                  calculados sus datos.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="imc" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="imc">IMC</TabsTrigger>
+                    <TabsTrigger value="calories">Calorías</TabsTrigger>
+                    <TabsTrigger value="protein">Proteínas</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="imc">
+                    <div className="text-center p-4">
+                      <Activity className="h-12 w-12 mx-auto mb-2 text-primary" />
+                      <h3 className="text-2xl font-semibold mb-2">
+                        Resultado IMC
+                      </h3>
+                      <p className="text-4xl font-bold mb-2">{imc}</p>
+                      <p className="text-xl">Sin resultado</p>
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="calories">
+                    <div className="text-center p-4">
+                      <Utensils className="h-12 w-12 mx-auto mb-2 text-primary" />
+                      <h3 className="text-2xl font-semibold mb-2">
+                        Calorías Diarias
+                      </h3>
+                      <p className="text-xl">Sin resultado</p>
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="protein">
+                    <div className="text-center p-4">
+                      <Dumbbell className="h-12 w-12 mx-auto mb-2 text-primary" />
+                      <h3 className="text-2xl font-semibold mb-2">
+                        Proteínas Diarias
+                      </h3>
+                      <p className="text-xl">Sin resultado</p>
                     </div>
                   </TabsContent>
                 </Tabs>
