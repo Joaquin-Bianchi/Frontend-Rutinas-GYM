@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Calculator, LogOut } from "lucide-react";
+import { Calculator, Home, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function ClientNavbar() {
@@ -26,6 +26,16 @@ export function ClientNavbar() {
             </Link>
           </div>
           <div className="flex items-center space-x-2">
+            <Link to="/home">
+              <Button
+                size="sm"
+                className="justify-start bg-secondary hover:bg-secondary/90 text-white"
+              >
+                {" "}
+                <Home className="h-4 w-4 text-primary" />{" "}
+                <p className="hidden sm:block">Inicio</p>
+              </Button>
+            </Link>
             <Link to="/calculator">
               <Button
                 size="sm"
@@ -33,7 +43,7 @@ export function ClientNavbar() {
               >
                 {" "}
                 <Calculator className="h-4 w-4 text-primary" />{" "}
-                <p className="hidden sm:block  ">Calculadora</p>
+                <p className="hidden sm:block">Calculadora</p>
               </Button>
             </Link>
             <Button
@@ -42,7 +52,7 @@ export function ClientNavbar() {
               className="justify-start bg-secondary  hover:bg-secondary/90 text-white"
             >
               <LogOut className=" h-4 w-4 text-primary" />
-              Cerrar Sesión
+              <p className="hidden sm:block">Cerrar Sesión</p>
             </Button>
           </div>
         </div>
