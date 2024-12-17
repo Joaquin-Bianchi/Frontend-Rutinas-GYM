@@ -12,6 +12,7 @@ import HomeClientPage from "./pages/private/HomeClientPage";
 import CategoryPlansPage from "./pages/private/categoryPlans/CategoryPlansPage";
 import NotFound from "./components/navigation/notFound/NotFound";
 import { SearchProvider } from "./context/SearchContext";
+import CalculationsPage from "./pages/private/clients/calculations/CalculationsPage";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -28,7 +29,8 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             {/* Rutas privadas */}
             <Route path="/" element={<ProtectedRoutes />}>
-              <Route path="/home" element={<HomeClientPage />} />{" "}
+              <Route path="/home" element={<HomeClientPage />} />
+              <Route path="/calculator" element={<CalculationsPage />} />
               {/* Página específica para CLIENT */}
               {/* Rutas privadas para otros roles */}
               <Route element={<PrivateLayout />}>
