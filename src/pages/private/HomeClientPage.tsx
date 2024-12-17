@@ -71,16 +71,16 @@ export default function HomeClientPage() {
             <div className="text-center mb-4 mt-2 sm:mb-8 sm:mt-8 lg:text-start">
               <h1 className="flex text-lg md:text-4xl font-bold justify-center gap-1 md:items-center md:mb-2 lg:justify-start ">
                 <User className="hidden text-primary md:block" size={40} />
-                <User className="text-primary md:hidden" />
+                <User className="text-primary md:hidden  text-lg md:text-xl" />
                 Bienvenido/a a tu perfil online
               </h1>
-              <p className="mx-2 sm:mx-0 text-sm md:text-xl text-muted-foreground">
+              <p className="mx-2  sm:mx-0 text-xs md:text-xl text-muted-foreground">
                 Aquí tienes tus rutinas personalizadas asignadas por tu profesor
               </p>
             </div>
 
             <div className="flex gap-2 mb-1 justify-center md:justify-start">
-              <BicepsFlexed className="text-primary" size={20}/>
+              <BicepsFlexed className="text-primary" size={20} />
               <p className="text-sm md:text-base text-muted-foreground">
                 Seleccione la rutina del dia de hoy y a entrenar!
               </p>

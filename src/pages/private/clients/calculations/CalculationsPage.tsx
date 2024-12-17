@@ -118,11 +118,11 @@ export default function HealthCalculatorPage() {
         <div className="text-center mb-12">
           <div className="flex justify-center items-baseline gap-2 mb-4">
             <Calculator className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold">
+            <h1 className="text-4xl md:text-4xl font-bold">
               Calculadora de Salud
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             Calcula tu IMC, calorías diarias recomendadas y proteínas
           </p>
         </div>
