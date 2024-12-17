@@ -11,7 +11,11 @@ const ProtectedRoutes = () => {
 
   // Si el usuario tiene rol CLIENT y está intentando acceder
   // a cualquier ruta distinta de /home, redirigir a /home
-  if (role === "CLIENT" && location.pathname !== "/home") {
+  if (
+    role === "CLIENT" &&
+    location.pathname !== "/home" &&
+    location.pathname !== "/calculator"
+  ) {
     return <Navigate to="/home" />;
   }
 
