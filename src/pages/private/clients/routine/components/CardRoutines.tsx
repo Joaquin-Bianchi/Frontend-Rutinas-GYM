@@ -38,7 +38,7 @@ export default function CardRoutines({ routine, exercises, client }: Props) {
           alt="Gym Logo"
           className="h-10 w-[4.3rem] -mr-1 rounded-full"
         />
-        <h3 className="print:text-black">Fitness Center</h3>
+        <h3 className="print:text-black">Vitality</h3>
       </div>
       <CardHeader className="print:pb-0">
         <CardTitle className="flex justify-between items-end">

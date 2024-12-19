@@ -46,9 +46,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-background/80 backdrop-blur-lg p-8 rounded-lg shadow-lg">
         <div className="mb-8 text-center">
           <Dumbbell className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="text-3xl font-bold text-foreground mt-4">
-            Fitness Center
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mt-4">Vitality</h1>
           <p className="text-muted-foreground">Inicia sesión para acceder</p>
         </div>
         <form onSubmit={onSubmit} className="space-y-4">

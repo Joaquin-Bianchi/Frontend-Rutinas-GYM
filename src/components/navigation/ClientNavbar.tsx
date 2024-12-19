@@ -21,7 +21,7 @@ export function ClientNavbar() {
                 className="h-10 w-[4.3rem] -mr-1 rounded-full"
               />
               <span className="text-xl font-bold text-primary-foreground hidden sm:inline">
-                Fitness Center
+                Vitality
               </span>
             </Link>
           </div>
